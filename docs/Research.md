@@ -23,3 +23,7 @@ The paper is related to our project, as we are also interested in developing eff
 - It only considers convex loss functions, which may not be applicable to more complex and non-convex models such as deep neural networks.
 - It assumes that the unlearning algorithm has access to some cheap-to-store data statistics, which may not be available or easy to compute in some scenarios.
 - It does not provide any empirical evaluation or comparison with existing unlearning algorithms on real-world datasets or applications..
+
+
+
+To put it in simple words this algorithm focuses on making the algorithm more efficient and fast by adding noise to the sensitive data rether than deleting it. Which is similar to forgetting it. And it uses some of the mathematical functions to make that happen.
