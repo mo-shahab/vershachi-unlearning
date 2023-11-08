@@ -27,4 +27,4 @@ The paper is related to our project, as we are also interested in developing eff
 
 
 To put it in simple words this algorithm focuses on making the algorithm more efficient and fast by adding noise to the sensitive data rether than deleting it. Which is similar to forgetting it. And it uses some of the mathematical functions to make that happen.
-Hence the title "Remember what you forget". which is important 
+Hence the title "Remember what you wnat to forget". which is important 
