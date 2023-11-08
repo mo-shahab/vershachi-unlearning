@@ -1,7 +1,7 @@
-
+# Summary of research papers:
+## Paper 1:
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
-
-Summary of NeruIPS-2021 research papers:
+## Title: NeruIPS-2021 Remember what you want to forget. 
 - Machine unlearning: The task of updating a machine learning (ML) model after some of the training data are deleted, so that the model reflects the remaining data.
 - Desirable qualities: The ML model should be efficient, effective, and certifiable. Efficiency means low running time, effectiveness means high accuracy, and certifiability means guaranteeing that the deleted data are unlearned by the model.
 - Trade-offs: There are trade-offs between the three qualities, and different methods for machine unlearning offer different trade-offs. The paper aims to compare the methods in terms of these qualities.
