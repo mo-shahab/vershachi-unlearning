@@ -1,5 +1,5 @@
 # Summary of research papers:
-## Paper 1: 
+## Paper 1: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: NeruIPS-2021 Remember what you want to forget. 
 cite: Sekhari, A., Acharya, J., Kamath, G., & Suresh, A. T. (2021). Remember what you want to forget: Algorithms for machine unlearning. Advances in Neural Information Processing Systems, 34, 18075-18086.
@@ -34,7 +34,7 @@ The paper is related to our project, as we are also interested in developing eff
 To put it in simple words this algorithm focuses on making the algorithm more efficient and fast by adding noise to the sensitive data rether than deleting it. Which is similar to forgetting it. And it uses some of the mathematical functions to make that happen.
 Hence the title "Remember what you wnat to forget". which is important 
 
-## Paper 2:
+## Paper 2: (applications, algorithms, perfomance of mul)
 
 ## Title: A Survey Of Machine Unlearning
 
@@ -443,7 +443,7 @@ retraining of machine learning models. In ICML. 10355–10366.
 - RapidFed
   - Yi Liu, Lei Xu, Xingliang Yuan, Cong Wang, and Bo Li. 2022. The Right to be Forgotten in Federated Learning: An Efficient Realization with Rapid Retraining. In INFOCOM. 1749–1758.
 
-## Paper 3:
+## Paper 3: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: Coded Machine Unlearning
 
@@ -458,7 +458,7 @@ link: https://ieeexplore.ieee.org/document/9458237
 - Synthetic data experiments: The authors test their coded learning and unlearning protocol on three synthetic datasets with different features and response variables. They show that coding provides a better trade-off between performance and unlearning cost for datasets with heavy-tailed features, but not for datasets with normal features.
 - Conclusion: The authors summarize their main contributions and discuss some possible directions for future work, such as extending the protocol to other models, studying different classes of codes, and exploring the role of influential samples in coded learning and unlearning.
 
-## Paper 4:
+## Paper 4: (applications of mul)
 
 ## Title: Toward Highly-Efficient and Accurate Services QoS Prediction via Machine Unlearning
 
@@ -487,7 +487,7 @@ link: https://ieeexplore.ieee.org/abstract/document/10171348
   - This paper aligns with our research focus on machine unlearning. While their primary concern is QoS prediction, they utilize machine unlearning techniques to enhance their predictions. Similarly, in our research, we're working on machine unlearning tools. The methods and challenges discussed in this paper provide valuable insights for our own work in the field of machine unlearning.
 In summary, this paper's approach is relevant to our research because it showcases the practical use of machine unlearning techniques in improving the accuracy and reliability of predictions in IoT services. The challenges they address and the methods they employ provide useful context and inspiration for our own machine unlearning project.
 
-## Paper 5:
+## Paper 5: (algorithms of ml)
 
 ## Title: Approximate Data Deletion from Machine Learning Models
 
