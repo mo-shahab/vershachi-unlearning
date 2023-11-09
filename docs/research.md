@@ -443,7 +443,7 @@ retraining of machine learning models. In ICML. 10355–10366.
 - RapidFed
   - Yi Liu, Lei Xu, Xingliang Yuan, Cong Wang, and Bo Li. 2022. The Right to be Forgotten in Federated Learning: An Efficient Realization with Rapid Retraining. In INFOCOM. 1749–1758.
 
-## Paper3:
+## Paper 3:
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: Coded Machine Unlearning
 
@@ -457,3 +457,32 @@ link: https://ieeexplore.ieee.org/document/9458237
 - Unlearning protocol: The model identifies the coded shards that contain the sample to be unlearned and updates them by subtracting the sample from the corresponding coded samples. Then, the model retrains the affected weak learners and updates the aggregate model. The protocol guarantees perfect unlearning.
 - Synthetic data experiments: The authors test their coded learning and unlearning protocol on three synthetic datasets with different features and response variables. They show that coding provides a better trade-off between performance and unlearning cost for datasets with heavy-tailed features, but not for datasets with normal features.
 - Conclusion: The authors summarize their main contributions and discuss some possible directions for future work, such as extending the protocol to other models, studying different classes of codes, and exploring the role of influential samples in coded learning and unlearning.
+
+## Paper 4:
+
+## Title: Toward Highly-Efficient and Accurate Services QoS Prediction via Machine Unlearning
+
+cite: Zeng, Y., Xu, J., Li, Y., Chen, C., Dai, Q., & Du, Z. (2023). Towards Highly-efficient and Accurate Services QoS Prediction via Machine Unlearning. IEEE Access.
+
+link: https://ieeexplore.ieee.org/abstract/document/10171348
+
+### Note: this paper has no direct relevance with our framework.
+
+- **CADDEraser Framework:**<br>
+  - The paper introduces CADDEraser, a new system designed to handle requests from users who want their data removed from IoT services. CADDEraser is efficient and ensures accurate predictions while addressing the challenges related to data removal (unlearning requests).
+
+- **Handling User Data Sensibly:**<br>
+  - IoT devices need to handle user data responsibly. If not handled carefully, it can lead to issues like data contamination, where incorrect or irrelevant data affects service predictions. CADDEraser helps in managing this challenge effectively.
+
+- **Use of Machine Unlearning (MUL)**:<br>
+  - Machine Unlearning (MUL) is a technique used here. MUL helps in removing personal data from the system. In the context of this paper, MUL is used to improve the quality of predictions made by IoT services.
+
+- **Importance of QoS Prediction:**<br>
+  - Quality of Service (QoS) prediction is crucial for service providers. It affects market share and user retention. Deep learning models, although powerful, can be vulnerable to attacks that compromise user data. Machine Unlearning is applied here to remove sensitive data and maintain the accuracy of predictions.
+
+- **Preventing Performance Degradation:**<br>
+  - When risky or irrelevant data is present, it can degrade the performance of prediction models. To prevent this, CADDEraser erases such data and retrains the model using a cleaned dataset. This ensures that the predictions remain accurate and reliable.
+
+- **Relevance to Our Research:**<br>
+  - This paper aligns with our research focus on machine unlearning. While their primary concern is QoS prediction, they utilize machine unlearning techniques to enhance their predictions. Similarly, in our research, we're working on machine unlearning tools. The methods and challenges discussed in this paper provide valuable insights for our own work in the field of machine unlearning.
+In summary, this paper's approach is relevant to our research because it showcases the practical use of machine unlearning techniques in improving the accuracy and reliability of predictions in IoT services. The challenges they address and the methods they employ provide useful context and inspiration for our own machine unlearning project.
