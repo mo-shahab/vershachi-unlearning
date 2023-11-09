@@ -98,7 +98,28 @@ screening system, inappropriate features, such as the gender or
 race of applicants, might be unintentionally learned by the machine
 learning model.
 
-### 7. Types of Unlearning - Exact, Approximate, Zero-Glance, Zero-Shot, Few Shot:
+### 7. Types of requests that an user can make to an mul framework:
+- Item Removal:<br>
+Explanation: Users can request the removal of specific data points or items from the trained model. This means the model forgets these particular pieces of information.<br>
+Example: If a user's data point is removed, the model will no longer consider it during predictions.
+
+- Feature Removal:<br>
+Explanation: Users can ask to forget certain features or attributes used for training. Removing features ensures the model doesn't rely on specific input characteristics.<br>
+Example: If a feature representing age is removed, the model won't consider age information for predictions anymore.
+
+- Class Removal:<br>
+Explanation: Users can request the removal of entire classes or categories from the model. This action makes the model forget how to classify certain types of data.<br>
+Example: If a class representing 'dogs' is removed, the model will no longer recognize or classify any input as 'dogs'.
+
+- Task Removal:<br>
+Explanation: Users can ask to forget a specific task or prediction objective the model was trained for. This allows the model to focus on other tasks.<br>
+Example: If a model was trained for both image recognition and text analysis, removing the 'text analysis' task means the model will only perform image recognition.
+
+- Stream Removal:<br>
+Explanation: Users can request the removal of a continuous data stream or source. This unlearning action ensures the model doesn't learn from ongoing data input.<br>
+Example: If a data stream from a particular sensor is removed, the model will no longer update its knowledge based on new data from that sensor.
+
+### 8. Types of Unlearning - Exact, Approximate, Zero-Glance, Zero-Shot, Few Shot:
 Different unlearning scenarios exist, such as exact unlearning, which aims for perfect data removal. Approximate unlearning allows for some loss of accuracy, while zero-glance, zero-shot, and few shot unlearning involve varying degrees of forgetting with different levels of prior knowledge or examples.
 
 `Exact unlearning`: This is when a machine learning model can forget a data item or a class exactly, without affecting the rest of the model. For example, if a model can forget a user’s data completely, without changing its performance on other users’ data, then it is an exact unlearner. Exact unlearning is often hard or impossible to achieve, as it requires a lot of computation or modification of the model.
@@ -111,10 +132,10 @@ Different unlearning scenarios exist, such as exact unlearning, which aims for p
 
 `Few shot unlearning`: This is when a machine learning model can forget a data item or a class from only a few examples of that specific data item or class. For example, if a model can forget a user’s data from only a few samples of the user’s data, then it is a few shot unlearner. Few shot unlearning is easier than zero shot unlearning, as it uses some direct information or data to guide the forgetting3
 
-### 8. Indistinguishability Metrics and Theorems:
+### 9. Indistinguishability Metrics and Theorems:
 Indistinguishability metrics define parameters for comparing models, ensuring that unlearned models cannot leak information about the training data. These metrics are vital for evaluating the effectiveness of unlearning techniques.
 
-### 9. Types of Unlearning Algorithms - Model-Agnostic, Model Intrinsic, Data-Driven:
+### 10. Types of Unlearning Algorithms - Model-Agnostic, Model Intrinsic, Data-Driven:
 Unlearning algorithms fall into categories like model-agnostic, which work across different models, and model intrinsic, tailored for specific model types such as linear, tree-based, Bayesian, or deep learning models. Data-driven methods leverage the dataset's characteristics for unlearning.
 
 1. **Model-Agnostic Unlearning:**<br>
@@ -126,7 +147,36 @@ Model intrinsic unlearning algorithms are tailored to specific machine learning 
 3. **Data-Driven Unlearning:**<br>
 Data-driven unlearning methods analyze the patterns within the training data itself. They use statistical techniques and data mining approaches to identify specific data points that need to be removed. These methods focus on understanding the inherent properties of the data, allowing for targeted and effective removal of relevant information.
 
-### 10. Evaluation Metrics - Accuracy, Completeness, ZRF Score:
+### 11. Different verifications on MUL:
+- Feature Injection Test:<br>
+Explanation: This test involves injecting specific features into the model to observe if it has truly forgotten those features. If the model reacts to these features, it suggests incomplete unlearning.<br>
+Example: Injecting a removed feature (like a deleted user attribute) and checking if the model responds to it.
+
+- Forgetting Measure:<br>
+Explanation: Forgetting measure quantifies the extent to which the model has forgotten specific data points. A higher forgetting rate indicates better unlearning.<br>
+Example: If the model has a forgetting rate of 90%, it means 90% of the unlearned data samples are no longer memorized.
+
+- Membership Inference Attacks:<br>
+Explanation: Attackers attempt to determine if a particular data sample was used for training. Effective unlearning should make it difficult to distinguish between used and unused data.<br>
+Example: Trying to identify if a specific image was part of the training dataset by querying the model's responses.
+
+- Slow Down Attacks:<br>
+Explanation: Slow down attacks measure the model's response time. Unlearning should not significantly slow down the model’s prediction process.<br>
+Example: Monitoring the time taken by the model to respond to queries before and after unlearning.
+
+- Interclass Confusion Test:<br>
+Explanation: This test assesses if the model confuses removed classes with existing ones. Proper unlearning ensures that deleted classes don’t affect the recognition of remaining classes.<br>
+Example: Checking if the model mistakenly identifies a removed category as a similar existing category.
+
+- Federated Verification:<br>
+Explanation: Federated verification assesses unlearning in a distributed environment where models are trained across multiple devices. It ensures that unlearning works seamlessly in federated learning setups.<br>
+Example: Verifying if models in a federated system correctly unlearn data across all devices involved in training.
+
+- Cryptographic Protocol:<br>
+Explanation: Cryptographic methods can be used to validate unlearning processes securely. These protocols ensure that unlearning actions are authenticated and authorized.<br>
+Example: Implementing encryption techniques to secure communication between the unlearning system components.
+
+### 11. Evaluation Metrics - Accuracy, Completeness, ZRF Score:
 Evaluation metrics like accuracy measure the model's performance post-unlearning. Completeness assesses the thoroughness of data removal, while metrics like ZRF (Zero Recall F1) score provide a comprehensive evaluation of unlearning effectiveness.
 
 1. ***Accuracy:***<br>
@@ -144,7 +194,7 @@ Evaluation metrics like accuracy measure the model's performance post-unlearning
 **Simplicity:** It quantifies how well the model forgets specific data points, with higher scores indicating stronger forgetting.<br>
 **Importance:** A high ZRF score indicates that the model has successfully erased the specified data, ensuring data privacy and preventing leakage of sensitive information.
 
-### 11. Unlearning Applications - Recommender Systems, Federated Learning, Graph Embedding, Lifelong Learning:
+### 12. Unlearning Applications - Recommender Systems, Federated Learning, Graph Embedding, Lifelong Learning:
 Machine unlearning finds applications in various domains, including recommender systems, federated learning setups, graph embedding techniques, and lifelong learning scenarios. Unlearning ensures that evolving models maintain data privacy and adaptability.
 
 1. ***Recommender Systems:***<br>
@@ -163,7 +213,7 @@ Machine unlearning finds applications in various domains, including recommender 
 - **Explanation:** Lifelong learning models continually acquire new knowledge while adapting to changing data. Unlearning here allows the model to forget obsolete information, making room for new learning without interference from outdated patterns.<br>
 - **Importance:** Unlearning in lifelong learning ensures that the model remains flexible and open to new information, enabling it to adapt and learn effectively over time.
 
-### 12. Consideration of Published Datasets:
+### 13. Consideration of Published Datasets:
 Researchers often rely on published datasets to validate unlearning techniques. These datasets provide standardized benchmarks for evaluating the performance of different unlearning algorithms.
 
 
@@ -214,3 +264,220 @@ The model leaks data means that the model reveals some information about the dat
 | RecEraser [19]       | Python, C++ | -                    | Recommender Systems       | https://github.com/chenchongthu/Recommendation-Unlearning |
 | FedEraser [90]       | Python     | -                      | Federated Learning         | https://www.dropbox.com/s/1lhx962axovbbom/FedEraser-Code.zip?dl=0 |
 | RapidFed [95]        | Python     | -                      | Federated Learning         | https://github.com/yiliucs/federated-unlearning       |
+
+### References made in this paper that we can make use of, with citation:
+
+These are the papers that are referenced in that particular section of the paper.
+1. Introduction:
+- Yinzhi Cao and Junfeng Yang. 2015. Towards making systems forget with
+machine unlearning. In 2015 IEEE Symposium on Security and Privacy. 463–480.
+ - Things mentioned in the above paper are:
+  - Reasons for machine unlearning
+  - The need for the systems to forget
+
+- Ninareh Mehrabi, Fred Morstatter, Nripsuta Saxena, Kristina Lerman, and Aram
+Galstyan. 2021. A survey on bias and fairness in machine learning. CSUR 54, 6
+(2021), 1–35.
+ - Things mentioned in this paper
+  - the bias in machine learning, for example in a beauty contest they used the ai as the judge and ai chose fair peopleover someone that had darker skin tone, and also how there was a bias against the asian people.
+
+2. Challenges in the machine unlearning
+- Lucas Bourtoule, Varun Chandrasekaran, Christopher A Choquette-Choo, Hengrui
+Jia, Adelin Travers, Baiwu Zhang, David Lie, and Nicolas Papernot. 2021.
+Machine unlearning. In SP. 141–159.
+ - Things mentioned in this paper ( important paper ): 
+  - The challenges in the machine unlearning
+  - keywords like "stochasticity of training" and "incrementality of training" are mentioned
+
+3. Unlearning requests:
+- Alexander Warnecke, Lukas Pirch, Christian Wressnegger, and Konrad
+Rieck. 2021. Machine Unlearning of Features and Labels. arXiv preprint
+arXiv:2108.11577 (2021).
+ - Things mentioned:
+  - different types of the requests that can be made in machine unlearning
+
+4. Design requirements in the MUL:
+- Yinzhi Cao and Junfeng Yang. 2015. Towards making systems forget with
+machine unlearning. In 2015 IEEE Symposium on Security and Privacy. 463–480.
+ - Things mentioned:
+  - different types of requirements such as completeness, accuracy, timeliness and such is mentioned
+  - To prepare for unlearning process, many techniques
+need to store model checkpoints, historical model updates, training
+data, and other temporary data
+  - The requirement of the framework to be model agnostic is mentioned
+
+- Yingzhe He, Guozhu Meng, Kai Chen, Jinwen He, and Xingbo Hu. 2021. Deepobliviate:
+a powerful charm for erasing data residual memory in deep neural
+networks. arXiv preprint arXiv:2105.06209 (2021).
+ - Things mentioned:
+  - the accuracy of the unlearned model is often
+measured on a new test set, or it is compared with that of the
+original model before unlearning
+  - To prepare for unlearning process, many techniques
+need to store model checkpoints, historical model updates, training
+data, and other temporary data
+
+5. Verification in unlearnign:
+- Anvith Thudi, Hengrui Jia, Ilia Shumailov, and Nicolas Papernot. 2022. On
+the necessity of auditable algorithmic definitions for machine unlearning. In
+USENIX Security. 4007–4022.
+ - things mentioned:
+  - The goal of unlearning verification methods is to certify that one
+cannot easily distinguish between the unlearned models and their
+retrained counterparts
+
+6. Types of machine unlearning:
+- Lucas Bourtoule, Varun Chandrasekaran, Christopher A Choquette-Choo, Hengrui
+Jia, Adelin Travers, Baiwu Zhang, David Lie, and Nicolas Papernot. 2021.
+Machine unlearning. In SP. 141–159.
+- Jonathan Brophy and Daniel Lowd. 2021. Machine unlearning for random
+forests. In ICML. 1092–1104.
+- Anvith Thudi, Gabriel Deza, Varun Chandrasekaran, and Nicolas Papernot.
+2022. Unrolling sgd: Understanding factors influencing machine unlearning. In
+EuroS&P. 303–319.
+ - things mentioned:
+  - different types of machine unlearning, exact, approximate, and such.
+
+7. Unlearning scenarios:
+- Anvith Thudi, Gabriel Deza, Varun Chandrasekaran, and Nicolas Papernot.
+2022. Unrolling sgd: Understanding factors influencing machine unlearning. In
+EuroS&P. 303–319.
+ - things mentioned:
+  - zero glance unlearning, zero shot unlearning
+- Youngsik Yoon, Jinhwan Nam, Hyojeong Yun, Dongwoo Kim, and Jungseul Ok.
+2022. Few-Shot Unlearning by Model Inversion. arXiv preprint arXiv:2205.15567
+(2022).
+ - things mentioned:
+  - few shot unlearning
+
+8. Unlearning algorithms:
+the different types of unlearning algorithms, with their papers:
+- SISA
+ - Lucas Bourtoule, Varun Chandrasekaran, Christopher A Choquette-Choo, Hengrui
+Jia, Adelin Travers, Baiwu Zhang, David Lie, and Nicolas Papernot. 2021.
+Machine unlearning. In SP. 141–159.
+
+- Athena
+ - David Marco Sommer, Liwei Song, Sameer Wagh, and Prateek Mittal. 2020.
+Towards probabilistic verification of machine unlearning. arXiv preprint
+arXiv:2003.04247 (2020).
+ - David Marco Sommer, Liwei Song, Sameer Wagh, and Prateek Mittal. 2022.
+Athena: Probabilistic Verification of Machine Unlearning. Proc. Priv. Enhancing
+Technol. 2022, 3 (2022), 268–290.
+
+- AmnesiacML
+ - Laura Graves, Vineel Nagisetty, and Vijay Ganesh. 2021. Amnesiac machine
+learning. In AAAI, Vol. 35. 11516–11524.
+
+- Kpriors
+ - Mohammad Emtiyaz E Khan and Siddharth Swaroop. 2021. Knowledgeadaptation
+priors. NIPS 34 (2021), 19757–19770.
+
+- ERM
+ - Seth Neel, Aaron Roth, and Saeed Sharifi-Malvajerdi. 2021. Descent-to-delete:
+Gradient-based methods for machine unlearning. In Algorithmic Learning Theory.
+931–962.
+
+- ShallowAttack
+ - Min Chen, Zhikun Zhang, Tianhao Wang, Michael Backes, Mathias Humbert,
+and Yang Zhang. 2021. When machine unlearning jeopardizes privacy. In
+SIGSAC. 896–911.
+
+- UnrollingSGD
+ - Anvith Thudi, Gabriel Deza, Varun Chandrasekaran, and Nicolas Papernot.
+2022. Unrolling sgd: Understanding factors influencing machine unlearning. In
+EuroS&P. 303–319.
+
+- DeltaGrad
+ - Yinjun Wu, Edgar Dobriban, and Susan Davidson. 2020. Deltagrad: Rapid
+retraining of machine learning models. In ICML. 10355–10366.
+
+- Amnesia
+ - Sebastian Schelter. 2020. “Amnesia” - A Selection of Machine Learning Models
+That Can Forget User Data Very Fast. In CIDR.
+
+- MUPy
+ - Yinzhi Cao and Junfeng Yang. 2015. Towards making systems forget with
+machine unlearning. In 2015 IEEE Symposium on Security and Privacy. 463–480.
+
+- DelKMeans
+ - Antonio Ginart, Melody Guan, Gregory Valiant, and James Y Zou. 2019. Making
+ai forget you: Data deletion in machine learning. NIPS 32 (2019).
+
+- CertifiedRem
+ - Chuan Guo, Tom Goldstein, Awni Y. Hannun, and Laurens van der Maaten.
+2020. Certified Data Removal from Machine Learning Models. In ICML, Vol. 119.
+3832–3842.
+
+- CertAttack
+ - Neil G Marchant, Benjamin IP Rubinstein, and Scott Alfeld. 2022. Hard to
+Forget: Poisoning Attacks on Certified Machine Unlearning. In AAAI, Vol. 36.
+7691–7700.
+
+- PRU
+ - Zachary Izzo, Mary Anne Smart, Kamalika Chaudhuri, and James Zou. 2021.
+Approximate data deletion from machine learning models. In AISTAT. 2008–
+2016.
+
+- HedgeCut
+ - Sebastian Schelter, Stefan Grafberger, and Ted Dunning. 2021. Hedgecut: Maintaining
+randomised trees for low-latency machine unlearning. In SIGMOD.
+1545–1557.
+
+- DaRE-RF
+ - Jonathan Brophy and Daniel Lowd. 2021. Machine unlearning for random
+forests. In ICML. 1092–1104.
+
+- MCMC-Unlearning
+ - Shaopeng Fu, Fengxiang He, and Dacheng Tao. 2022. Knowledge Removal in
+Sampling-based Bayesian Inference. In ICLR.
+
+- BIF
+ - Shaopeng Fu, Fengxiang He, Yue Xu, and Dacheng Tao. 2021. Bayesian inference
+forgetting. arXiv preprint arXiv:2101.06417 (2021).
+
+- L-CODEC
+ - Ronak Mehta, Sourav Pal, Vikas Singh, and Sathya N Ravi. 2022. Deep Unlearning
+via Randomized Conditionally Independent Hessians. In CVPR. 10422–10431.
+
+- SelectiveForgetting
+ - Aditya Golatkar, Alessandro Achille, and Stefano Soatto. 2020. Eternal sunshine
+of the spotless net: Selective forgetting in deep networks. In CVPR. 9304–9312.
+ - Aditya Golatkar, Alessandro Achille, and Stefano Soatto. 2020. Forgetting outside
+the box: Scrubbing deep networks of information accessible from input-output
+
+- Neurons
+ - Damai Dai, Li Dong, Yaru Hao, Zhifang Sui, Baobao Chang, and Furu Wei. 2022.
+Knowledge Neurons in Pretrained Transformers. In ACL. 8493–8502.
+
+- Unlearnable
+ - Hanxun Huang, Xingjun Ma, Sarah Monazam Erfani, James Bailey, and Yisen
+Wang. 2021. Unlearnable Examples: Making Personal Data Unexploitable. In
+ICLR.
+
+- DLMA
+ - Da Yu, Huishuai Zhang, Wei Chen, Jian Yin, and Tie-Yan Liu. 2021. How does
+data augmentation affect privacy in machine learning?. In AAAI, Vol. 35. 10746–
+10753.
+
+- GraphProjector
+ - Weilin Cong and Mehrdad Mahdavi. [n. d.]. Privacy Matters! Efficient Graph
+Representation Unlearning with Data Removal Guarantee. ([n. d.]).
+
+- GraphEditor
+ - Weilin Cong and Mehrdad Mahdavi. [n. d.]. GRAPHEDITOR: An Efficient Graph
+Representation Learning and Unlearning Approach. ([n. d.]).
+
+- RecEraser
+ - Chong Chen, Fei Sun, Min Zhang, and Bolin Ding. 2022. Recommendation
+unlearning. In WWW. 2768–2777.
+
+- FedEraser
+ - Gaoyang Liu, Xiaoqiang Ma, Yang Yang, Chen Wang, and Jiangchuan Liu. 2021.
+Federaser: Enabling efficient client-level data removal from federated learning
+models. In IWQOS. 1–10.
+
+- RapidFed
+ - Yi Liu, Lei Xu, Xingliang Yuan, Cong Wang, and Bo Li. 2022. The Right to be
+Forgotten in Federated Learning: An Efficient Realization with Rapid Retraining.
+In INFOCOM. 1749–1758.
