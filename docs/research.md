@@ -1,5 +1,5 @@
 # Summary of research papers:
-## Paper 1:
+## Paper 1: 
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: NeruIPS-2021 Remember what you want to forget. 
 cite: Sekhari, A., Acharya, J., Kamath, G., & Suresh, A. T. (2021). Remember what you want to forget: Algorithms for machine unlearning. Advances in Neural Information Processing Systems, 34, 18075-18086.
@@ -506,3 +506,15 @@ link: https://proceedings.mlr.press/v130/izzo21a.html
 - Additionally, the paper discusses influential methods within the context of model retraining, comparing and contrasting them with the exact deletion approach. These discussions provide valuable insights into the trade-offs between precision and computational complexity when dealing with data removal requests.
 
 In summary, the paper outlines the challenges posed by data deletion requests within the framework of stringent privacy regulations. It proposes an innovative computational model inspired by these challenges, emphasizing the need for efficient and accurate data removal techniques. The incorporation of Newton's method and in-depth discussions about influential methods enrich the exploration of approximate unlearning, paving the way for more effective solutions in the realm of machine learning privacy.
+
+### the difference between exact, newton's, influential method and approximate method with examples
+
+ - Imagine you have a smart system, like those used by big companies such as Google and Facebook. These systems store lots of personal data. People have the right to request their data to be removed, ensuring their privacy. This is a fundamental concept known as the "right to be forgotten," protected by laws like the EU's General Data Protection Regulation and the California Consumer Privacy Act.
+
+- Now, the challenge arises when you want to remove specific pieces of data from this smart system. Think of these pieces of data as 'k points.' Deleting them while keeping the system working efficiently is tough once it's set up.
+
+- One way to do this is the 'exact method.' It's like surgically removing the specific data points without harming the rest of the system. But, doing it precisely requires a lot of computational power, making it slow and impractical for real-world situations.
+
+- To tackle this, researchers explore 'approximate unlearning.' It's like finding a balance between speed and accuracy. One approach they introduce is 'Newton's method.' Imagine you have a painting, and you want to modify it slightly without ruining the whole artwork. Newton's method helps in making those small, precise changes efficiently.
+
+- Additionally, the paper discusses 'influential methods.' These are techniques that guide how the system learns and evolves. They are like experienced teachers helping a student understand complex topics. By comparing these methods with the exact deletion approach, the researchers explore which methods work best for efficient and accurate data removal.
