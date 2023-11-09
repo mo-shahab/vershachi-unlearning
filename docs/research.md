@@ -486,3 +486,23 @@ link: https://ieeexplore.ieee.org/abstract/document/10171348
 - **Relevance to Our Research:**<br>
   - This paper aligns with our research focus on machine unlearning. While their primary concern is QoS prediction, they utilize machine unlearning techniques to enhance their predictions. Similarly, in our research, we're working on machine unlearning tools. The methods and challenges discussed in this paper provide valuable insights for our own work in the field of machine unlearning.
 In summary, this paper's approach is relevant to our research because it showcases the practical use of machine unlearning techniques in improving the accuracy and reliability of predictions in IoT services. The challenges they address and the methods they employ provide useful context and inspiration for our own machine unlearning project.
+
+## Paper 5:
+
+## Title: Approximate Data Deletion from Machine Learning Models
+
+cite: Izzo, Z., Smart, M. A., Chaudhuri, K., & Zou, J. (2021, March). Approximate data deletion from machine learning models. In International Conference on Artificial Intelligence and Statistics (pp. 2008-2016). PMLR.
+
+link: https://proceedings.mlr.press/v130/izzo21a.html
+
+- Certainly! In this paper, the focus revolves around crucial data privacy regulations such as the EU's General Data Protection Regulation and the California Consumer Privacy Act. These regulations empower individuals to request the removal of their personal data from systems operated by large companies like Google and Facebook, emphasizing the fundamental concept of the "right to be forgotten."
+
+- Recent research has revealed the vulnerability of machine learning models, especially in vision and natural language processing (NLP) domains, where attackers can reconstruct training data. The paper addresses a critical challenge: how to efficiently and accurately delete specific batches of data points (referred to as \(k\) points) from a precomputed machine learning model. This challenge arises because once a model is prepared, removing data points without compromising its efficiency becomes a complex task.
+
+- Exact data deletion, while desirable, is computationally intensive, making it impractical for real-world applications. To tackle this challenge, the paper delves into the realm of approximate unlearning, exploring innovative methods to efficiently handle deletion requests without compromising the model's overall accuracy.
+
+- One notable technique introduced in the paper is Newton's method, which offers an approximate approach to data retraining. By leveraging this method, the researchers aim to strike a balance between computational efficiency and accuracy when updating the model after data deletion.
+
+- Additionally, the paper discusses influential methods within the context of model retraining, comparing and contrasting them with the exact deletion approach. These discussions provide valuable insights into the trade-offs between precision and computational complexity when dealing with data removal requests.
+
+In summary, the paper outlines the challenges posed by data deletion requests within the framework of stringent privacy regulations. It proposes an innovative computational model inspired by these challenges, emphasizing the need for efficient and accurate data removal techniques. The incorporation of Newton's method and in-depth discussions about influential methods enrich the exploration of approximate unlearning, paving the way for more effective solutions in the realm of machine learning privacy.
