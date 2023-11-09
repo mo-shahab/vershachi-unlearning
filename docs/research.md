@@ -443,9 +443,14 @@ retraining of machine learning models. In ICML. 10355–10366.
 - RapidFed
   - Yi Liu, Lei Xu, Xingliang Yuan, Cong Wang, and Bo Li. 2022. The Right to be Forgotten in Federated Learning: An Efficient Realization with Rapid Retraining. In INFOCOM. 1749–1758.
 
-# Paper3:
+## Paper3:
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: Coded Machine Unlearning
+
+cite: Aldaghri, N., Mahdavifar, H., & Beirami, A. (2021). Coded machine unlearning. IEEE Access, 9, 88137-88150.
+
+link: https://ieeexplore.ieee.org/document/9458237
+
 - Coded machine unlearning: A new framework for removing data from trained ML models using data encoding and ensemble learning. It aims to achieve perfect unlearning with better performance and lower cost than uncoded methods.
 - Problem setup: A regression problem with a training dataset of n samples and d features. The loss function is regularized and kernelized. The model uses random projections to reduce the dimensionality of the features. The unlearning protocol must satisfy the perfect unlearning criterion.
 - Learning protocol: The model uses a linear encoder to transform the training dataset into r coded shards, each with n/s samples. The shards are assigned to r weak learners that are trained independently and aggregated using an averaging function. The encoder usa random binary matrix with rate τ = n/m and density ρ.
