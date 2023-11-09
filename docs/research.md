@@ -495,7 +495,7 @@ cite: Izzo, Z., Smart, M. A., Chaudhuri, K., & Zou, J. (2021, March). Approximat
 
 link: https://proceedings.mlr.press/v130/izzo21a.html
 
-- Certainly! In this paper, the focus revolves around crucial data privacy regulations such as the EU's General Data Protection Regulation and the California Consumer Privacy Act. These regulations empower individuals to request the removal of their personal data from systems operated by large companies like Google and Facebook, emphasizing the fundamental concept of the "right to be forgotten."
+- In this paper, the focus revolves around crucial data privacy regulations such as the EU's General Data Protection Regulation and the California Consumer Privacy Act. These regulations empower individuals to request the removal of their personal data from systems operated by large companies like Google and Facebook, emphasizing the fundamental concept of the "right to be forgotten."
 
 - Recent research has revealed the vulnerability of machine learning models, especially in vision and natural language processing (NLP) domains, where attackers can reconstruct training data. The paper addresses a critical challenge: how to efficiently and accurately delete specific batches of data points (referred to as \(k\) points) from a precomputed machine learning model. This challenge arises because once a model is prepared, removing data points without compromising its efficiency becomes a complex task.
 
