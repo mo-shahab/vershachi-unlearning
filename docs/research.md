@@ -626,3 +626,84 @@ link: https://dl.acm.org/doi/abs/10.1145/3319535.3363226
 - However, doing this directly can cause some problems, like the model becoming too sensitive and forgetting everything it learned before. The unlearning approach is like a smart way of implementing this idea without causing new problems or hurting the model's performance on other data.
 
 - It's essential to note that handling false positives (events that are mistakenly identified as abnormal) is relatively straightforward. In the paper, they focus more on explaining the challenges and techniques related to handling false negatives because these are the tricky cases.
+
+## Paper 8:
+## Title: Machine Unlearning: Its Nature, Scope, and Importance for a “Delete Culture”
+
+cite: Floridi, L. (2023). Machine Unlearning: its nature, scope, and importance for a “delete culture”. Philosophy & Technology, 36(2), 42.
+
+link: https://link.springer.com/article/10.1007/s13347-023-00644-5
+
+### Premise of the paper:
+- **Accumulation of Digital vs. Analog Information:**<br>
+The paper discusses how digital information can accumulate over time, unlike analog information. While digital data can be stored and added to continuously, analog information, like traditional documents or physical records, doesn't have the same easy accumulation.
+
+- **Newborn Deletion Culture:**<br>
+The concept of a "newborn deletion culture" is introduced. This culture addresses what information should be made entirely unavailable or, at the very least, practically inaccessible. The paper emphasizes the importance of considering the feasibility of making information unavailable before imposing it as an obligation. It highlights the ethical principle that what ought to be done must be possible to do.
+
+- **Legal Content Removal in a Delete Culture:**<br>
+In a "delete culture," legal content, not prohibited for reasons like being pornographic or violent, is removed mainly due to concerns related to intellectual property (IP) or privacy infringement. The paper notes that encryption and other practices making information inaccessible become more common in a delete culture, primarily due to these concerns.
+
+- **Risks in the Development of Delete Culture:**<br>
+The paper discusses the potential risks when transitioning to a delete culture, emphasizing that it's different from a cancel culture. It suggests that relying on conceptual tools developed in a recording culture (a culture that emphasizes preserving information) may not be sufficient. New approaches may be necessary to address issues like privacy and intellectual property infringement in the context of a delete culture
+
+### We can't just make the data or information unavailable. The nuances of making the information unavailable.
+
+- Cost and Reversibility of Blocking vs. Removing Information:<br>
+  - The paper points out that preventing access to information (blocking) is more cost-effective and reversible compared to completely removing it. Blocking is simpler and can be undone more easily.
+
+- Examples Illustrating the Challenges:
+
+  - Cambridge Analytica Case:
+    - After the Cambridge Analytica scandal, authorities required the company to delete the data it held. However, the paper notes that making information permanently unavailable is challenging. People might not fully comply, keeping copies or not genuinely deleting the data. Right to be Forgotten Case - Google Spain v AEPD and Mario Costeja González:
+The landmark decision in 2014 mandated Google to exclude certain information from search results. However, this didn't involve deleting the information; instead, it made the information inaccessible in specific regions (e.g., EU). The paper highlights that determined individuals can still access it through methods like VPNs.
+
+- Availability, Inaccessibility, and Circumstances:
+
+Availability of Information
+Inaccessibility of the Same Information
+Circumstances under Which the Information is Unavailable
+It uses these variables to describe situations where information is blocked or made inaccessible, emphasizing the challenges in achieving full and permanent removal.
+
+- Global Access Challenges:
+  - The text mentions that determined individuals can find ways to access information despite attempts to block or restrict it. This applies not only to public information but also to potentially sensitive or "secret" information. The strategy often revolves around making access difficult rather than impossible.
+
+### Challenges of the paper:
+- Problem in Machine Learning After Training:<br>The paper raises a question about what to do when a machine learning model, after being trained, poses privacy or intellectual property issues. It lists three potential solutions: (a) delete the model, (b) remove unwanted data and retrain the model from scratch (referred to as exact unlearning), or (c) "block" the information that the model has learned.
+
+- How Machine Unlearning (MU) Achieves Blocking:<br>The paper explains how MU could achieve a form of blocking. For instance, if a chatbot like ChatGPT has information that it should not provide, MU could be used to make the chatbot "unlearn" that specific information. This means the information becomes unavailable in principle, not just inaccessible in practice. This approach aligns with concepts like the "right to be unlearnt," similar to the "right to be forgotten."
+
+  - Example: If someone asks ChatGPT about sensitive financial information, MU could be used to make ChatGPT forget or not know the answer.
+
+- Current Status of Machine Unlearning (MU):<br>
+  - Challenges: MU is in its early stages and faces challenges like computational efficiency, scalability, technical reliability, and potential malicious attacks.
+
+  - Pre-Unlearning Strategy: MU works better when the machine learning model is designed with unlearning in mind from the beginning. This is referred to as a "pre-unlearning" strategy, and it involves structuring the learning process to distinguish between what needs to be unlearned and what doesn't.
+
+    - Example: Designing an ML model to easily unlearn specific types of information.
+
+  - Algorithmic Level Definition: Some argue that MU is well-defined only at the algorithmic level, suggesting that its application might be clearer at the level of defining algorithms.
+
+  - Debate in the AI Community: Despite ongoing debates, discussions about MU as a solution were notably absent in recent discussions related to decisions by authorities, such as the Italian Data Protection Authority's decision to block ChatGPT.
+
+### Reasons for the Scope of Machine Unlearning:
+The paper suggests that the field of MU is likely to gain momentum due to increasing legal and social pressures. Mentioned regulations like the AI Act and the AI Liability Directive indicate a growing awareness and regulatory push for responsible AI practices.
+
+### The paper concludes with discussing how MUL can be misused, overused, underused:
+
+- **Misuse of Machine Unlearning (MU):**<br>
+  - Problem: MU, when in the wrong hands, can be misused. Imagine someone taking a trained model that provides information deemed undesirable or unacceptable and tweaking it to produce a revised model that no longer provides that information.
+  - Potential Issues: In the hands of malicious individuals, MU could become a potent tool for censorship, spreading misinformation, propaganda, cyber-attacks, or even new forms of ransomware. This could lead to the removal of acceptable and desirable information, akin to a massive erasure of information reminiscent of dystopian scenarios like in the book "1984."
+  - Challenges: Ethical concerns arise, especially in the context of training chatbots like ChatGPT. Decisions about what information to include or omit become complex in a world where managing vast amounts of information efficiently relies on machine learning tools.
+
+- **Overuse of Machine Unlearning:**<br>
+  - Risk: If MU methods become too successful, there's a risk of overuse. If it becomes easy and inexpensive to unlearn, there might be a tendency for individuals or organizations to take more risks during the initial training of their machine learning models.
+  - Potential Issue: This might lead to a mindset of "collect first, unlearn later if needed," adopting an amoral, cost–benefit analysis approach, especially when dealing with privacy-related issues such as the right to be forgotten.
+
+- **Underuse of Machine Unlearning:**<br>
+  - Different Approaches: Removing and blocking information are two different approaches, each with its own costs, difficulties, and flexibility. Blocking information, a form of "machine silencing," could become a strong competitor to MU unless the law mandates the use of MU for specific cases.
+  - Potential Debate: In the future, there might be a debate about whether unlearning or blocking is the right approach for highly sensitive information. Legal requirements may influence this choice.
+
+### The Future of Machine Unlearning:
+- Development: It has taken a long time to develop a culture of recording information. While developing a culture of deleting will not happen overnight, it's suggested that MU will likely be part of this developmental process.
+Investment: The paper concludes by emphasizing the importance of investing in the development and study of MU as it plays a role in shaping the future of information management and ethical AI practices.
