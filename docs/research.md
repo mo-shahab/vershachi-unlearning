@@ -627,7 +627,7 @@ link: https://dl.acm.org/doi/abs/10.1145/3319535.3363226
 
 - It's essential to note that handling false positives (events that are mistakenly identified as abnormal) is relatively straightforward. In the paper, they focus more on explaining the challenges and techniques related to handling false negatives because these are the tricky cases.
 
-## Paper 8:
+## Paper 8: (importance, introduction, challenges of mul)
 ## Title: Machine Unlearning: Its Nature, Scope, and Importance for a “Delete Culture”
 
 cite: Floridi, L. (2023). Machine Unlearning: its nature, scope, and importance for a “delete culture”. Philosophy & Technology, 36(2), 42.
