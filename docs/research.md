@@ -597,3 +597,32 @@ The proposed model is able to erase the information with respect to a particular
 
 •	Multiple Class Unlearning: 
 Our method shows excellent results for unlearning multiple classes of data. We observe that with the increase in the number of classes to unlearn, the repair step becomes more effective and leads to performance closer to the original model on (Dr) set.
+
+## Paper 7: (application of mul)
+## Title: Lifelong Anomaly Detection Through Unlearning
+
+cite: Min Du, Zhi Chen, Chang Liu, Rajvardhan Oak, and Dawn Song. 2019. Lifelong Anomaly Detection Through Unlearning. In 2019 ACM SIGSAC Conference on Computer and Communications Security (CCS ’19), November 11–15, 2019, London, United Kingdom. ACM, New York, NY, USA, 15 pages.
+
+link: https://dl.acm.org/doi/abs/10.1145/3319535.3363226
+
+### What is Anamoly Detection?
+- so basically anamoly detection, also known as outlier detection, it is just a technique used in data mining and ml, that do not conform expected behaviour within a dataset. the unusual patterns are referred to as the anamolies.
+
+### What is Lifelong Anamoly Detection?
+- Lifelong anomaly detection refers to the process of continuously learning and adapting to new patterns of anomalies over time. Unlike traditional anomaly detection methods that assume a static environment, lifelong anomaly detection systems are designed to handle evolving data distributions and changing patterns of anomalies that occur in dynamic and continuously changing datasets.
+
+- In lifelong anomaly detection, the model is capable of learning from new data and adapting to new types of anomalies as they emerge. This approach is particularly useful in applications where the characteristics of anomalies can change over time or where the system needs to continuously monitor and detect novel threats or irregularities.
+
+- The key idea behind lifelong anomaly detection is to create adaptive models that can evolve and improve their performance over the long term, ensuring accurate anomaly detection even in the face of changing data patterns and emerging anomalies. This approach enhances the system's resilience and effectiveness in real-world scenarios where the environment is constantly evolving.
+
+### How is this paper related to the unlearning ? 
+
+- Imagine you have a smart system that's continuously learning from its mistakes. In this case, the system is a machine learning model used for anomaly detection.
+
+- Now, when this model is being used in real-world applications, the goal is to keep it updated with new information about where it made mistakes, like falsely identifying something as abnormal (false positives) or missing an actual abnormal event (false negatives).
+
+- Here's where the unlearning framework comes in. The basic idea is, if we discover that a particular event (let's call it xt) was incorrectly identified as normal when it's actually abnormal (a false negative), we don't want the model to keep making the same mistake. So, instead of trying to maximize the probability that xt is normal given the previous data (x1...xt−1), we want to minimize this probability.
+
+- However, doing this directly can cause some problems, like the model becoming too sensitive and forgetting everything it learned before. The unlearning approach is like a smart way of implementing this idea without causing new problems or hurting the model's performance on other data.
+
+- It's essential to note that handling false positives (events that are mistakenly identified as abnormal) is relatively straightforward. In the paper, they focus more on explaining the challenges and techniques related to handling false negatives because these are the tricky cases.
