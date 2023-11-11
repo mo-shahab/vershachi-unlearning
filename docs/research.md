@@ -458,6 +458,17 @@ link: https://ieeexplore.ieee.org/document/9458237
 - Synthetic data experiments: The authors test their coded learning and unlearning protocol on three synthetic datasets with different features and response variables. They show that coding provides a better trade-off between performance and unlearning cost for datasets with heavy-tailed features, but not for datasets with normal features.
 - Conclusion: The authors summarize their main contributions and discuss some possible directions for future work, such as extending the protocol to other models, studying different classes of codes, and exploring the role of influential samples in coded learning and unlearning.
 
+- The algorithm in this paper is about coded machine unlearning, which is a method to efficiently remove the information of a sample from a trained machine learning model. The algorithm consists of two parts: learning and unlearning.
+- Learning: The algorithm uses an encoder to transform the original training dataset into a smaller number of coded shards, which are then used to train weak learners independently. The final model is obtained by aggregating the weak learners' models using a certain function, such as averaging.
+- Unlearning: The algorithm identifies the coded shards that contain the sample to be unlearned and updates them by subtracting the sample from the corresponding coded samples. Then, the algorithm retrains the affected weak learners using the updated coded shards and updates the final model by recalculating the aggregation function. The algorithm guarantees perfect unlearning, which means that the updated model is equivalent to a model trained on the dataset without the unlearned sample..
+
+
+# Difference 
+## how is this model different from the first
+- The overall difference between the two parts of the page is that the first part focuses on the problem of coded machine unlearning, which is a new framework for removing data from trained ML models using data encoding and ensemble learning, while the second part focuses on the problem of probabilistic machine unlearning, which is a relaxed definition of data deletion that requires the output model to be similar to the one trained without the deleted data. The first part proposes a coded learning and unlearning protocol that uses random linear coding to combine the training samples into smaller coded shards and updates the model accordingly. The second part proposes a Gaussian mechanism for unlearning that adds Gaussian noise to the output of the learning algorithm and proves its differential privacy and excess risk guarantees. The first part also presents some synthetic data experiments to demonstrate the performance versus unlearning cost trade-off of the coded protocol. The second part also derives a lower bound on the sample size required for unlearning and extends the results to the case of convex but not strongly convex loss functions.
+
+
+
 ## Paper 4: (applications of mul)
 
 ## Title: Toward Highly-Efficient and Accurate Services QoS Prediction via Machine Unlearning
