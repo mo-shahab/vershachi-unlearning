@@ -707,3 +707,18 @@ The paper suggests that the field of MU is likely to gain momentum due to increa
 ### The Future of Machine Unlearning:
 - Development: It has taken a long time to develop a culture of recording information. While developing a culture of deleting will not happen overnight, it's suggested that MU will likely be part of this developmental process.
 Investment: The paper concludes by emphasizing the importance of investing in the development and study of MU as it plays a role in shaping the future of information management and ethical AI practices.
+
+## Paper 9:
+## Title: “Amnesia” - A Selection of Machine Learning Models That Can Forget User Data Very Fast
+
+cite: Schelter, S. (2020). Amnesia-a selection of machine learning models that can forget user data very fast. suicide, 8364(44035), 46992.
+
+link: https://www.cidrdb.org/cidr2020/papers/p32-schelter-cidr20.pdf
+
+### Introduction:
+- same as other different papers, it first talks about the need of having the machine learning models' data be deleted. for like security and privacy issues. it stresses on "decremental learning"
+- it talks about how the "right to be forgotten" is the legal necessity of any machine learning model, which is of the ethical concern.
+- the word ***"decremental"*** is often used in the paper, it does not have any special and estabilished meaning, it can safely be assumed that the authors of this paper have coined this term, which in our case can be substituted with unlearning.
+- So, in the context of this paper, "decremental update" essentially refers to a method of updating a machine learning model in a way that reduces or eliminates information related to a specific user, providing a way to forget or remove user-specific data from the model efficiently.
+- also mentions, that it is easier to delete the data from the databases but not from the model that has already been trained. which infers the complications that comes with handling the data in machine learning models.
+
