@@ -463,8 +463,8 @@ link: https://ieeexplore.ieee.org/document/9458237
 - Unlearning: The algorithm identifies the coded shards that contain the sample to be unlearned and updates them by subtracting the sample from the corresponding coded samples. Then, the algorithm retrains the affected weak learners using the updated coded shards and updates the final model by recalculating the aggregation function. The algorithm guarantees perfect unlearning, which means that the updated model is equivalent to a model trained on the dataset without the unlearned sample..
 
 
-#Difference 
-##how is this model different from the first
+# Difference 
+## how is this model different from the first
 - The overall difference between the two parts of the page is that the first part focuses on the problem of coded machine unlearning, which is a new framework for removing data from trained ML models using data encoding and ensemble learning, while the second part focuses on the problem of probabilistic machine unlearning, which is a relaxed definition of data deletion that requires the output model to be similar to the one trained without the deleted data. The first part proposes a coded learning and unlearning protocol that uses random linear coding to combine the training samples into smaller coded shards and updates the model accordingly. The second part proposes a Gaussian mechanism for unlearning that adds Gaussian noise to the output of the learning algorithm and proves its differential privacy and excess risk guarantees. The first part also presents some synthetic data experiments to demonstrate the performance versus unlearning cost trade-off of the coded protocol. The second part also derives a lower bound on the sample size required for unlearning and extends the results to the case of convex but not strongly convex loss functions.
 
 
