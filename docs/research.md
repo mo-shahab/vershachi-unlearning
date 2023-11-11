@@ -461,13 +461,9 @@ link: https://ieeexplore.ieee.org/document/9458237
 - The algorithm in this paper is about coded machine unlearning, which is a method to efficiently remove the information of a sample from a trained machine learning model. The algorithm consists of two parts: learning and unlearning.
 - Learning: The algorithm uses an encoder to transform the original training dataset into a smaller number of coded shards, which are then used to train weak learners independently. The final model is obtained by aggregating the weak learners' models using a certain function, such as averaging.
 - Unlearning: The algorithm identifies the coded shards that contain the sample to be unlearned and updates them by subtracting the sample from the corresponding coded samples. Then, the algorithm retrains the affected weak learners using the updated coded shards and updates the final model by recalculating the aggregation function. The algorithm guarantees perfect unlearning, which means that the updated model is equivalent to a model trained on the dataset without the unlearned sample..
-
-
-# Difference 
-## how is this model different from the first
+ 
+### How this model is different than the first?
 - The overall difference between the two parts of the page is that the first part focuses on the problem of coded machine unlearning, which is a new framework for removing data from trained ML models using data encoding and ensemble learning, while the second part focuses on the problem of probabilistic machine unlearning, which is a relaxed definition of data deletion that requires the output model to be similar to the one trained without the deleted data. The first part proposes a coded learning and unlearning protocol that uses random linear coding to combine the training samples into smaller coded shards and updates the model accordingly. The second part proposes a Gaussian mechanism for unlearning that adds Gaussian noise to the output of the learning algorithm and proves its differential privacy and excess risk guarantees. The first part also presents some synthetic data experiments to demonstrate the performance versus unlearning cost trade-off of the coded protocol. The second part also derives a lower bound on the sample size required for unlearning and extends the results to the case of convex but not strongly convex loss functions.
-
-
 
 ## Paper 4: (applications of mul)
 
@@ -498,7 +494,7 @@ link: https://ieeexplore.ieee.org/abstract/document/10171348
   - This paper aligns with our research focus on machine unlearning. While their primary concern is QoS prediction, they utilize machine unlearning techniques to enhance their predictions. Similarly, in our research, we're working on machine unlearning tools. The methods and challenges discussed in this paper provide valuable insights for our own work in the field of machine unlearning.
 In summary, this paper's approach is relevant to our research because it showcases the practical use of machine unlearning techniques in improving the accuracy and reliability of predictions in IoT services. The challenges they address and the methods they employ provide useful context and inspiration for our own machine unlearning project.
 
-## Paper 5: (algorithms of ml)
+## Paper 5: (algorithms of mul)
 
 ## Title: Approximate Data Deletion from Machine Learning Models
 
@@ -733,3 +729,43 @@ link: https://www.cidrdb.org/cidr2020/papers/p32-schelter-cidr20.pdf
 - So, in the context of this paper, "decremental update" essentially refers to a method of updating a machine learning model in a way that reduces or eliminates information related to a specific user, providing a way to forget or remove user-specific data from the model efficiently.
 - also mentions, that it is easier to delete the data from the databases but not from the model that has already been trained. which infers the complications that comes with handling the data in machine learning models.
 
+### An example for why just deleting the data from the dataset wont suffice in completely removing the data from a trained machine learning model
+
+- Imagine there's a dataset about book ratings, and one user (let's call them User 51881) has read books related to teenage suicide. This information is sensitive, and the user wants it removed from the database under privacy regulations like the "right-to-be-forgotten."
+
+- Now, the problem arises because there might be machine learning models, like a book recommendation system, that learned from the database before the user's records were deleted. For instance, the system might have a similarity matrix, showing how similar users are based on their reading history.
+
+- In this case, even if the sensitive data about User 51881 is deleted, the model can still make educated guesses about their deleted reading history. For example, the system might find other users highly similar to User 51881 and show that these similar users also liked books about teenage suicide.
+
+- So, despite the user's data being deleted, the model can still indirectly reveal their sensitive reading history by finding similarities with other users who liked similar books. This poses a potential privacy risk, showing that simply removing data from a database might not be enough, as machine learning models can still make connections and predictions based on previously learned patterns
+
+### Incremental model and decremental model: 
+
+1. Incremental Model:
+  - Definition: Incremental models involve adding new data to the existing dataset, updating the model based on the additional information.<br>
+  - Example: If you have a recommendation system and a new user rates a book, the system incrementally updates its understanding to provide better recommendations for that user.
+
+2. Decremental Model:
+  - Definition: Decremental models, on the other hand, focus on removing data from the existing dataset, adjusting the model by forgetting or unlearning certain information.<br>
+  - Example: If a user requests their data to be removed from a recommendation system (for privacy reasons), the system should be able to decrementally update itself to forget that user's preferences.
+
+3. Tasks: ( these are the different tasks that this paper works on, have not done a deep analysis on these, just to give an idea ) 
+
+  - Item-Based Collaborative Filtering (Recommender Systems):
+    - Explanation: This is a type of recommendation system where items are recommended based on the preferences and behavior of users.
+    - Example: If User A and User B like similar books, and User A likes a new book, the system incrementally learns that User B might also like the new book.
+
+  - Ridge Regression (Regression):
+    - Explanation: Ridge Regression is a regression technique that prevents overfitting by adding a penalty term to the linear regression equation.
+    - Example: In a housing price prediction model, if new data about house prices is added, the system incrementally adjusts the regression model to maintain accuracy.
+
+  - k-Nearest Neighbors with Locality Sensitive Hashing (Classification):
+    - Explanation: k-Nearest Neighbors is a classification algorithm that classifies a data point based on the majority class of its neighbors. Locality Sensitive Hashing helps speed up the process.
+    - Example: In a spam email classifier, if new emails are added, the system incrementally updates its understanding of what features are indicative of spam or not.
+
+  - Multinomial Naive Bayes (Classification):
+    - Explanation: Multinomial Naive Bayes is a classification algorithm based on Bayes' theorem, particularly suitable for discrete data, such as text classification where the data can be represented as word counts in a document.
+    - Example: In a spam email classifier using Multinomial Naive Bayes, if new emails are added, the system incrementally adjusts its understanding of word frequencies associated with spam or non-spam emails. For example, if the word "free" appears frequently in new spam emails, the system incrementally updates its model to better recognize this pattern.
+
+### to conclude:
+- this paper gives a brief idea on how to deal with data with machine learning models, in this context it mostly falls in our field of research too. on the other hand the gist of the paper is totally different and mainly deals with something different.
