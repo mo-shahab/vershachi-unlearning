@@ -715,7 +715,7 @@ The paper suggests that the field of MU is likely to gain momentum due to increa
 - Development: It has taken a long time to develop a culture of recording information. While developing a culture of deleting will not happen overnight, it's suggested that MU will likely be part of this developmental process.
 Investment: The paper concludes by emphasizing the importance of investing in the development and study of MU as it plays a role in shaping the future of information management and ethical AI practices.
 
-## Paper 9:
+## Paper 9: (introduction, overview of mul)
 ## Title: “Amnesia” - A Selection of Machine Learning Models That Can Forget User Data Very Fast
 
 cite: Schelter, S. (2020). Amnesia-a selection of machine learning models that can forget user data very fast. suicide, 8364(44035), 46992.
@@ -769,3 +769,40 @@ link: https://www.cidrdb.org/cidr2020/papers/p32-schelter-cidr20.pdf
 
 ### to conclude:
 - this paper gives a brief idea on how to deal with data with machine learning models, in this context it mostly falls in our field of research too. on the other hand the gist of the paper is totally different and mainly deals with something different.
+
+## Paper 10: ( applications of mul)
+## Title: Efficient Repair of Polluted Machine Learning Systems via Causal Unlearning
+
+cite: Yinzhi Cao, Alexander Fangxiao Yu, Andrew Aday, Eric Stahl, Jon Merwine, and Junfeng Yang. 2018. Efficient Repair of Polluted Machine Learning Systems via Causal Unlearning. In Proceedings of 2018 ACM Asia Conference on Computer and Communications Security, Incheon, Republic of Korea, June 4–8, 2018 (ASIA CCS ’18), 13 pages.
+
+link: https://dl.acm.org/doi/abs/10.1145/3196494.3196517
+
+### Introduction: 
+
+- Imagine you have a smart system, like those used in everyday applications. These systems learn from examples but can be tricked by malicious attacks, especially one called "data pollution." This attack involves sneaking in misleading training data, which makes the system learn wrong things and give incorrect results.
+
+- Now, fixing this problem is usually done by finding and removing the bad data and re-teaching the system. However, these systems often deal with massive amounts of data (like millions of examples), making it impossible for a person to manually check each one for problems.
+
+- This paper introduces a solution called "causal unlearning" and a system named "Karma." What they do is pretty cool. They automatically figure out which data is causing the issue and needs to be removed. This saves a lot of time for the people managing these systems because they don't have to manually inspect everything.
+
+- The paper tested Karma on three different learning systems, and the results were great. It made fixing these systems much easier, and it was really good at finding the problematic data. So, in simple terms, Karma is like a smart helper that quickly finds and fixes mistakes in these smart systems.
+
+### How does **KARMA** work: 
+- Imagine you have a smart system that sometimes makes mistakes because someone played a trick by giving it wrong examples during its learning phase. Karma is like a tool that comes to the rescue to fix these mistakes.
+
+- Here's how Karma works:
+  - Trace the Trouble: When someone tricks the system with bad examples, they leave a trail of problems. Karma follows this trail, starting from the wrong examples, going to the messed-up learning model, and ending with the errors in the results.
+
+  - Smart Search: Karma searches through different groups of examples that were used to teach the system. It figures out which group is causing the most mistakes in the results.
+
+  - Trial and Error: Karma does a bit of experimenting. It removes a group of examples that seem to be causing trouble, creates a new learning model without those examples, and checks if the mistakes in the results are fixed.
+
+  - Two-Step Cleanup: Karma makes it easy for the people managing the system. First, it assumes that some users will report mistakes in the system's results. Second, it relies on these users' reports to gradually clean up the system. So, you don't have to find all the mistakes at once.
+
+  - Admin Check: Karma also needs a bit of help from administrators. It points out which examples might be causing trouble, and administrators check to make sure Karma is right.
+
+  - Not Perfect, but Helpful: Karma might sometimes say an example is bad when it's not, or it might miss a bad example. But that's okay because it's better to be safe. It's like Karma is looking for weird things in the examples to make sure the system works better.
+
+### to conclude: 
+- this paper is on an application or framework which is based off machine unlearning, this framework is called karma. this framework detects any bad data and tries to clean it.
+- we can use this for when we talk about the applications of machine unlearning.
