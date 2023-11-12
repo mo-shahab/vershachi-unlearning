@@ -834,14 +834,21 @@ SISA works in an ensemble style, which is an efficient and general method to imp
 Given a target sample 𝑥, an original model, and its unlearned model, the adversary aims to infer whether 𝑥 is unlearned from the original model.
 
 ## •	PRIVACY DEGRADATION MEASUREMENT
+
 o	Degradation Count (DegCount) : It calculates the proportion of target samples whose true membership status is predicted with higher confidence by our attack than by classical membership inference
+
 o	Degradation Rate (DegRate) : It calculates the average confidence improvement rate of our attack predicting the true membership status compared to classical membership inference
 
 ## •	EVALUATION
+
 o	first conduct an end-to-end experiment to validate the effectiveness of our attack on multiple datasets using the most straightforward unlearning method, i.e., retraining from scratch.
+
 o	Second, we compare different feature construction methods and provide a summary of the most appropriate to choose depending on the context
+
 o	Third, we evaluate the impact of over fitting and of different hyper parameters
+
 o	Fourth, we conduct experiments to evaluate dataset and model transferability between shadow model and target model
+
 o	Finally, compare the effectiveness of the attack against the SISA unlearning method
 
 ## •	Datasets
@@ -874,3 +881,43 @@ To mimic the behavior of the target model, the adversary needs to train a shadow
 Shokri et al. presented the first membership inference attack against ML models. The main idea is to use shadow models to mimic the target model’s behavior to generate training data for the attack model. Salem et al. [60] gradually removed the assumptions of [64] by proposing three different attack methods. Since then, membership inference has been extensively investigated in various ML models and tasks, such as federated learning [46], white-box classification [48], generative adversarial networks [13, 28], natural language processing [67], and computer vision segmentation [30]
 
 Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. Membership Inference Attacks Against Machine Learning Models. In IEEE Symposium on Security and Privacy (S&P), pages 3–18. IEEE, 2017.
+
+
+## Paper 11: ( overview of mul)
+
+## Title: Towards making systems forget with machine unlearning
+
+Cite: Y. Cao and J. Yang, "Towards Making Systems Forget with Machine Unlearning," 2015 IEEE Symposium on Security and Privacy, San Jose, CA, USA, 2015, pp. 463-480, doi: 10.1109/SP.2015.35.
+
+## •	Evaluation metric
+
+The usefulness of forgetting systems can be evaluated with two metrics: how completely they can forget data (completeness) and how quickly they can do so (timeliness). The higher these metrics, the better the systems are at restoring privacy, security, and usability.
+
+## •	Approach
+
+To prepare for unlearning, we transform learning algorithms in a system to a form consisting of a small number of summations. 
+Each summation is the sum of some efficiently computable transformation of the training data samples. 
+The learning algorithms depend only on the summations, not individual data. 
+These summations are saved together with the trained model. 
+Then, in the unlearning process, we subtract the data to forget from each summation, and then update the model. 
+As a result the time required is less and faster retraining from scratch.
+They propose that a general efficient unlearning approach applicable to any algorithm that can be converted to the summation form.
+
+## •	This paper makes four main contributions:
+
+o	The concept of forgetting systems that restore privacy, security, and usability by forgetting data lineage completely and quickly;
+
+o	 A general unlearning approach that converts learning algorithms into a summation form for efficiently forgetting data lineage;
+
+o	 An evaluation of our approach on real-world systems/algorithms demonstrating that it is practical, complete, fast, and easy to use; and
+
+o	 The practical data pollution attacks we created against real-world systems/algorithms.
+
+
+## •	machine learning system has three processing stages.
+
+o	 Feature selection: During this stage, the system selects, from all features of the training data, a set of features most crucial for classifying data.
+
+o	Model training: The system extracts the values of the selected features from each training data sample into a feature vector. It feeds the feature vectors and the malicious or benign labels of all training data samples into some machine learning algorithm to construct a succinct model.
+
+o	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
