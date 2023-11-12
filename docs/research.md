@@ -852,15 +852,19 @@ o	The image datasets are used to evaluate the vulnerability of the convolutional
 ## •	MEMBERSHIP INFERENCE IN MACHINE UNLEARNING
 o	Attack Pipeline
 It consists of three phases: posteriors generation, feature construction and membership inference.
-	Posteriors Generation
+
+• Posteriors Generation
 The adversary has access to two versions of the target ML model, the original model M𝑜 and the unlearned model M𝑢. Given a target sample 𝑥, the adversary queries M𝑜 and M𝑢, and obtains the corresponding posteriors, i.e., P𝑜 and P𝑢.
+
 •	Feature Construction
 Given the two posteriors P𝑜 and P𝑢, the adversary aggregates them to construct the feature vector F.
+
 •	Inference
 The adversary sends the obtained F to the attack model, which is a binary classifier, to determine whether the target sample 𝑥 is in the training set of the original model.
+
 o	Attack Model Training
-First assume the adversary has a local dataset, which can be called the shadow dataset D𝑠. The shadow dataset can come from a different distribution than the one used to train the target model. To infer whether the target sample 𝑥 is in the original model or not, the core idea is to train an attack model M𝐴 that captures the difference between the two posteriors.
-The main is that, if the target sample 𝑥 is deleted and the two models M𝑜 and M𝑢 will behave differently.
+First assume the adversary has a local dataset, which can be called the shadow dataset D𝑠. The shadow dataset can come from a different distribution than the one used to train the target model. To infer whether the target sample 𝑥 is in the original model or not, the core idea is to train an attack model M𝐴 that captures the difference between the two posteriors. The main is that, if the target sample 𝑥 is deleted and the two models M𝑜 and M𝑢 will behave differently.
+
 o	Training Shadow Models
 To mimic the behavior of the target model, the adversary needs to train a shadow original model and a set of shadow unlearned models. To do this, the adversary first partitions D𝑠 into two disjoint parts, the shadow negative set D𝑠𝑛 and the shadow positive set D𝑠𝑝. The shadow positive set D𝑠𝑝 is used to train the shadow original model M𝑠𝑜. The shadow unlearned model M𝑠𝑢 is trained by deleting samples from D𝑠𝑝.
 
