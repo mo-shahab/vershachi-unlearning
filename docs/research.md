@@ -844,15 +844,12 @@ o	Third, we evaluate the impact of over fitting and of different hyper parameter
 o	Fourth, we conduct experiments to evaluate dataset and model transferability between shadow model and target model
 o	Finally, compare the effectiveness of the attack against the SISA unlearning method
 
-•	Datasets
+## •	Datasets
  We run experiments on two different types of datasets: categorical datasets and image datasets. 
 o	The categorical datasets are used to evaluate the vulnerability of simple machine learning models. 
 o	The image datasets are used to evaluate the vulnerability of the convolutional neural networks.
 
-
-
-
-•	MEMBERSHIP INFERENCE IN MACHINE UNLEARNING
+## •	MEMBERSHIP INFERENCE IN MACHINE UNLEARNING
 o	Attack Pipeline
 It consists of three phases: posteriors generation, feature construction and membership inference.
 	Posteriors Generation
@@ -869,7 +866,7 @@ To mimic the behavior of the target model, the adversary needs to train a shadow
 
 
 //this is a reference understanding 
-•	Membership Inference 
+## •	Membership Inference 
 Shokri et al. presented the first membership inference attack against ML models. The main idea is to use shadow models to mimic the target model’s behavior to generate training data for the attack model. Salem et al. [60] gradually removed the assumptions of [64] by proposing three different attack methods. Since then, membership inference has been extensively investigated in various ML models and tasks, such as federated learning [46], white-box classification [48], generative adversarial networks [13, 28], natural language processing [67], and computer vision segmentation [30]
 
 Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. Membership Inference Attacks Against Machine Learning Models. In IEEE Symposium on Security and Privacy (S&P), pages 3–18. IEEE, 2017.
