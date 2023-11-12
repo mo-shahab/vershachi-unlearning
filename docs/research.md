@@ -883,7 +883,7 @@ Shokri et al. presented the first membership inference attack against ML models.
 Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. Membership Inference Attacks Against Machine Learning Models. In IEEE Symposium on Security and Privacy (S&P), pages 3–18. IEEE, 2017.
 
 
-## Paper 11: ( overview of mul)
+## Paper 12: ( overview of mul)
 
 ## Title: Towards making systems forget with machine unlearning
 
