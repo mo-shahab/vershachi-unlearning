@@ -1,5 +1,6 @@
 # Summary of research papers:
 ## The datasets referenced by the papers in the paper titled "A Survey Of Machine Unlearning"
+
 | Category      | Dataset            | #Items | Disk Size | Downstream Applications       | REF                                  |
 |---------------|--------------------|--------|-----------|-------------------------------|--------------------------------------|
 | Image         | MNIST              | 70K    | 11MB      | Classification                | 29+ papers ([11, 52, 59], . . . )    |
@@ -19,6 +20,7 @@
 | Graph         | OGB               | 100M+  | 59MB      | Classification                | [25, 29]                             |
 | Graph         | Cora              | 2K+    | 4.5MB     | Classification                | [22, 25, 29]                         |
 | Graph         | MovieLens         | 1B+    | 3GB+      | Recommender Systems            | [131]                                |
+
 ## Paper 1: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: NeruIPS-2021 Remember what you want to forget. 
