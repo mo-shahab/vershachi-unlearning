@@ -922,3 +922,33 @@ They propose that a general efficient unlearning approach applicable to any algo
 -	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
 
 ### ///Paper still in Progress
+
+## Paper 13: ( need, reasons of mul (talks about eu guidelines and gdpr))
+## Title: Algorithms that remember: model inversion attacks and data protection law
+
+cite: Veale M, Binns R, Edwards L. 2018 Algorithms that remember: model inversion attacks and data protection law.Phil. Trans. R. Soc. A 376: 20180083.
+
+link: http://dx.doi.org/10.1098/rsta.2018.0083
+
+### Introduction
+- this is the text from the paper "The recent EU General Data Protection Regulation (GDPR), which strengthens data protection provisions and penalties, has been looked to internationally as a way forward, particularly following high-profile coverage of the scandal around Facebook and Cambridge Analytica in early 2018."
+- this also is the txt from the paper:
+> In this paper, we argue that changing technologies may render the situation less clear-cut. We highlight a range of recent research which indicates that the process of turning training data into machine-learned systems is not one way but two: that training data, a semblance or subset of it, or information about who was in the training set, can in certain cases be reconstructed from a model.
+
+### European data protection law and machine learning
+- The GDPR is a lengthy and complex law, and is challenging to concisely summarize. It applies whenever personal data are processed (including collected, transformed, consulted or erased) either within the Union or outside the Union when the data relate to an EU resident.
+
+- text from the paper:
+> The use of machine learning to turn ‘normal’ personal data into ‘special category’ personal data, such as race, political opinion or data concerning health, also requires establishing a lawful basis, which will usually be more stringent than personal data in general.
+
+### Why might models be personal data?
+- the above subtitle is an actual section in the paper, literally titled as is. 
+- in this section, they talk about the different types of the attacks that can be done in the machine learning model and there are different types of attack listed in this section, here these are:
+  - Model inversion (explained with an example):
+    - Under a model inversion attack, a data controllerwho does not initially have direct access to B but is given access to A and M(B) is able to recover some of the variables in training set B, for those individuals in both the training set and the extra dataset A. These variables connect to each other, such that the new personal dataset in question has all the variables of A and some of B. Theremay be error and inexactitude in the latter, but the data recovered from those in the training dataset will be more accurate than characteristics simply inferred from those that were not in the training dataset.
+  - Membership inference:
+    - Membership inference attacks do not recover training data, but instead ascertain whether a given individual’s data were in a training set or not. Under a membership inference attack, the holder of A and M(A) does not recover any of the columns in B, but can add an additional column to dataset A representing whether or not a member of DS1 is in the set Z: that is, whether or not they were also part of the training set participants DS2.
+
+### To conclude:
+- this paper does not introduce anything new, it only talks about the authors concern over how one can abuse the data from the machine learning models. so they give a framework and when i say framework its not the software kind of framework, but in a general sense. this framework they tell how one should be aware when training the model with datasets, and how to act when u deal with the personal information. also they talk about how the governments should take measures so that they avoid any such thing happening. and they also talk about how data controllers must be ethically able to make decisions when they deal with the personal information of the users. 
+- in the gist of it, they say that if you are training a machine learning model on a dataset which may contain personal information of the users. any person with ill intention can try to recreate the dataset from the trained model.
