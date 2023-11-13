@@ -1292,3 +1292,61 @@ link: https://doi.org/10.1145/3589313
 - "Robust boosting" is like training a team of learners to become really good at making predictions, and making sure they can adapt to changes without starting from scratch.
 
 ### note: there will be need to get back on this paper, to deal with the efficiency of the model.
+
+## Paper 19: ( algorithms of mul - model intrinsic )
+## Title: Machine Unlearning for Random Forests
+
+cite: Brophy, J., & Lowd, D. (2021, July). Machine unlearning for random forests. In International Conference on Machine Learning (pp. 1092-1104). PMLR.
+
+link: https://proceedings.mlr.press/v139/brophy21a.html?ref=https://githubhelp.com
+
+- in this paper they have introduce data removal enabled forest (DaRE).
+- DaRE trees use randomness and caching to make data deletion efficient.
+
+### Introduction: 
+- discusses eu guidelines, california consumer privacy act and stuff. 
+- talks about the complications that come when retraining model.
+- in this paper they try to perform unlearning operations on the DaRE trees, they also try to evaluate the efficiency of the algorithms that they formulated
+
+### Definitions of the keywords that are used in the paper when discussing unlearning: 
+#### DaRE (Data Removal-Enabled) forests (a.k.a. DaRE RF):
+- an RF variant that enables the efficient removal of training instances.
+#### Retraining minimal subtrees
+- Retraining Minimal Subtrees is a technique to avoid unnecessary retraining of decision trees in machine learning. To achieve this, certain statistics are stored at each node of the tree during the initial training phase.
+
+- For decision nodes, the stored information includes counts for the total number of instances, positive instances, and specific counts related to a set of thresholds per attribute. These counts allow the system to recalculate the split criteria for each threshold without going through the entire dataset.
+
+- Leaf nodes store counts for total instances and positive instances along with a list of training instances that lead to that leaf. These statistics are initialized during the first training of the tree and have minimal impact on training time.
+
+- When a training instance is deleted, the stored statistics are updated. The affected decision nodes then recompute split criteria for each attribute-threshold pair. If a different threshold provides a better split criterion than the current one, the subtree rooted at that node is retrained. The training data for this subtree is obtained by combining the instance lists from all leaf-node descendants.
+
+- If no retraining is needed at any decision node, and the process reaches a leaf node, the label counts and instance list of that leaf node are updated, completing the deletion operation.
+
+- In essence, Retraining Minimal Subtrees optimizes the updating process after deleting a training instance, ensuring that only the necessary parts of the decision tree are retrained, minimizing unnecessary computational overhead.
+
+#### Sampling valid thresholds
+- In the context of this paper, the term "Sampling Valid Thresholds" refers to a technique used to efficiently handle continuous attributes in decision trees. For a continuous attribute, the optimal threshold for splitting will always lie between two training instances with adjacent feature values that have opposite labels. If the two instances have the same label, the split criterion improves by increasing or decreasing the threshold value.
+
+#### Random splits
+- In the context of this paper, "Random Splits" is a technique employed to enhance the efficiency of model updating, specifically in decision trees. The primary idea is to introduce decision nodes that make splits at random, independent of the optimization criterion used for typical decision nodes. This technique is contrasted with "greedy" decision nodes that select splits based on optimizing a predefined split criterion.
+
+#### Exact unlearning
+- In the realm of machine learning, "Exact Unlearning" refers to a set of techniques and methods designed to efficiently and precisely remove or delete specific data points from a trained model, thereby reversing or undoing the learning process for those instances. The goal is to seamlessly and accurately eliminate the influence of selected data without the need to retrain the entire model.
+
+#### Approximate unlearning
+- Approximate unlearning, also known as statistical unlearning, presents an alternative to exact unlearning, aiming to provide a practical and feasible method for removing the influence of specific data points from a trained model. The key distinction is that approximate unlearning doesn't guarantee an exact reversal of the learning process but instead focuses on achieving a statistically acceptable level of removal.
+
+#### Mitigation
+- Mitigation strategies, while not explicitly framed as unlearning techniques, focus on addressing the adverse effects of noisy, poisoned, or non-private training data on machine learning models. These approaches aim to reduce or counteract the impact of undesirable data rather than completely reversing the learning process.
+
+#### Differential privacy
+- Differential Privacy (DP) is a privacy-preserving concept in the field of data analysis and machine learning. It provides a rigorous framework to ensure that the inclusion or exclusion of any individual data point has a negligible impact on the outcomes of computations or analyses. This concept aims to balance the utility of data analysis with the protection of individual privacy.
+
+#### Dataset cleaning
+- Dataset cleaning is a crucial step in the data preprocessing phase of machine learning. It involves the identification and removal of unwanted or problematic elements within a dataset to enhance the overall quality of the data. The cleaning process is performed for various reasons, including privacy concerns, the elimination of outliers, and addressing issues related to noisy, corrupted, or poisoned training instances.
+
+#### Continual learning
+- Continual learning, also known as lifelong learning or incremental learning, refers to the ability of a machine learning model to adapt and improve its performance over time by continuously updating its knowledge with new data. In a continual learning setting, the model is exposed to a stream of incoming data, and it dynamically adjusts its parameters to accommodate this evolving information. The goal is to enable the model to effectively learn from and adapt to new patterns, trends, or changes in the data distribution.
+
+#### Eco friendly machine learning
+- Eco-friendly machine learning refers to a research direction that advocates for the development of learning systems with a focus on environmental and economic sustainability. The core idea is to design machine learning models and algorithms in a way that minimizes their impact on the environment and optimizes the utilization of computational resources.
