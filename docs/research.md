@@ -813,71 +813,70 @@ Cite: Chen, Min, et al. "When machine unlearning jeopardizes privacy." Proceedin
 arXiv:2005.02205 [cs.CR]
 
 
-## •	Introduction
+### - 	Introduction
 In this paper, we study to what extent data is indelibly imprinted in an ML model by quantifying the additional information leakage caused by machine unlearning.
 The most legitimate way to implement machine unlearning is to remove the data sample requested to be deleted (referred to as target sample), and retrain the ML model from scratch, but this incurs high computational overhead.
 Machine unlearning naturally generates two versions of ML models, namely the original model and the unlearned model, and creates a discrepancy between them due to the target sample’s deletion. It can be that machine unlearning may leave some imprint of the data deleted, and thus create unintended privacy risks.
 
-## •	Machine Learning and Unlearning
+### -	Machine Learning and Unlearning
 Machine learning classification is the most common ML task. An ML classifier M maps a data sample 𝑥 to posterior probabilities P, where P is a vector of entries indicating the probability of 𝑥 belonging to a specific class 𝑦 according to the model M. The sum of all values in P is 1 by definition. To construct an ML model, one needs to collect a set of data samples, referred to as the training set D. The model owner should remove the target sample 𝑥 from its training set D. Moreover, any influence of 𝑥 on the model M should also be removed. This process is referred to as machine unlearning.
 
-## •	Retraining from Scratch
+### -	Retraining from Scratch
 The most legitimate way to implement machine unlearning is to retrain the whole ML model from scratch. Formally, denoting the original model as M𝑜 and its training dataset as D , this approach consists of training a new model M𝑢 on dataset D𝑢 = D𝑜 \ 𝑥pow2 We call this M𝑢 the unlearned model.
 Drawback: Retraining from scratch is easy to implement. However, when the size of the original dataset D𝑜 is large and the model is complex, the computational overhead of retraining is too large.
 
-## •	General method to implement machine unlearning
-## o	SISA.
+### -	General method to implement machine unlearning
+#### -	SISA.
 SISA works in an ensemble style, which is an efficient and general method to implement machine unlearning. The training dataset D𝑜 in SISA is partitioned into 𝑘 disjoint parts Do1, Do2, • • • ,Do𝑘. The model owner trains a set of original ML models Mo1,Mo2, • • • ,Mo𝑘 on each corresponding dataset Do𝑖 . When the model owner receives a request to delete a data sample 𝑥, it just needs to retrain the sub-model Mo  that contains 𝑥, resulting in unlearned model Mu𝑖. Sub-models that do not contain 𝑥 remain unchanged. Notice that the size of dataset Do𝑖 is much smaller than D ; thus, the computational overhead of SISA is much smaller than the “retraining from scratch” method.
 
 
-## •	Adversary’s Goal
+### -	Adversary’s Goal
 Given a target sample 𝑥, an original model, and its unlearned model, the adversary aims to infer whether 𝑥 is unlearned from the original model.
 
-## •	PRIVACY DEGRADATION MEASUREMENT
+### -	PRIVACY DEGRADATION MEASUREMENT
+-	Degradation Count (DegCount) : It calculates the proportion of target samples whose true membership status is predicted with higher confidence by our attack than by classical membership inference
 
-o	Degradation Count (DegCount) : It calculates the proportion of target samples whose true membership status is predicted with higher confidence by our attack than by classical membership inference
+-	Degradation Rate (DegRate) : It calculates the average confidence improvement rate of our attack predicting the true membership status compared to classical membership inference
 
-o	Degradation Rate (DegRate) : It calculates the average confidence improvement rate of our attack predicting the true membership status compared to classical membership inference
+### - 	EVALUATION
 
-## •	EVALUATION
+-	first conduct an end-to-end experiment to validate the effectiveness of our attack on multiple datasets using the most straightforward unlearning method, i.e., retraining from scratch.
 
-o	first conduct an end-to-end experiment to validate the effectiveness of our attack on multiple datasets using the most straightforward unlearning method, i.e., retraining from scratch.
+-	Second, we compare different feature construction methods and provide a summary of the most appropriate to choose depending on the context
 
-o	Second, we compare different feature construction methods and provide a summary of the most appropriate to choose depending on the context
+-	Third, we evaluate the impact of over fitting and of different hyper parameters
 
-o	Third, we evaluate the impact of over fitting and of different hyper parameters
+-	Fourth, we conduct experiments to evaluate dataset and model transferability between shadow model and target model
 
-o	Fourth, we conduct experiments to evaluate dataset and model transferability between shadow model and target model
+-	Finally, compare the effectiveness of the attack against the SISA unlearning method
 
-o	Finally, compare the effectiveness of the attack against the SISA unlearning method
-
-## •	Datasets
+### - 	Datasets
  We run experiments on two different types of datasets: categorical datasets and image datasets. 
-o	The categorical datasets are used to evaluate the vulnerability of simple machine learning models. 
-o	The image datasets are used to evaluate the vulnerability of the convolutional neural networks.
+-	The categorical datasets are used to evaluate the vulnerability of simple machine learning models. 
+-	The image datasets are used to evaluate the vulnerability of the convolutional neural networks.
 
-## •	MEMBERSHIP INFERENCE IN MACHINE UNLEARNING
-o	Attack Pipeline
+### -	MEMBERSHIP INFERENCE IN MACHINE UNLEARNING
+-	Attack Pipeline
 It consists of three phases: posteriors generation, feature construction and membership inference.
 
-• Posteriors Generation
+- Posteriors Generation
 The adversary has access to two versions of the target ML model, the original model M𝑜 and the unlearned model M𝑢. Given a target sample 𝑥, the adversary queries M𝑜 and M𝑢, and obtains the corresponding posteriors, i.e., P𝑜 and P𝑢.
 
-•	Feature Construction
+-	Feature Construction
 Given the two posteriors P𝑜 and P𝑢, the adversary aggregates them to construct the feature vector F.
 
-•	Inference
+-	Inference
 The adversary sends the obtained F to the attack model, which is a binary classifier, to determine whether the target sample 𝑥 is in the training set of the original model.
 
-o	Attack Model Training
+-	Attack Model Training
 First assume the adversary has a local dataset, which can be called the shadow dataset D𝑠. The shadow dataset can come from a different distribution than the one used to train the target model. To infer whether the target sample 𝑥 is in the original model or not, the core idea is to train an attack model M𝐴 that captures the difference between the two posteriors. The main is that, if the target sample 𝑥 is deleted and the two models M𝑜 and M𝑢 will behave differently.
 
-o	Training Shadow Models
+-	Training Shadow Models
 To mimic the behavior of the target model, the adversary needs to train a shadow original model and a set of shadow unlearned models. To do this, the adversary first partitions D𝑠 into two disjoint parts, the shadow negative set D𝑠𝑛 and the shadow positive set D𝑠𝑝. The shadow positive set D𝑠𝑝 is used to train the shadow original model M𝑠𝑜. The shadow unlearned model M𝑠𝑢 is trained by deleting samples from D𝑠𝑝.
 
 
 //this is a reference understanding 
-## •	Membership Inference 
+### -	Membership Inference 
 Shokri et al. presented the first membership inference attack against ML models. The main idea is to use shadow models to mimic the target model’s behavior to generate training data for the attack model. Salem et al. [60] gradually removed the assumptions of [64] by proposing three different attack methods. Since then, membership inference has been extensively investigated in various ML models and tasks, such as federated learning [46], white-box classification [48], generative adversarial networks [13, 28], natural language processing [67], and computer vision segmentation [30]
 
 Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. Membership Inference Attacks Against Machine Learning Models. In IEEE Symposium on Security and Privacy (S&P), pages 3–18. IEEE, 2017.
@@ -889,11 +888,11 @@ Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. Membership In
 
 Cite: Y. Cao and J. Yang, "Towards Making Systems Forget with Machine Unlearning," 2015 IEEE Symposium on Security and Privacy, San Jose, CA, USA, 2015, pp. 463-480, doi: 10.1109/SP.2015.35.
 
-## •	Evaluation metric
+### -	Evaluation metric
 
 The usefulness of forgetting systems can be evaluated with two metrics: how completely they can forget data (completeness) and how quickly they can do so (timeliness). The higher these metrics, the better the systems are at restoring privacy, security, and usability.
 
-## •	Approach
+### -	Approach
 
 To prepare for unlearning, we transform learning algorithms in a system to a form consisting of a small number of summations. 
 Each summation is the sum of some efficiently computable transformation of the training data samples. 
@@ -903,23 +902,23 @@ Then, in the unlearning process, we subtract the data to forget from each summat
 As a result the time required is less and faster retraining from scratch.
 They propose that a general efficient unlearning approach applicable to any algorithm that can be converted to the summation form.
 
-## •	This paper makes four main contributions:
+### -	This paper makes four main contributions:
 
-o	The concept of forgetting systems that restore privacy, security, and usability by forgetting data lineage completely and quickly;
+-	The concept of forgetting systems that restore privacy, security, and usability by forgetting data lineage completely and quickly;
 
-o	 A general unlearning approach that converts learning algorithms into a summation form for efficiently forgetting data lineage;
+-	 A general unlearning approach that converts learning algorithms into a summation form for efficiently forgetting data lineage;
 
-o	 An evaluation of our approach on real-world systems/algorithms demonstrating that it is practical, complete, fast, and easy to use; and
+-	 An evaluation of our approach on real-world systems/algorithms demonstrating that it is practical, complete, fast, and easy to use; and
 
-o	 The practical data pollution attacks we created against real-world systems/algorithms.
+-	 The practical data pollution attacks we created against real-world systems/algorithms.
 
 
-## •	machine learning system has three processing stages.
+### -	machine learning system has three processing stages.
 
-o	 Feature selection: During this stage, the system selects, from all features of the training data, a set of features most crucial for classifying data.
+-	 Feature selection: During this stage, the system selects, from all features of the training data, a set of features most crucial for classifying data.
 
-o	Model training: The system extracts the values of the selected features from each training data sample into a feature vector. It feeds the feature vectors and the malicious or benign labels of all training data samples into some machine learning algorithm to construct a succinct model.
+-	Model training: The system extracts the values of the selected features from each training data sample into a feature vector. It feeds the feature vectors and the malicious or benign labels of all training data samples into some machine learning algorithm to construct a succinct model.
 
-o	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
+-	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
 
-## ///Paper still in Progress
+### ///Paper still in Progress
