@@ -1247,3 +1247,48 @@ In short, this method lets you tweak a model's understanding of certain classes,
 
 ### These are the datasets they worked on:
 CIFAR-10, AT&T Faces, MLP, CNN, ResNet
+
+## Paper 18: ( increasing efficiency of mul - model intrinsic )
+## Title: DeltaBoost: Gradient Boosting Decision Trees with Efficient Machine Unlearning
+
+cite: Zhaomin Wu, Junhui Zhu, Qinbin Li, and Bingsheng He. 2023. DeltaBoost: Gradient Boosting Decision Trees with Efficient Machine Unlearning. Proc. ACM Manag. Data 1, 2, Article 168 (June 2023), 26 pages.
+
+link: https://doi.org/10.1145/3589313
+
+### Introduction:
+- its the same premise as other papers, on why machine unlearning is needed.
+- they work on the gradient boosting decision trees. 
+- Gradient boosting decision trees is a popular machine learning model that features efficiency and explainability
+- so lets breakdown what does it mean by decision trees and what does it mean gradient boosting
+- Decision Trees:
+  - In machine learning, a decision tree is a predictive model that maps features to conclusions. It makes decisions by asking a series of questions and, based on the answers, makes a prediction.
+- Gradient Boosted:
+  - "Gradient boosting" is a machine learning technique for regression and classification problems, and it works by building a series of decision trees sequentially. Each tree corrects the errors of the previous one. The term "gradient" refers to the optimization method used in the process.
+- they give two instances on whats gonna happen if you remove a node from the decision tree
+- it talks how the gbdt relies on the previous node that came before it.
+- and unlearning means removing the previous nodes, so this affect the model.
+- this is the link for the code where they have all the code related this paper https://github.com/Xtra-Computing/DeltaBoost
+
+### Explaining key words:
+- **Gradient boosting decision trees** is a tree-based machine learning model that minimizes the objective function by gradient descent based on the residual between the prediction value and the label.
+
+### Observations made in the paper: 
+- GBDT is challenging for unlearning
+- Removing a small fraction of instances hardly affects the choice of the split point for the best gain
+
+#### Deltaboost is the framework which is based on the GDBT for efficient machine unlearning in GDBT based models.
+
+### Design of the deltaboost:
+- First, they construct a robust and balanced histogram from the data, which requires only slight adjustments to generate the retrained histogram after the deletion.
+- Second, based on their analysis in the section where they discuss about the splits which is nothing but the nodes in the GDBT, they design a robust data structure, namely split neighborhood, to select the best split candidate from the histogram ( they have considered the dataset and the data is plotted onto an histogram in the paper ) in each feature.
+
+### Split neighborhood:
+- The "split neighborhood" refers to a range or group of possible ways to divide or split the data in a decision tree. In the context of the paper, it seems to be discussing how changes in the data, such as removing or altering certain instances, can influence the options considered for splitting the data at different points in a decision tree.
+
+### Robust feature selection:
+- "Robust feature selection" is like choosing the most important and reliable pieces of information from a bunch of data. Imagine you have a lot of information, but not all of it is equally helpful. Some parts might be noisy or less useful.
+
+### Robust boosting:
+- "Robust boosting" is like training a team of learners to become really good at making predictions, and making sure they can adapt to changes without starting from scratch.
+
+### note: there will be need to get back on this paper, to deal with the efficiency of the model.
