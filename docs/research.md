@@ -555,58 +555,75 @@ In summary, the paper outlines the challenges posed by data deletion requests wi
 Cite: Tarun, A. K., Chundawat, V. S., Mandal, M., & Kankanhalli, M. (2023). Fast yet effective machine unlearning. IEEE Transactions on Neural Networks and Learning Systems. 
 arXiv:2111.08947 [cs.LG]
 
-1.	Introduction
+## 1.	Introduction
    
 Unlearning the data observed during the training of a machine learning (ML) model is an important task that can play a pivotal role in fortifying the privacy and security of ML-based applications.
+
 Privacy regulations are increasing day by day to include provisions in future to give the control of personal privacy to the individuals. That is for instance the California Consumer Privacy Act (CCPA) allows companies to collect the user data by default. However, the user has the right to delete it on request.
+
 This also implies that the company is requested to remove the data for example face id of a user (or a set of users) from the already trained face recognition model. In addition, there is a constraint such that the company no longer has access to those (requested to be removed) facial images.
+
 The unlearning that is selective forgetting or data deletion solutions presented in the literature are focused on simple learning algorithms such a linear/logistic regression, random forests, and k-means clustering and other analysis. 
+
 Initial work on forgetting in convolutional networks is however shown to be effective only on small scale problems and are computationally expensive due to non-convex loss functions.
 
-2.	Open problems on efficient unlearning in deep networks are
+## 2.	Open problems on efficient unlearning in deep networks are
    
 •	efficiently unlearning multiple classes is yet to be explored due to several complexities that arise while working with deep learning models that is optimization and final network weight combination.
+
 •	several optimal set of weights may exist for the same network, making it difficult to confidently evaluate the degree of unlearning.
+
 •	Forgetting a large part of data or an entire class of data while preserving the accuracy of the model is a major problem
+
 •	Moreover, efficiently manipulating the network weights without using the unlearning data still remains an unsolved problem. 
+
 In brief the main problems that arise are to unlearn multiple classes of data, perform unlearning for large-scale problems, and generalize the solution to different type of deep network.
 
-3.	Proposed by Authors
+## 3.	Proposed by Authors
    
 In this paper, they propose a framework for unlearning in a zero-glance privacy setting, i.e. the model can’t see the unlearning class of data we learn an error-maximizing noise matrix consisting of highly influential points corresponding to the unlearning class. Then, they train the model using the noise matrix to update the network weights and introduce Unlearning by Selective Impair and Repair (UNSIR), a single-pass method to unlearn single/multiple classes of data in a deep model without requiring access to the data samples of the requested set of unlearning classes.
 
-4.	Comparison Models
+## 4.	Comparison Models
+
 Models used for comparison are ResNet18, AllCNN, MobileNetv2 and Vision Transformers
 
-5.	Used Datasets
+## 5.	Used Datasets
+
 Datasets used CIFAR-10 [53], CIFAR-100 [53] and VGGFace-100.
 
-6.	Might require later for analysis
+## 6.	Might require later for analysis
    
-(Let the complete training dataset consisting of n samples and K total number of classes be Dc = f(xi;yi)gni=1where x 2 X   Rd are the inputs and y 2 Y = 1; :::;K are the corresponding class labels. If the forget and retain classes are denoted by Yf and Yr then Df [Dr = Dc, Df \Dr = ;. Let the deep learning model be represented by the function f (x) : X ! Y parameterized by   2 Rd used to model the relation X ! Y. The weights   of the original trained deep network f  1 are a function of the complete training data Dc. Forgetting in zero-glance privacy setting is an algorithm, which gives a new set of weights  Dr sub by using the trained model f and a subset of retain images Dr sub   Dr which doesn’t remember the information regarding Df and behaves similarly to a model which has never seen Df in the parameter and output space. To achieve unlearning, we first learn a noise matrix N for each class in Yf by using the trained model. Then we transform the model in such a way that it fails to classify the samples from forget set Df while maintaining the accuracy for classifying the samples from the retain set Dr. This is ensured by using a small subset of samples Dr sub drawn from the retain dataset Dr)
+///(Let the complete training dataset consisting of n samples and K total number of classes be Dc = f(xi;yi)gni=1where x 2 X   Rd are the inputs and y 2 Y = 1; :::;K are the corresponding class labels. If the forget and retain classes are denoted by Yf and Yr then Df [Dr = Dc, Df \Dr = ;. Let the deep learning model be represented by the function f (x) : X ! Y parameterized by   2 Rd used to model the relation X ! Y. The weights   of the original trained deep network f  1 are a function of the complete training data Dc. Forgetting in zero-glance privacy setting is an algorithm, which gives a new set of weights  Dr sub by using the trained model f and a subset of retain images Dr sub   Dr which doesn’t remember the information regarding Df and behaves similarly to a model which has never seen Df in the parameter and output space. To achieve unlearning, we first learn a noise matrix N for each class in Yf by using the trained model. Then we transform the model in such a way that it fails to classify the samples from forget set Df while maintaining the accuracy for classifying the samples from the retain set Dr. This is ensured by using a small subset of samples Dr sub drawn from the retain dataset Dr)///
 
-7.	ERROR-MAXIMIZING NOISE BASED UNLEARNING
+## 7.	ERROR-MAXIMIZING NOISE BASED UNLEARNING
    
 The approach aims to learn a noise matrix for the unlearning class by maximizing the model loss. Such generated noise samples will damage/overwrite the previously learned network weights for the relevant classes during the model update and induce unlearning. Error maximizing noise will have high influence to enable parameters updates corresponding to the unlearning class.
 
-A. Error-maximizing Noise
+## A. Error-maximizing Noise
 The goal is to create a correlation between Noise N and the unlearning class label f.
 
-B. UNSIR: Unlearning with Single Pass Impair and Repair
+## B. UNSIR: Unlearning with Single Pass Impair and Repair
   •	Impair. 
-    They train the model on a small subset of data from the original distribution which also contains generated noise. This     step is called ’impair’ as it corrupts those weights in the network which are responsible for recognition of the data       in forget class. They use a high learning rate and observe that almost always only a single epoch of ’impair’ is enough.
+ 
+    They train the model on a small subset of data from the original distribution which also contains generated noise. This step is called ’impair’ as it corrupts those weights in the network which are responsible for recognition of the data in forget class. They use a high learning rate and observe that almost always only a single epoch of ’impair’ is enough.
+    
   •	Repair. 
-    The ’impair’ step may sometimes disturb the weights that are responsible for predicting the retain classes. Thus, they      ’repair’ those weights by training the model for a single epoch (on rare occasions, more epochs may be required) on the     retain data (Dr sub).
+    
+    The ’impair’ step may sometimes disturb the weights that are responsible for predicting the retain classes. Thus, they ’repair’ those weights by training the model for a single epoch (on rare occasions, more epochs may be required) on the retain data (Dr sub).
 
-8.	Evaluation Metrics
+## 8.	Evaluation Metrics
     
 •	Accuracy on forget set (ADf ): Should be close to zero.
+
 •	Accuracy on retain set (ADr ): Should be close to the performance of original model.
+
 •	Relearn time (RT): Relearn time is a good proxy to measure the amount of information remaining in the model about the unlearning data. 
+
 •	Weight distance: The distance between individual layers of the original model and the unlearned model gives additional insights about the amount of information remaining in the network about the forget data.
+
 •	Prediction distribution on forget class: We analyze the distribution of the predictions for different samples in the forget classes of data in the unlearned model. Presence of any specific observable patterns like repeatedly predicting a single retain class may indicate risk of information exposure.
 
-9.	ANALYSIS
+## 9.	ANALYSIS
 
 A.	Layer-wise Distance between the Network Weights
 B. Efficiency
@@ -618,13 +635,16 @@ G. Using Different Proportions of Retain Data (Dr) for Unlearning
 H. Different Levels of Weight Penalization
 I. Healing after Multiple Steps of Repair
 
-10.	Results
+## 10.	Results
     
 The results were compared with three baseline unlearning methods: Retrain Model, FineTune, and NegGrad. Due to poor results of FineTune, NegGrad, and Fisher forgetting in CIFAR-10, we compare our results only with the Retrain Model in the subsequent experiments.
-•	Single Class Unlearning:
+
+## •	Single Class Unlearning:
+
 The proposed model is able to erase the information with respect to a particular class and unlearn in a single shot of impair and repair. They were able to obtain superior accuracy in retain set (Dr) and forget set (Df ) over the existing methods. The relearn time (RT) is much higher for our method in comparison to the baseline methods.
 
-•	Multiple Class Unlearning: 
+## •	Multiple Class Unlearning: 
+
 Our method shows excellent results for unlearning multiple classes of data. We observe that with the increase in the number of classes to unlearn, the repair step becomes more effective and leads to performance closer to the original model on (Dr) set.
 
 ## Paper 7: (application of mul)
@@ -943,7 +963,15 @@ The usefulness of forgetting systems can be evaluated with two metrics: how comp
 
 -	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
 
-### ///Paper still in Progress
+
+## •	system inference attack 
+
+Attacker gains an opportunity to infer private data by feeding samples into the system and observing the prediction results. Such an attack is called a system inference attack
+
+## •	Training Data Pollution Attacks
+
+An attacker injects carefully polluted data samples into a learning system, misleading the algorithms to compute an incorrect feature set and model. Subsequently, when processing unknown samples, the system may flag a big number of benign samples as malicious and generate too many false positives, or it may flag a big number of malicious as benign so the true malicious samples evade detection.
+
 
 ## Paper 13: ( need, reasons of mul (talks about eu guidelines and gdpr))
 ## Title: Algorithms that remember: model inversion attacks and data protection law
