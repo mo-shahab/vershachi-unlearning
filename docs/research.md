@@ -1139,7 +1139,7 @@ all these talk they say how the accuracy of the fully trained machine learning m
 ### when to retrain the model:
 - this paper clearly evaluates the performance metric and discusses it.
 
-## Paper 16: ( techniques of mul) this is the official paper published by facebook research.
+## Paper 16: ( techniques of mul) this is the paper officially published by facebook research.
 ## Title: Certified Data Removal from Machine Learning Models
 
 cite: Guo, C., Goldstein, T., Hannun, A., & Van Der Maaten, L. (2019). Certified data removal from machine learning models. arXiv preprint arXiv:1911.03030.
