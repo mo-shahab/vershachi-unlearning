@@ -603,9 +603,12 @@ The approach aims to learn a noise matrix for the unlearning class by maximizing
 The goal is to create a correlation between Noise N and the unlearning class label f.
 
 ## B. UNSIR: Unlearning with Single Pass Impair and Repair
- ## •	Impair. 
+  •	Impair. 
+ 
     They train the model on a small subset of data from the original distribution which also contains generated noise. This step is called ’impair’ as it corrupts those weights in the network which are responsible for recognition of the data in forget class. They use a high learning rate and observe that almost always only a single epoch of ’impair’ is enough.
-  ## •	Repair. 
+    
+  •	Repair. 
+    
     The ’impair’ step may sometimes disturb the weights that are responsible for predicting the retain classes. Thus, they ’repair’ those weights by training the model for a single epoch (on rare occasions, more epochs may be required) on the retain data (Dr sub).
 
 ## 8.	Evaluation Metrics
