@@ -963,7 +963,15 @@ The usefulness of forgetting systems can be evaluated with two metrics: how comp
 
 -	Prediction: When the system receives an unknown data sample, it extracts the sample’s feature vector and uses the model to predict whether the sample is malicious or benign
 
-### ///Paper still in Progress
+
+## •	system inference attack 
+
+Attacker gains an opportunity to infer private data by feeding samples into the system and observing the prediction results. Such an attack is called a system inference attack
+
+## •	Training Data Pollution Attacks
+
+An attacker injects carefully polluted data samples into a learning system, misleading the algorithms to compute an incorrect feature set and model. Subsequently, when processing unknown samples, the system may flag a big number of benign samples as malicious and generate too many false positives, or it may flag a big number of malicious as benign so the true malicious samples evade detection.
+
 
 ## Paper 13: ( need, reasons of mul (talks about eu guidelines and gdpr))
 ## Title: Algorithms that remember: model inversion attacks and data protection law
