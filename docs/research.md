@@ -970,3 +970,121 @@ link: https://dl.acm.org/doi/abs/10.1145/3560830.3563731
 - in simple terms, forgeability hints that our current way of thinking about making machines forget things might not be as effective as we thought. it points out that there could be an issue in the way we define the process of unlearning for machines.
 - in this paper they show a connection between machine unlearning and membership inferencing.
 - this paper has a subtle relevance with our framework, this paper can help us counter the argument made where they argue on the machine unlearning's meaning and principles.
+
+## Paper 15: (introduction, comparison of mul algorithms, focuses on mul of linear models, model intrinsic mul)
+## Title: Certifiable Machine Unlearning for Linear Models
+
+cite: Mahadevan, A., & Mathioudakis, M. (2021). Certifiable machine unlearning for linear models. arXiv preprint arXiv:2106.15093.
+
+link: https://arxiv.org/abs/2106.15093
+
+- this is how they define machine unlearning in the paper "Machine unlearning is the task of updating a machine learning (ML) model after the partial deletion of data on which the model had been trained, so that the model reflects the remaining data."
+
+### Introduction: 
+- this paper is about "machine unlearning," which is the process of updating a machine learning (ML) model after some of the data it was trained on is deleted. The goal is to do this effectively and efficiently, meaning it should remove the deleted data without requiring a lot of computational effort.
+
+- There are laws like "the right to be forgotten" that require proving that the deleted data is genuinely removed from the ML model. The paper explores three methods for unlearning in linear models and compares them in terms of how well they work, how efficient they are, and whether they meet certifiability requirements.
+
+- In their study, the researchers use six real-world datasets and different settings to test these unlearning methods. They share insights into how the quantity and distribution of deleted data affect ML models and the performance of each unlearning method. Additionally, they suggest a practical online strategy to decide when the accumulated error from unlearning is significant enough to warrant a full retraining of the ML model.
+
+- in this paper they compare and analyse the different existing machine unlearning methods, they compare the methods by their performance in vareity of setting
+
+- they tell that machine unlearning model must be effective and certifiable 
+
+- they talk about how effectively the machine unlearning model must be done, so that even after the machine is unlearned it must ensure that the model stays unaffected and something in those lines. 
+
+- they focus on the linear classification models, so we can say this research is model intrinsic.
+
+- and they assume that the models that they are comparing are initially trained with the stochastic gradient descent (SGD) and the algos used to train the models are standard and stuff. 
+
+### Briefs about how they will be doing it (in text as is): 
+For the experimental evaluation, we implement a common ML pipeline (Figure 1) for the compared methods. The first stage trains an initial ML model from the data. To limit the variable parts of our experimentation, we will be focusing on linear classification models, such as logistic regression, as they represent a large class of models that are commonly encountered in a wide range of settings. In addition, we’ll be assuming that the initial model is trained with stochastic gradient descent (SGD), since SGD and its variants are the standard algorithms for training general ML models. The second stage employs the initial ML model for inference, i.e., for classification. During this stage, if data deletion occurs, then the pipeline proceeds to the third stage to unlearn the deleted data and produce an updated model. After every such model update, the updated model is evaluated for certifiability. If it fails, then the pipeline restarts and trains a new model from scratch on the remaining data; otherwise, it is employed in the inference stage and pipeline resumes. When an audit is requested by an external auditor (not shown in Figure 1) – a full retraining of the ML model is executed on the remaining data, and the fully retrained model is compared to the currently employed model. If the employed model is found to have unlearned the deleted data as well as the fully retrained model (within a threshold of disparity), then the audit is successful, meaning the pipeline has certifiably unlearned the deleted data so far and is allowed to resume.
+
+### three methods of ml that they compare:
+
+- Fisher Method:
+  - What it does: This method corrects the machine learning (ML) model using the data that's still available.
+  - Analogy: It's like fixing a mistake in a painting by looking at the parts that were not affected.
+
+- Influence Method:
+  - What it does: This method corrects the ML model using the data that was deleted.
+  - Analogy: Imagine you painted a picture, erased part of it, and then tried to fix it by focusing on the erased part.
+
+- DeltaGrad Method:
+  - What it does: This method corrects the ML model by adjusting the steps it took during the initial training.
+  - Analogy: Think of it as going back and changing the way you originally learned something to get it right.
+
+- Overall Purpose:
+These methods are used to undo or correct the learning of a machine model, particularly for linear classification models trained with Stochastic Gradient Descent (SGD). They are like different tools in a toolkit, each approaching the problem in a unique way. In this case, the evaluation focuses on efficiency (how fast it works), effectiveness (how well it corrects the model), and certifiability (the ability to show that the model has forgotten specific information).
+
+### The experimental framework used in the paper: 
+
+- First Stage: Training
+  - What happens: A machine learning (ML) model is trained using a dataset (let's call it D).
+  - Details: The dataset has information about things (features) and categories (labels). Imagine it's like teaching a computer to recognize different types of fruits based on their features.
+
+- Second Stage: Inference
+  - What happens: The trained model is used to predict categories for new data points.
+  - Analogy: Think of it like the computer now being able to identify fruits when you show it pictures of new ones.
+
+- Third Stage: Unlearning
+  - What happens: Some data might be deleted from the original training set, and the model needs to adjust to this change.
+  - Details: This is where the unlearning part comes in. The model tries to forget the deleted data and adapt. It's like if you forgot some fruits you initially learned and need to adjust to still recognize new ones.
+
+- Evaluation of Unlearning:
+  - Effectiveness: How well the model still predicts accurately.
+  - Measurement: Accuracy on a separate test dataset.
+  - Certifiability: How well the model truly forgets the deleted data.
+  - Measurement: Comparing its accuracy on the deleted data against a fully retrained model.
+
+- Decision Making:
+  - If the adjusted model still works well (high accuracy) and forgets the deleted data effectively (low disparity), it continues to the inference stage.
+If the adjustments aren't good enough, or if there have been many deletions, it goes back to the training stage and retrains from scratch on the remaining data.
+
+- Intuition:
+  - It's like fine-tuning a computer's ability to recognize new fruits based on feedback (test dataset) and making sure it forgets old ones properly.
+Note: The pipeline aims to balance efficiency (not taking too much time) and effectiveness (still being accurate) while making sure it truly forgets the deleted information.
+
+### Dataset used in the paper: 
+| Dataset | Dimensionality |           | Classes | Train Data | Test Data  |
+|---------|-----------------|-----------|---------|------------|------------|
+|         | d               | level     | k-init       | n-init      | n-test      |
+|---------|-----------------|-----------|---------|------------|------------|
+| mnistb  | 784             | Moderate  | 2       | 11,982     | 1,984      |
+| cifar2  | 3072            | High      | 2       | 20,000     | 2,000      |
+| mnist   | 784             | Moderate  | 10      | 60,000     | 10,000     |
+| covtype | 54              | Low       | 2       | 522,910    | 58,102     |
+| epsilon | 2000            | High      | 2       | 400,000    | 100,000    |
+| higgs   | 28              | Low       | 2       | 9,900,000  | 1,100,000  |
+
+### effect of deletion distribution: 
+Before comparing machine unlearning methods, the paper explores how deleting data affects the accuracy of fully trained models. This helps separate the impact of data deletion from the effects of specific unlearning methods.
+
+- Uniform Deletion Distributions:
+  - Even at deletion fractions close to 0.5, test accuracy of fully retrained models is not significantly affected.
+Redundancy in real-world datasets allows the model to perform well with a small number of data points from each class.
+Informed deletions (removing outliers) decrease accuracy more than random deletions.
+
+- Targeted Deletion Distributions:
+  - Worst-case scenario causing large drops in test accuracy due to class imbalance.
+Deletion of informed points leads to a less effective model at the same deletion fraction.
+Targeted-informed distribution is a worst-case deletion scenario, and machine unlearning methods should be tested on such distributions.
+
+- Correlation between Test and Deleted Dataset Accuracy:
+  - Test accuracy (Acctest) and accuracy on deleted data (Accdel) follow a similar trend across deletion fractions. 
+  - Acctest can serve as a good proxy for Accdel, which may be challenging to compute after data deletion but is crucial for assessing certifiability.
+
+all these talk they say how the accuracy of the fully trained machine learning models is after they remove data from it, before they unlearn the model
+
+- they then do the comparison in efficiency, effectiveness and certifiability
+
+### Evaluation:
+
+- Efficiency-Certifiability Trade-offs:
+  - Trade-offs were evaluated between certifiability and efficiency for unlearning methods, revealing a general inverse relationship, with Influence and Fisher showing similar trends and DeltaGrad being less efficient.
+
+- Efficiency-Effectiveness Trade-off:
+  - The trade-off between efficiency and effectiveness was explored, highlighting that Influence excels in providing a favorable balance, outperforming Fisher and DeltaGrad, particularly in high-dimensional datasets.
+
+### when to retrain the model:
+- this paper clearly evaluates the performance metric and discusses it. 
