@@ -894,13 +894,13 @@ The usefulness of forgetting systems can be evaluated with two metrics: how comp
 
 ### -	Approach
 
-To prepare for unlearning, we transform learning algorithms in a system to a form consisting of a small number of summations. 
-Each summation is the sum of some efficiently computable transformation of the training data samples. 
-The learning algorithms depend only on the summations, not individual data. 
-These summations are saved together with the trained model. 
-Then, in the unlearning process, we subtract the data to forget from each summation, and then update the model. 
-As a result the time required is less and faster retraining from scratch.
-They propose that a general efficient unlearning approach applicable to any algorithm that can be converted to the summation form.
+- To prepare for unlearning, we transform learning algorithms in a system to a form consisting of a small number of summations. 
+- Each summation is the sum of some efficiently computable transformation of the training data samples. 
+- The learning algorithms depend only on the summations, not individual data. 
+- These summations are saved together with the trained model. 
+- Then, in the unlearning process, we subtract the data to forget from each summation, and then update the model. 
+- As a result the time required is less and faster retraining from scratch.
+- They propose that a general efficient unlearning approach applicable to any algorithm that can be converted to the summation form.
 
 ### -	This paper makes four main contributions:
 
@@ -952,3 +952,21 @@ link: http://dx.doi.org/10.1098/rsta.2018.0083
 ### To conclude:
 - this paper does not introduce anything new, it only talks about the authors concern over how one can abuse the data from the machine learning models. so they give a framework and when i say framework its not the software kind of framework, but in a general sense. this framework they tell how one should be aware when training the model with datasets, and how to act when u deal with the personal information. also they talk about how the governments should take measures so that they avoid any such thing happening. and they also talk about how data controllers must be ethically able to make decisions when they deal with the personal information of the users. 
 - in the gist of it, they say that if you are training a machine learning model on a dataset which may contain personal information of the users. any person with ill intention can try to recreate the dataset from the trained model.
+
+## Paper 14:
+## Title: Forgeability and Membership Inference Attacks
+
+cite: Zhifeng Kong, Amrita Roy Chowdhury∗, and Kamalika Chaudhuri. 2022. Forgeability and Membership Inference Attacks. In Proceedings of the 15th ACM Workshop on Artificial Intelligence and Security (AISec ’22), November 11, 2022, Los Angeles, CA, USA. ACM, New York, NY, USA, 7 pages.
+
+link: https://dl.acm.org/doi/abs/10.1145/3560830.3563731
+
+### Introduction: 
+- talks about membership inference attack and machine learning privacy
+- they emphasize on the gdpr rules and stuff.
+- they also mention that exact machine unlearning, which means to retrain the data from the scratch is computationally expensive and such. 
+- they talk about data being "forgeable" - which means -> Imagine you have two sets of data, let's call them Set A and Set B. These sets are said to be "forgeable" if you can use them to train a smart system (like an AI model) to be almost the same.
+- it literally means forging, but we must suppose all the forging examples hereon in the context of ai and machine learning
+- what they are trying to tell is that, if i have a ml model and i unlearn some of the stuff from it, then forgeability suggests that the original model and then the unlearned model do not have much difference, you can barely tell that the some of the stuff has been unlearned or not, there is no noticeable difference that can make you say that the machine has unlearned.
+- in simple terms, forgeability hints that our current way of thinking about making machines forget things might not be as effective as we thought. it points out that there could be an issue in the way we define the process of unlearning for machines.
+- in this paper they show a connection between machine unlearning and membership inferencing.
+- this paper has a subtle relevance with our framework, this paper can help us counter the argument made where they argue on the machine unlearning's meaning and principles.
