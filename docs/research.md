@@ -1350,3 +1350,74 @@ link: https://proceedings.mlr.press/v139/brophy21a.html?ref=https://githubhelp.c
 
 #### Eco friendly machine learning
 - Eco-friendly machine learning refers to a research direction that advocates for the development of learning systems with a focus on environmental and economic sustainability. The core idea is to design machine learning models and algorithms in a way that minimizes their impact on the environment and optimizes the utilization of computational resources.
+
+## Paper 20: ( introduction to federated unlearning )
+## Title: Asynchronous Federated Unlearning
+
+Cite: Ningxin Su, Baochun Li. “Asynchronous Federated Unlearning,” in the Proceedings of IEEE INFOCOM 2023, New York Area, U.S.A., May 17–20, 2023.
+In this paper, we introduce the new paradigm of asynchronous federated unlearning, and propose KNOT, our new federated unlearning mechanism that uses clustering to mitigate the negative effects of unlearning.
+
+## •	Introduction 
+
+Federated learning is a type of distributed machine learning assumes that edge devices, also known as clients, collaboratively train a global model with their local private data, which are further aggregated by a central server.
+
+This allows the user to keep their data locally and to processes them instead of sending them to the central server.
+
+So the client’s data area stored globally in the central server and he can request them to be deleted as a result it led to the machine unlearning.
+
+In federated unlearning, the primary objective is to minimize the time it takes to complete the retraining process, when a subset of the clients request the erasure of some of their data samples.
+
+In each round the server sends the initial model to the client. Then the client trains the model using the data present locally with the client and sends the updates back to the server. The server then uses an aggregation algorithm to aggregate all received updates into a new model, in preparation for the next round.
+
+## •	Asynchronous federated learning
+
+Naturally the clients have different computing power and communication capabilities, leading to different amounts of time for them to finish training. In order to speed up the FL training session, asynchronous aggregation on the server has recently been proposed.
+
+The main principle is that the server only needs to wait for a minimum number of faster clients before aggregation proceeds.
+
+Hence this favors the faster clients in each round, who contribute more and therefore to train the global model. This results that the slower clients will update the old models which affects the aggregation process.
+
+To construct a “firewall” between clusters of clients in the system, such that server aggregation is carried out within each cluster only.
+
+Though suitable strategies for distributing clients across clusters are open to further investigation???IMP (clustered aggregation can indeed improve training performance in asynchronous FL)
+
+## •	Model - LeNet-5
+
+100 clients to be randomly assigned to 5 clusters select 30 clients in each communication round, and 15 clients as the minimum number of clients to be aggregated asynchronously.
+
+## •	Baseline Algorithm used to compare
+
+FedBuff as asynchronous FL baseline and Federated Averaging (FedAvg) as synchronous baseline.
+
+It was confirmed the fact that synchronous FL with FedAvg was much slower than asynchronous FL with FedBuff before clients request to erase their data at the same wall-clock time
+
+## •	KNOT: ALGORITHM AND ANALYSIS
+
+In the design of Knot first we have to make sure that the client clusters are made in an efficient manner.
+## o	Implementation and Preparation
+
+KNOT is implemented in PLATO, a new open-source research framework for asynchronous FL.
+
+One of the key features in PLATO has been the support for asynchronous FL, with the ability to measure the elapsed wall-clock time in a FL training session.
+
+o	improvements to PLATO
+
+o	Achieving stellar scalability
+
+o	Measuring wall-clock training times
+
+o	Improving reproducibility
+
+## •	Datasets 
+
+Here four datasets are used 
+
+o	CIFAR-10 - image classification
+
+o	Federated EMNIST - image classification (specifically designed for FL)
+
+o	Purchase-100 - behavioral pattern recognition
+
+o	Tiny Shakespeare - natural language processing
+
+https://github.com/TL-System/plato/tree/main/examples/unlearning/knot for KNOT source code
