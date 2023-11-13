@@ -1109,4 +1109,52 @@ all these talk they say how the accuracy of the fully trained machine learning m
   - The trade-off between efficiency and effectiveness was explored, highlighting that Influence excels in providing a favorable balance, outperforming Fisher and DeltaGrad, particularly in high-dimensional datasets.
 
 ### when to retrain the model:
-- this paper clearly evaluates the performance metric and discusses it. 
+- this paper clearly evaluates the performance metric and discusses it.
+
+## Paper 16: ( techniques of mul) this is the official paper published by facebook research.
+## Title: Certified Data Removal from Machine Learning Models
+
+cite: Guo, C., Goldstein, T., Hannun, A., & Van Der Maaten, L. (2019). Certified data removal from machine learning models. arXiv preprint arXiv:1911.03030.
+
+link: https://arxiv.org/abs/1911.03030
+
+### Introduction: 
+- The paper introduces the concept of "certified removal," which represents a robust theoretical guarantee that a model, from which data has been removed, is indistinguishable from a model that never encountered the removed data in the first place.
+- they base off their argument on their framework which is called "certified data removal" with two questions 
+  1. when someone requests their data to be taken off from a online site which has ml models and stuff, so how will the removal impact the ml model.
+  2. when the ml model is a victim of a data poisoning attack, how will you remove the data that does not belong to the model and stuff.
+- they basically test their "certified removal" mechanism on the linear models.
+
+### Certified removal: 
+- they have bunch of theorems, which becomes an important part of their proposed hypothesis.
+- they refer to parametric models in machine learning
+
+### Removal mechanisms:
+- In machine learning, a **parametric model** is a model that summarizes data with a set of fixed-size parameters that are independent of the number of instances of training. This means that the number of parameters in the model is fixed and does not change as we add more data to the model.
+- For example, in linear regression, the model is defined by a set of parameters (slope and intercept) that are optimized to fit the data. Once these parameters are set, they remain fixed and do not change as we add more data to the model.
+- In contrast, non-parametric models do not make any assumptions about the underlying distribution of the data. Instead, they use the data itself to build the model. Examples of non-parametric models include decision trees, random forests, and k-nearest neighbors (KNN).
+
+- **Certified Data Removal from Machine Learning Models:**
+  - Good data stewardship involves removing data at the owner's request. The paper explores whether and how a trained machine learning model, which inherently retains information about its training data, can be affected by such data removal requests.
+
+  - The central question is whether it's possible to "remove" data from a machine learning model, and the paper introduces the concept of "certified removal" as a rigorous guarantee that a model, post-removal, is indistinguishable from a model that never saw the data.
+
+  - Linear Classifiers:
+    - The paper focuses on certified removal from parametric models, starting with linear classifiers. It proposes a mechanism to remove a specific data point from the training set and produce a model that approximately minimizes the loss with that data point removed.
+    - The idea is to hide any information about the removed data point, and this is achieved by applying a random perturbation to the model parameters at training time.
+
+  - Removal Mechanism:
+    - A Newton update removal mechanism is introduced. This mechanism produces a model that is approximately equal to the unique minimizer of the loss function with the specified data point removed.
+    - The paper emphasizes the importance of making this removal mechanism efficient, and it introduces the concept of a gradient residual, which should be zero for the removed data point.
+
+  - Loss Perturbation:
+    - To further ensure certified removal, a loss perturbation technique is applied at training time. This involves perturbing the empirical risk by a random linear term.
+    - This perturbation helps mask any information in the gradient residual, ensuring that the removal is certified, with the level of certification depending on the quality of the removal mechanism and the distribution of the model perturbation.
+
+  - Practical Considerations:
+    - The paper discusses practical considerations, including scenarios where certified removal may not need to occur immediately after a request. Batch removals, where multiple training samples are removed at once, are also considered.
+    - The Newton update naturally supports batch removals, and the paper provides insights into reducing online computation costs, making the approach more practical for real-world applications.
+
+### Experimentation:
+- https://github.com/facebookresearch/certified-removal
+- the above link is the replication of the above research in the form of code:
