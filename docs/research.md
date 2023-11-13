@@ -1185,4 +1185,65 @@ link: https://arxiv.org/abs/1911.03030
 
 ### Experimentation:
 - https://github.com/facebookresearch/certified-removal
-- the above link is the replication of the above research in the form of code:
+- the above link is the replication of the above research in the form of code
+
+## Paper 17:
+## Title: Machine unlearning: linear filtration for logit based classifiers
+
+cite: Baumhauer, T., Schöttle, P., & Zeppelzauer, M. (2022). Machine unlearning: Linear filtration for logit-based classifiers. Machine Learning, 111(9), 3203-3226.
+
+link: https://link.springer.com/article/10.1007/s10994-022-06178-9
+
+they propose linear filtration as an intuitive, computationally efficient sanitization method. their experiments demonstrate benefits in an adversarial setting over naive deletion schemes.
+
+### Introduction: 
+- again, here the gdpr is mentioned. and all about the california privacy act and about the "right to be forgotten"
+- the paper mention about model inversion, where the fact that the machine learning model remembers the data and the perpetrator can extract sensitive information from the model 
+- they define machine unlearning as "Informally, deletion of part of the training data from a machine learning model can be understood as removal of its influence on the model parameters, in order to obtain a model that looks as if it has never seen that part of the data. We refer to this process as unlearning."
+- though the above definition is informal and also mentioned by authors of the paper, this still will help our perspective broaden.
+- they use the linear models or linear classifiers, which does the predict logit, which means to predict something and giving a probabilistic value between 0 to 1. so, its like giving a probability to the prediction.
+
+- In summary, the main contributions of our work are:
+  1. We develop linear filtration, a novel algorithm for the sanitization of classification models that predict logits, after class-wide deletion requests.
+  2. On the theoretical side, we add to the definition of unlearning in the sense of Ginart et al. (2019), by proposing a weakened, black-box variant of the definition, which
+may serve as a more realistic goal in practice.
+  3. As practical methodology, we suggest that the quality of an empirical unlearning operation may be evaluated in an adversarial setting, i.e. by testing how well it prevents certain privacy attacks on machine learning models.
+
+- the above text is as is from the paper.
+
+### Defining the keywords
+- they have a section where they have defined all the keywords related to machine unlearning below are the definitions from the paper.
+- they refer to or to be exact they cite to all the papers and discuss their definitions.
+1. Machine unlearning
+2. Membership inference
+3. Model inversion
+4. Differential privacy
+
+### Methods of unlearning: 
+- they discuss various types of unlearning methods
+- they give the thing for the weak unlearning method and here is the text from the paper (simplified):
+#### Method Overview:
+- The authors suggest a method called "weak unlearning" to adjust what a machine learning model knows about specific classes. It's not a complete unlearning but a practical way to modify the model's understanding.
+
+#### Weak Unlearning Operation:
+- They introduce a specific operation designed for classes in machine learning. It's a way to tweak neural network models, focusing on particular classes.
+
+#### What It Does:
+- Basic Setup:
+  - Start with a classifier made up of weights and features.
+
+- Linear Filtration:
+  - Replace the original model's weight configuration, introducing a linear transformation. It's like putting a filter on the model's predictions, especially for specific classes.
+
+After this, you can get rid of the original configuration, which can be handy when storing the model.
+- Choosing the Filter:
+  - They discuss different ways to pick this filter, including simple methods like cutting out parts related to a class, adjusting outputs to align with others, randomization, zeroing, and a transfer method.
+- Practical Side:
+  - The method is presented as something practical, especially when complete unlearning is tricky. They share experiments, highlighting one main method that seems to work well.
+- Complexity:
+  - They briefly touch on the computational side, mentioning that the method doesn't significantly increase the computational workload, making it applicable in real-world situations.
+
+In short, this method lets you tweak a model's understanding of certain classes, making it more flexible in situations where completely unlearning isn't straightforward.
+
+### These are the datasets they worked on:
+CIFAR-10, AT&T Faces, MLP, CNN, ResNet
