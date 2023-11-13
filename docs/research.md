@@ -1,4 +1,24 @@
 # Summary of research papers:
+## The datasets referenced by the papers in the paper titled "A Survey Of Machine Unlearning"
+| Category      | Dataset            | #Items | Disk Size | Downstream Applications       | REF                                  |
+|---------------|--------------------|--------|-----------|-------------------------------|--------------------------------------|
+| Image         | MNIST              | 70K    | 11MB      | Classification                | 29+ papers ([11, 52, 59], . . . )    |
+| Image         | CIFAR              | 60K    | 163MB     | Classification                | 16+ papers ([58, 70, 136, 163], . . . )|
+| Image         | SVHN               | 600K   | 400MB+    | Classification                | 8+ papers([11, 59, 70, 71, 91], . . . )|
+| Image         | LSUN [174]         | 69M+   | 1TB+      | Classification                | [59]                                 |
+| Image         | ImageNet [33]      | 14M+   | 166GB     | Classification                | [11, 48, 67, 70, 142, 143]            |
+| Tabular       | Adult              | 48K+   | 10MB      | Classification                | 8+ papers([12, 23, 90, 94, 132, 138], . . . )|
+| Tabular       | Breast Cancer      | 569    | < 1MB     | Classification                | [47, 169]                            |
+| Tabular       | Diabetes           | 442    | < 1MB     | Regression                    | [12, 24, 166]                        |
+| Text          | IMDB Review        | 50K    | 66MB      | Sentiment Analysis            | [93]                                 |
+| Text          | Reuters            | 11K+   | 73MB      | Categorization                | [93]                                 |
+| Text          | Newsgroup          | 20K    | 1GB+      | Categorization                | [93]                                 |
+| Sequence      | Epileptic Seizure  | 11K+   | 7MB       | Timeseries Classification     | [26]                                 |
+| Sequence      | Activity Recognition| 10K+  | 26MB      | Timeseries Classification     | [26]                                 |
+| Sequence      | Botnet             | 72M    | 3GB+      | Clustering                    | [52]                                 |
+| Graph         | OGB               | 100M+  | 59MB      | Classification                | [25, 29]                             |
+| Graph         | Cora              | 2K+    | 4.5MB     | Classification                | [22, 25, 29]                         |
+| Graph         | MovieLens         | 1B+    | 3GB+      | Recommender Systems            | [131]                                |
 ## Paper 1: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
 ## Title: NeruIPS-2021 Remember what you want to forget. 
