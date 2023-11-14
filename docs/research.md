@@ -1418,3 +1418,46 @@ o	Purchase-100 - behavioral pattern recognition
 o	Tiny Shakespeare - natural language processing
 
 https://github.com/TL-System/plato/tree/main/examples/unlearning/knot for KNOT source code
+
+
+## REFERENCES 
+
+A Survey Of Machine Unlearning - Nguyen, T. T., Huynh, T. T., Nguyen, P. L., Liew, A. W. C., Yin, H., & Nguyen, Q. V. H. (2022). A survey of machine unlearning. arXiv preprint arXiv:2209.02299
+
+Coded Machine Unlearning - Aldaghri, N., Mahdavifar, H., & Beirami, A. (2021). Coded machine unlearning. IEEE Access, 9, 88137-88150
+
+Toward Highly-Efficient and Accurate Services QoS Prediction via Machine Unlearning - Zeng, Y., Xu, J., Li, Y., Chen, C., Dai, Q., & Du, Z. (2023). Towards Highly-efficient and Accurate Services QoS Prediction via Machine Unlearning. IEEE Access
+
+Approximate Data Deletion from Machine Learning Models - Izzo, Z., Smart, M. A., Chaudhuri, K., & Zou, J. (2021, March). Approximate data deletion from machine learning models. In International Conference on Artificial Intelligence and Statistics (pp. 2008-2016). PMLR.
+
+Fast Yet Effective Machine Unlearning - Tarun, A. K., Chundawat, V. S., Mandal, M., & Kankanhalli, M. (2023). Fast yet effective machine unlearning. IEEE Transactions on Neural Networks and Learning Systems. arXiv:2111.08947 [cs.LG]
+
+Lifelong Anomaly Detection Through Unlearning - Min Du, Zhi Chen, Chang Liu, Rajvardhan Oak, and Dawn Song. 2019. Lifelong Anomaly Detection Through Unlearning. In 2019 ACM SIGSAC Conference on Computer and Communications Security (CCS ’19), November 11–15, 2019, London, United Kingdom. ACM, New York, NY, USA, 15 pages.
+
+Machine Unlearning: Its Nature, Scope, and Importance for a “Delete Culture” - Floridi, L. (2023). Machine Unlearning: its nature, scope, and importance for a “delete culture”. Philosophy & Technology, 36(2), 42.
+
+“Amnesia” - A Selection of Machine Learning Models That Can Forget User Data Very Fast - Schelter, S. (2020). Amnesia-a selection of machine learning models that can forget user data very fast. suicide, 8364(44035), 46992.
+
+Efficient Repair of Polluted Machine Learning Systems via Causal Unlearning - Yinzhi Cao, Alexander Fangxiao Yu, Andrew Aday, Eric Stahl, Jon Merwine, and Junfeng Yang. 2018. Efficient Repair of Polluted Machine Learning Systems via Causal Unlearning. In Proceedings of 2018 ACM Asia Conference on Computer and Communications Security, Incheon, Republic of Korea, June 4–8, 2018 (ASIA CCS ’18), 13 pages.
+
+NeruIPS-2021 Remember what you want to forget - Sekhari, A., Acharya, J., Kamath, G., & Suresh, A. T. (2021). Remember what you want to forget: Algorithms for machine unlearning. Advances in Neural Information Processing Systems, 34, 18075-18086
+
+When Machine Unlearning Jeopardizes Privacy - Chen, Min, et al. "When machine unlearning jeopardizes privacy." Proceedings of the 2021 ACM SIGSAC conference on computer and communications security. 2021. arXiv:2005.02205 [cs.CR]
+
+Towards making systems forget with machine unlearning - Y. Cao and J. Yang, "Towards Making Systems Forget with Machine Unlearning," 2015 IEEE Symposium on Security and Privacy, San Jose, CA, USA, 2015, pp. 463-480, doi: 10.1109/SP.2015.35.
+
+Algorithms that remember: model inversion attacks and data protection law - Veale M, Binns R, Edwards L. 2018 Algorithms that remember: model inversion attacks and data protection law.Phil. Trans. R. Soc. A 376: 20180083
+
+Forgeability and Membership Inference Attacks - Zhifeng Kong, Amrita Roy Chowdhury∗, and Kamalika Chaudhuri. 2022. Forgeability and Membership Inference Attacks. In Proceedings of the 15th ACM Workshop on Artificial Intelligence and Security (AISec ’22), November 11, 2022, Los Angeles, CA, USA. ACM, New York, NY, USA, 7 pages.
+
+Certifiable Machine Unlearning for Linear Models - Mahadevan, A., & Mathioudakis, M. (2021). Certifiable machine unlearning for linear models. arXiv preprint arXiv:2106.15093.
+
+Certified Data Removal from Machine Learning Models - Guo, C., Goldstein, T., Hannun, A., & Van Der Maaten, L. (2019). Certified data removal from machine learning models. arXiv preprint arXiv:1911.03030.
+
+Machine unlearning: linear filtration for logit based classifiers - Baumhauer, T., Schöttle, P., & Zeppelzauer, M. (2022). Machine unlearning: Linear filtration for logit-based classifiers. Machine Learning, 111(9), 3203-3226
+
+Delta Boost: Gradient Boosting Decision Trees with Efficient Machine Unlearning - Zhaomin Wu, Junhui Zhu, Qinbin Li, and Bingsheng He. 2023. DeltaBoost: Gradient Boosting Decision Trees with Efficient Machine Unlearning. Proc. ACM Manag. Data 1, 2, Article 168 (June 2023), 26 pages.
+
+Machine Unlearning for Random Forests - Brophy, J., & Lowd, D. (2021, July). Machine unlearning for random forests. In International Conference on Machine Learning (pp. 1092-1104). PMLR.
+
+Asynchronous Federated Unlearning - Ningxin Su, Baochun Li. “Asynchronous Federated Unlearning,” in the Proceedings of IEEE INFOCOM 2023, New York Area, U.S.A., May 17–20, 2023.
