@@ -254,7 +254,7 @@ The model leaks data means that the model reveals some information about the dat
 
 4. **back door attacks:** <br> deceiving the machine learning models
 
-### About the pre-trained models for our tool, have a look at this: 
+### table for all the unlearning algorithms with their links: 
 
 | Unlearning Algorithm | Language   | Platform               | Applicable ML Models      | Code Repository                                              |
 |----------------------|------------|------------------------|---------------------------|--------------------------------------------------------------|
