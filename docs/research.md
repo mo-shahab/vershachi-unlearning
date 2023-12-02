@@ -23,7 +23,7 @@
 
 ## Paper 1: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
-## Title: NeruIPS-2021 Remember what you want to forget. 
+## Title: Remember what you want to forget. 
 cite: Sekhari, A., Acharya, J., Kamath, G., & Suresh, A. T. (2021). Remember what you want to forget: Algorithms for machine unlearning. Advances in Neural Information Processing Systems, 34, 18075-18086.
 
 link: https://proceedings.neurips.cc/paper/2021/hash/9627c45df543c816a3ddf2d8ea686a99-Abstract.html
