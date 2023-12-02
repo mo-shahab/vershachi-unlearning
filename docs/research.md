@@ -1499,4 +1499,4 @@ Machine Unlearning for Random Forests - Brophy, J., & Lowd, D. (2021, July). Mac
 
 Asynchronous Federated Unlearning - Ningxin Su, Baochun Li. “Asynchronous Federated Unlearning,” in the Proceedings of IEEE INFOCOM 2023, New York Area, U.S.A., May 17–20, 2023.
 
-this is to test git commit
+Machine Unlearning - Bourtoule, Lucas, et al. "Machine unlearning." 2021 IEEE Symposium on Security and Privacy (SP). IEEE, 2021.
