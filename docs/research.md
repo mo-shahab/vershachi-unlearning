@@ -23,7 +23,7 @@
 
 ## Paper 1: (algorithms of mul)
 Author -- Yashwanth R  @https://github.com/ShiroganeMiyuki-0
-## Title: NeruIPS-2021 Remember what you want to forget. 
+## Title: Remember what you want to forget. 
 cite: Sekhari, A., Acharya, J., Kamath, G., & Suresh, A. T. (2021). Remember what you want to forget: Algorithms for machine unlearning. Advances in Neural Information Processing Systems, 34, 18075-18086.
 
 link: https://proceedings.neurips.cc/paper/2021/hash/9627c45df543c816a3ddf2d8ea686a99-Abstract.html
@@ -1420,6 +1420,43 @@ o	Tiny Shakespeare - natural language processing
 https://github.com/TL-System/plato/tree/main/examples/unlearning/knot for KNOT source code
 
 
+## Paper 21: ( introduction to machine unlearning and SISA )
+## Title: Machine Unlearning
+
+Cite: Bourtoule, Lucas, et al. "Machine unlearning." 2021 IEEE Symposium on Security and Privacy (SP). IEEE, 2021.
+
+## •	Introduction
+
+o	Having models forget necessitates knowledge of exactly how individual training points contributed to model parameter updates.
+      
+o	SISA training approach, short for Sharded, Isolated, Sliced, and Aggregated training, can be implemented with minimal modification to existing pipelines.
+      
+o	First, we divide the training data into multiple disjoint shards such that a training point is included in one shard only
+
+o Then, we train models in isolation on each of these shards, which limits the influence of a point to the model that was trained on the shard containing the point. 
+
+o Finally, when a request to unlearn a training point arrives, we need to retrain only the affected model
+
+•	SISA training achieves more advantageous trade-offs between accuracy and time to unlearn—compared to two baselines: 
+
+(1) The naive approach of retraining from scratch
+
+(2) Only train on a fraction of the original training set
+
+•	When a data point is to be unlearned, only the constituent model whose dataset contains this point is affected. More specifically, a data point is unlearned from a particular slice in a particular shard.
+Techniques 
+
+•	Sharding: By dividing the data into disjoint fragments and training a constituent model on each smaller data fragment, we are able to distribute the training cost.
+
+•	Isolation: the training of each shard occurs in isolation. By not performing a joint update.
+
+•	Slicing: By further dividing data dedicated for each model (i.e., each shard) and incrementally tuning (and storing) the parameter state of a model, we obtain additional time savings.
+
+•	Aggregation: At inference time, predictions from various constituent models can be used to provide an overall prediction.
+
+## This paper initially talks about the definition of unlearning SISA framework, implementation and training.
+
+
 ## REFERENCES 
 
 A Survey Of Machine Unlearning - Nguyen, T. T., Huynh, T. T., Nguyen, P. L., Liew, A. W. C., Yin, H., & Nguyen, Q. V. H. (2022). A survey of machine unlearning. arXiv preprint arXiv:2209.02299
@@ -1462,4 +1499,4 @@ Machine Unlearning for Random Forests - Brophy, J., & Lowd, D. (2021, July). Mac
 
 Asynchronous Federated Unlearning - Ningxin Su, Baochun Li. “Asynchronous Federated Unlearning,” in the Proceedings of IEEE INFOCOM 2023, New York Area, U.S.A., May 17–20, 2023.
 
-this is to test git commit
+Machine Unlearning - Bourtoule, Lucas, et al. "Machine unlearning." 2021 IEEE Symposium on Security and Privacy (SP). IEEE, 2021.
