@@ -31,3 +31,6 @@
   - id3
 
 - unlearning algos:
+
+## 5. federated learning:
+-KNOT
