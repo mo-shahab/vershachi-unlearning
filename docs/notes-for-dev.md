@@ -1,6 +1,31 @@
 
 # the ml models and their unlearning algorithms
 
+PROJECT STRUCTURE:
+
+repo-root/
+|---vershachi/
+    |---__init__.py
+    |---fisher_unlearning/
+    |   |---__init__.py
+    |   |---fisher_unlearning.py 
+    |---knot_unlearning/
+    |   |---__init__.py
+    |   |---knot.py
+    |---bayesian_unlearning/
+    |   |---__init__.py
+    |   |---bayesian_unlearning.py
+    |---sisa_unlearning/
+    |   |---__init__.py
+    |   |---sisa.py
+    |---utils.py
+|---models/
+|   |---__init__.py
+|   |---model1.py
+|   |---model2.py
+|---tools/
+
+
 ## 1. linear regression models:
 ### refer paper "certifiable mul for linear models"
 - learning algos:
