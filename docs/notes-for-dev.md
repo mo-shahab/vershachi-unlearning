@@ -59,3 +59,11 @@ repo-root/
 
 ## 5. federated learning:
 -KNOT
+
+
+
+
+## working on sisa
+### distribution.py
+- type of distribution is boolean -> uniform or non uniform
+- making seperate functions for the shards and the requests
