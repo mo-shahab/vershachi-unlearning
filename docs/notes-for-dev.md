@@ -25,6 +25,10 @@ repo-root/
 |   |---model2.py
 |---tools/
 
+## to get started refer this:
+- to get started you have to build this library in the development mode 
+- there is a simple setup.py file which defines our standalone library, in the root of the repo
+- run this command in the root of the repo to install the library in the development mode `pip install -e .`
 
 ## 1. linear regression models:
 ### refer paper "certifiable mul for linear models"
