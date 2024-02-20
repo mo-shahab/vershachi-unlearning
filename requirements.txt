@@ -1,2 +1,2 @@
-black
 scikit-learn
+torch
