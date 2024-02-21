@@ -22,7 +22,7 @@ split_dataset(shards, distribution, container, datasetfile, label=label)
 num_requests = 1000  # Change this to the desired number of requests
 
 # path to the splitfile.npy
-partition = "./containers/default/splitfile.npy"
+partition = np.load("./containers/default/splitfile.npy")
 
 # generate_and_distribute_requests(num_requests, distribution, container, label, datasetfile)
 generate_and_distribute_requests(
