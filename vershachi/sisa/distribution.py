@@ -48,7 +48,9 @@ def generate_requests(num_requests, distribution, datasetfile):
         return np.random.randint(0, datasetfile["nb_train"], num_requests)
 
 
-def generate_and_distribute_requests(requests, distribution, container, label, partition, dataset):
+def generate_and_distribute_requests(
+    requests, distribution, container, label, partition, dataset
+):
     if isinstance(dataset, str):
         # If dataset is a string, assume it's the path to a JSON metadata file
         with open(dataset) as f:

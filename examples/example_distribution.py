@@ -14,7 +14,7 @@ container = "default"
 data = load_data(datasetfile)
 
 # Split dataset
-shards = 4 # Change this to the desired number of shards
+shards = 4  # Change this to the desired number of shards
 distribution = "uniform"  # Change this to the desired distribution
 split_dataset(shards, distribution, container, datasetfile, label="0")
 
