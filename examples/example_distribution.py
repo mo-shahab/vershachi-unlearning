@@ -16,10 +16,10 @@ data = load_data(datasetfile)
 # Split dataset
 shards = 4 # Change this to the desired number of shards
 distribution = "uniform"  # Change this to the desired distribution
-split_dataset(shards, distribution, container, datasetfile, label=label)
+split_dataset(shards, distribution, container, datasetfile, label="0")
 
 # Generate and distribute requests
-num_requests = 1000  # Change this to the desired number of requests
+# num_requests = 1000  # Change this to the desired number of requests
 
 # path to the splitfile.npy
 partition = np.load("./containers/default/splitfile.npy")
@@ -27,9 +27,9 @@ partition = np.load("./containers/default/splitfile.npy")
 
 # Loop to generate and distribute requests for different numbers of shards
 for j in range(1, 16):
-    num_requests = j * shards // 5
-    partition = np.load("./containers/default/splitfile.npy")
-    label = "requestfile_" + str(j)
+    num_requests = int(j * shards / 5)
+    # partition = np.load("./containers/default/splitfile.npy")
+    label = "" + str(j)
     generate_and_distribute_requests(
         num_requests, distribution, container, label, partition, datasetfile
     )
