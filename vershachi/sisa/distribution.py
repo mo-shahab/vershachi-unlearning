@@ -26,7 +26,7 @@ def split_dataset(shards, distribution, container, dataset, label="latest"):
 
             # Create empty request files for each shard.
             requests = [np.array([]) for _ in range(shards)]
-            np.save(f"{save_dir}/requestfile:{label}.npy", requests)
+            np.save(f"{save_dir}/requestfile_{label}.npy", requests)
 
 
 def generate_requests(num_requests, distribution, datasetfile):
@@ -48,18 +48,23 @@ def generate_requests(num_requests, distribution, datasetfile):
         return np.random.randint(0, datasetfile["nb_train"], num_requests)
 
 
-def generate_and_distribute_requests(
-    requests, distribution, container, label, partition, datasetfile
-):
+def generate_and_distribute_requests(requests, distribution, container, label, partition, dataset):
+    if isinstance(dataset, str):
+        # If dataset is a string, assume it's the path to a JSON metadata file
+        with open(dataset) as f:
+            datasetfile = json.load(f)
+    elif isinstance(dataset, dict):
+        # If dataset is a dictionary, assume it's already loaded metadata
+        datasetfile = dataset
+    else:
+        # If dataset is not a string or dictionary, raise an error
+        raise ValueError("Unsupported dataset format")
+
     if requests is not None:
         if distribution == "reset":
             # Reset request files.
             requests = [np.array([]) for _ in range(partition.shape[0])]
-            # np.save(f"containers/{container}/requestfile:{label}.npy", requests)
-            request_path = os.path.join(
-                "containers", container, f"requestfile:{label}.npy"
-            )
-            np.save(request_path, requests)
+            np.save(f"containers/{container}/requestfile_{label}.npy", requests)
         else:
             # Generate unlearning requests.
             all_requests = generate_requests(requests, distribution, datasetfile)
@@ -68,11 +73,7 @@ def generate_and_distribute_requests(
             requests = distribute_requests(partition, all_requests)
 
             # Save distributed requests.
-            # np.save(f"containers/{container}/requestfile:{label}.npy", requests)
-            request_path = os.path.join(
-                "containers", container, f"requestfile:{label}.npy"
-            )
-            np.save(request_path, requests)
+            np.save(f"containers/{container}/requestfile_{label}.npy", requests)
 
 
 def distribute_requests(partition, all_requests):
