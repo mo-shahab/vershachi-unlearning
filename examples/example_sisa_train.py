@@ -4,29 +4,18 @@ from vershachi.sisa.sisa import SisaTrainer
 
 
 # the path to the model directory
-model_dir = '../models/'
-# Define a class to simulate command-line arguments
-class Args:
-    def __init__(self):
-        self.model = "purchase"
-        self.train = True
-        self.test = False
-        self.epochs = 20
-        self.batch_size = 16
-        self.dropout_rate = 0.4
-        self.learning_rate = 0.001
-        self.optimizer = "sgd"
-        self.output_type = "argmax"
-        self.container = "conatainers"
-        self.shard = 4  # Specify the shard index
-        self.slices = 1
-        self.dataset = "datasets/purchase/datasetfile"
-        self.chkpt_interval = 1
-        self.label = "latest"
+# Define the path to the model directory
+# model_dir = '../models/'
+model_dir = r'C:\dev\vershachi-unlearning\models'
+# Define the path to the dataset file
+dataset_file = r'C:\dev\vershachi-unlearning\datasets\datasetfile'
+shards = 4 # should avoid hardcoding the number of shards and such like this
 
-# Create an instance of Args class
-args = Args()
-
-# Create an instance of SISA_Trainer and train
-trainer = SisaTrainer(args, model_dir)
-trainer.train()
+# Create an instance of Sisa_Trainer and train
+trainer = SisaTrainer(model_dir=model_dir, dataset_file=dataset_file, train=True)
+for i in range(shards):
+    for j in range(16):
+        print(f"shard: {i+1}/{shards}, requests: {j+1}/16")
+        r = j * shards // 5
+        trainer = SisaTrainer(model_dir=model_dir, dataset_file=dataset_file, shard=i, label=str(r))
+        trainer._train()
