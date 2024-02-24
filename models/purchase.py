@@ -1,6 +1,7 @@
 from torch.nn import Module, Linear
 from torch.nn.functional import tanh
 
+
 class Model(Module):
     def __init__(self, input_shape, nb_classes, *args, **kwargs):
         super(Model, self).__init__()

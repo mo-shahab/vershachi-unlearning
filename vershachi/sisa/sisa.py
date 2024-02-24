@@ -9,13 +9,29 @@ from glob import glob
 from time import time
 from importlib import import_module
 import json
-import sys  
+import sys
+
 
 class SisaTrainer:
-    def __init__(self, model_dir, dataset_file, model_name="purchase", train=True, test=False,
-                 epochs=20, batch_size=16, dropout_rate=0.4, learning_rate=0.001, optimizer="sgd",
-                 output_type="argmax", container="default", shard=2, slices=1, chkpt_interval=1,
-                 label="latest"):
+    def __init__(
+        self,
+        model_dir,
+        dataset_file,
+        model_name="purchase",
+        train=True,
+        test=False,
+        epochs=20,
+        batch_size=16,
+        dropout_rate=0.4,
+        learning_rate=0.001,
+        optimizer="sgd",
+        output_type="argmax",
+        container="default",
+        shard=2,
+        slices=1,
+        chkpt_interval=1,
+        label="latest",
+    ):
         self.model_dir = model_dir
         self.dataset_file = dataset_file
         self.model_name = model_name
@@ -32,7 +48,7 @@ class SisaTrainer:
         self.slices = slices
         self.chkpt_interval = chkpt_interval
         self.label = label
-        
+
         self.input_shape, self.nb_classes = self._get_dataset_metadata()
         self.model_lib = self._import_model_module()
         self.loss_fn = CrossEntropyLoss()
@@ -56,7 +72,9 @@ class SisaTrainer:
 
     def _init_model(self):
         # Pass input_shape and nb_classes to _init_model()
-        model = self.model_lib.Model(self.input_shape, self.nb_classes, dropout_rate=self.dropout_rate)
+        model = self.model_lib.Model(
+            self.input_shape, self.nb_classes, dropout_rate=self.dropout_rate
+        )
         model.to(self.device)
         return model
 
@@ -98,9 +116,7 @@ class SisaTrainer:
                         f"containers/{self.container}/cache/{slice_hash}_*.pt"
                     )
                     if len(recovery_list) > 0:
-                        print(
-                            f"Recovery mode for shard {self.shard} on slice {sl}"
-                        )
+                        print(f"Recovery mode for shard {self.shard} on slice {sl}")
 
                         # Load weights.
                         self.model.load_state_dict(torch.load(recovery_list[0]))
@@ -118,7 +134,10 @@ class SisaTrainer:
                     # If there is no recovery checkpoint and this slice is not the first, load previous slice.
                     elif sl > 0:
                         previous_slice_hash = getShardHash(
-                            self.container, self.label, self.shard, until=sl * slice_size
+                            self.container,
+                            self.label,
+                            self.shard,
+                            until=sl * slice_size,
                         )
 
                         # Load weights.
@@ -147,12 +166,8 @@ class SisaTrainer:
                     ):
 
                         # Convert data to torch format and send to selected device.
-                        gpu_images = torch.from_numpy(images).to(
-                            self.device
-                        )  
-                        gpu_labels = torch.from_numpy(labels).to(
-                            self.device
-                        )
+                        gpu_images = torch.from_numpy(images).to(self.device)
+                        gpu_labels = torch.from_numpy(labels).to(self.device)
 
                         forward_start_time = time()
 
@@ -170,7 +185,7 @@ class SisaTrainer:
                     # Save weights and time for every epoch.
                     torch.save(
                         self.model.state_dict(),
-                        f"containers/{self.container}/cache/{slice_hash}_{epoch}.pt"
+                        f"containers/{self.container}/cache/{slice_hash}_{epoch}.pt",
                     )
                     with open(
                         f"containers/{self.container}/times/{slice_hash}_{epoch}.time",
@@ -191,9 +206,9 @@ class SisaTrainer:
                 if sl == self.slices - 1:
                     os.rename(
                         f"containers/{self.container}/cache/{slice_hash}_{slice_epochs - 1}.pt",
-                        f"containers/{self.container}/cache/shard-{self.shard}_{self.label}.pt"
+                        f"containers/{self.container}/cache/shard-{self.shard}_{self.label}.pt",
                     )
                     os.rename(
                         f"containers/{self.container}/times/{slice_hash}_{slice_epochs - 1}.time",
-                        f"containers/{self.container}/times/shard-{self.shard}_{self.label}.time"
+                        f"containers/{self.container}/times/shard-{self.shard}_{self.label}.time",
                     )

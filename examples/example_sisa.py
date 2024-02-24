@@ -17,9 +17,21 @@ dataset = "path_to_your_dataset_file"
 label = "latest"
 
 # Create SISA object
-sisa = SISA(model, dataset, container, shard, slices, label=label, train=train, test=test,
-            epochs=epochs, batch_size=batch_size, learning_rate=learning_rate,
-            optimizer=optimizer, output_type=output_type)
+sisa = SISA(
+    model,
+    dataset,
+    container,
+    shard,
+    slices,
+    label=label,
+    train=train,
+    test=test,
+    epochs=epochs,
+    batch_size=batch_size,
+    learning_rate=learning_rate,
+    optimizer=optimizer,
+    output_type=output_type,
+)
 
 # Train model
 if train:
@@ -28,4 +40,3 @@ if train:
 # Test model
 if test:
     sisa.test()
-
