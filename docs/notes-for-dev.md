@@ -30,6 +30,10 @@ repo-root/
 - there is a simple setup.py file which defines our standalone library, in the root of the repo
 - run this command in the root of the repo to install the library in the development mode `pip install -e .`
 
+## dataloader.py
+- it is being used in the sharded.py file in the module `sisa` in the library
+- it is being used so that the before you can train your model, the datasets are loaded perfectly and stuff and such.
+
 ## 1. linear regression models:
 ### refer paper "certifiable mul for linear models"
 - learning algos:

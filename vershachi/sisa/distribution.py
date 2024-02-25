@@ -20,6 +20,12 @@ def split_dataset(shards, distribution, container, dataset, label="latest"):
             save_dir = f"containers/{container}"
             if not os.path.exists(save_dir):
                 os.makedirs(save_dir)
+            
+            # Create subdirectories for outputs, cache, and time
+            for subdir in ["outputs", "cache", "times"]:
+                subdir_path = os.path.join(save_dir, subdir)
+                if not os.path.exists(subdir_path):
+                    os.makedirs(subdir_path)
 
             # Save partition to a numpy file.
             np.save(f"{save_dir}/splitfile.npy", partition)
