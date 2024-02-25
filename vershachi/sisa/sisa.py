@@ -195,20 +195,40 @@ class SisaTrainer:
 
                     # Remove previous checkpoint.
                     if epoch > 0:
-                        os.remove(
-                            f"containers/{self.container}/cache/{slice_hash}_{epoch - 1}.pt"
-                        )
-                        os.remove(
-                            f"containers/{self.container}/times/{slice_hash}_{epoch - 1}.time"
-                        )
+                        previous_checkpoint_path = f"containers/{self.container}/cache/{slice_hash}_{epoch - 1}.pt"
+                        previous_time_file_path = f"containers/{self.container}/times/{slice_hash}_{epoch - 1}.time"
+
+                        # Check if the files exist before attempting to remove them
+                        if os.path.exists(previous_checkpoint_path):
+                            try:
+                                os.remove(previous_checkpoint_path)
+                                print(f"Previous checkpoint removed: {previous_checkpoint_path}")
+                            except Exception as e:
+                                print(f"Error removing previous checkpoint: {e}")
+
+                        if os.path.exists(previous_time_file_path):
+                            try:
+                                os.remove(previous_time_file_path)
+                                print(f"Previous time file removed: {previous_time_file_path}")
+                            except Exception as e:
+                                print(f"Error removing previous time file: {e}")
 
                 # If this is the last slice, create a final checkpoint.
                 if sl == self.slices - 1:
+                    destination_checkpoint_path = f"containers/{self.container}/cache/shard-{self.shard}_{self.label}.pt"
+                    destination_time_file_path = f"containers/{self.container}/times/shard-{self.shard}_{self.label}.time"
+
+                    if os.path.exists(destination_checkpoint_path):
+                        os.remove(destination_checkpoint_path)
+
+                    if os.path.exists(destination_time_file_path):
+                        os.remove(destination_time_file_path)
+
                     os.rename(
                         f"containers/{self.container}/cache/{slice_hash}_{slice_epochs - 1}.pt",
-                        f"containers/{self.container}/cache/shard-{self.shard}_{self.label}.pt",
+                        destination_checkpoint_path,
                     )
                     os.rename(
                         f"containers/{self.container}/times/{slice_hash}_{slice_epochs - 1}.time",
-                        f"containers/{self.container}/times/shard-{self.shard}_{self.label}.time",
+                        destination_time_file_path,
                     )
