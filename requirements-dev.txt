@@ -2,3 +2,4 @@ black
 torch
 scikit-learn
 numpy
+tqdm

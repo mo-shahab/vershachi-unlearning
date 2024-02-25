@@ -18,6 +18,10 @@ for i in range(shards):
         print(f"shard: {i+1}/{shards}, requests: {j+1}/16")
         r = j * shards // 5
         trainer = SisaTrainer(
-            model_dir=model_dir, dataset_file=dataset_file, epochs=5, shard=i, label=str(r)
+            model_dir=model_dir,
+            dataset_file=dataset_file,
+            epochs=5,
+            shard=i,
+            label=str(r),
         )
         trainer._train()

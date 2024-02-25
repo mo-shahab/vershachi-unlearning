@@ -202,14 +202,18 @@ class SisaTrainer:
                         if os.path.exists(previous_checkpoint_path):
                             try:
                                 os.remove(previous_checkpoint_path)
-                                print(f"Previous checkpoint removed: {previous_checkpoint_path}")
+                                print(
+                                    f"Previous checkpoint removed: {previous_checkpoint_path}"
+                                )
                             except Exception as e:
                                 print(f"Error removing previous checkpoint: {e}")
 
                         if os.path.exists(previous_time_file_path):
                             try:
                                 os.remove(previous_time_file_path)
-                                print(f"Previous time file removed: {previous_time_file_path}")
+                                print(
+                                    f"Previous time file removed: {previous_time_file_path}"
+                                )
                             except Exception as e:
                                 print(f"Error removing previous time file: {e}")
 
