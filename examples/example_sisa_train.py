@@ -14,13 +14,14 @@ shards = 4  # should avoid hardcoding the number of shards and such like this
 # Create an instance of Sisa_Trainer and train
 trainer = SisaTrainer(model_dir=model_dir, dataset_file=dataset_file, train=True)
 for i in range(shards):
-    for j in range(16):
-        print(f"shard: {i+1}/{shards}, requests: {j+1}/16")
+    for j in range(5):
+        print(f"shard: {i+1}/{shards}, requests: {j+1}/5")
         r = j * shards // 5
         trainer = SisaTrainer(
             model_dir=model_dir,
             dataset_file=dataset_file,
             epochs=5,
+            container=4,
             shard=i,
             label=str(r),
         )

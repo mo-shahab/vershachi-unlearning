@@ -7,7 +7,7 @@ from vershachi.sisa.distribution import split_dataset, generate_and_distribute_r
 
 # Paths and parameters
 datasetfile = "../datasets/datasetfile"
-container = "default"
+container = "4"
 # label = "latest"
 
 # Load data
@@ -26,7 +26,7 @@ partition = np.load("./containers/default/splitfile.npy")
 # print(partition)
 
 # Loop to generate and distribute requests for different numbers of shards
-for j in range(1, 16):
+for j in range(1, 5):
     num_requests = int(j * shards / 5)
     # partition = np.load("./containers/default/splitfile.npy")
     label = "" + str(j)
