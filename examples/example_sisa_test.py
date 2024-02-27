@@ -30,4 +30,3 @@ for shard in range(shards):
         )
         # Perform testing
         tester._test()
-

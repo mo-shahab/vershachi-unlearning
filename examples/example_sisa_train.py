@@ -9,7 +9,7 @@ from vershachi.sisa.sisa import SisaTrainer
 model_dir = r"C:\dev\vershachi-unlearning\models"
 # Define the path to the dataset file
 dataset_file = r"C:\dev\vershachi-unlearning\datasets\datasetfile"
-shards = 4  # should avoid hardcoding the number of shards and such like this
+shards = 3  # should avoid hardcoding the number of shards and such like this
 
 # Create an instance of Sisa_Trainer and train
 trainer = SisaTrainer(model_dir=model_dir, dataset_file=dataset_file, train=True)
@@ -21,7 +21,7 @@ for i in range(shards):
             model_dir=model_dir,
             dataset_file=dataset_file,
             epochs=5,
-            container=4,
+            container=shards,
             shard=i,
             label=str(r),
         )

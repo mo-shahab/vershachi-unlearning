@@ -1,7 +1,7 @@
 import numpy as np
 
 # Load the data
-data_dict = np.load("purchase2_train.npy", allow_pickle=True).item()
+data_dict = np.load("purchase2_test.npy", allow_pickle=True).item()
 
 # Check if the loaded data is a dictionary
 if isinstance(data_dict, dict):

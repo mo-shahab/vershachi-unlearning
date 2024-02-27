@@ -7,14 +7,14 @@ from vershachi.sisa.distribution import split_dataset, generate_and_distribute_r
 
 # Paths and parameters
 datasetfile = "../datasets/datasetfile"
-container = "4"
+container = "3"
 # label = "latest"
 
 # Load data
 data = load_data(datasetfile)
 
 # Split dataset
-shards = 4  # Change this to the desired number of shards
+shards = 3  # Change this to the desired number of shards
 distribution = "uniform"  # Change this to the desired distribution
 split_dataset(shards, distribution, container, datasetfile, label="0")
 
@@ -22,7 +22,7 @@ split_dataset(shards, distribution, container, datasetfile, label="0")
 # num_requests = 1000  # Change this to the desired number of requests
 
 # path to the splitfile.npy
-partition = np.load("./containers/default/splitfile.npy")
+partition = np.load(f"./containers/{container}/splitfile.npy")
 # print(partition)
 
 # Loop to generate and distribute requests for different numbers of shards
