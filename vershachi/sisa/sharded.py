@@ -135,24 +135,25 @@ def fetchTestBatch(dataset, batch_size):
     with open(dataset) as f:
         datasetfile = json.loads(f.read())
 
-    # Get the directory containing the dataloader module
-    dataloader_dir = os.path.dirname(dataset)
-    # Load the dataset module from the specified directory
-    dataset_module_path = os.path.join(dataloader_dir, "__init__.py")
+    # Get the directory containing the dataset file
+    dataset_dir = os.path.dirname(dataset)
+    # Get the dataset module name from datasetfile["dataloader"]
+    dataset_module_name = datasetfile["dataloader"]
+    # Construct the path to the dataset file
+    dataset_file_path = os.path.join(dataset_dir, f"{dataset_module_name}.py")
 
+    # Load the dataset module from the specified path
     spec = importlib.util.spec_from_file_location(
-        datasetfile["dataloader"], dataset_module_path
+        dataset_module_name, dataset_file_path
     )
-    dataloader_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(dataloader_module)
+    dataset_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(dataset_module)
 
     limit = 0
     while limit <= datasetfile["nb_test"] - batch_size:
         limit += batch_size
-        yield dataloader_module.load(
-            np.arange(limit - batch_size, limit), category="test"
-        )
+        yield dataset_module.load(np.arange(limit - batch_size, limit), category="test")
     if limit < datasetfile["nb_test"]:
-        yield dataloader_module.load(
+        yield dataset_module.load(
             np.arange(limit, datasetfile["nb_test"]), category="test"
         )

@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def compute_time_stats(container):
     """
     Compute statistics based on the execution time (cumulated feed-forward + backprop.) of the shards.
@@ -12,10 +13,9 @@ def compute_time_stats(container):
     """
     # Read the execution times from the CSV file
     times_df = pd.read_csv(f"containers/{container}/times/times.tmp", names=["time"])
-    
+
     # Compute sum and mean of the execution times
     total_time = times_df["time"].sum()
     mean_time = times_df["time"].mean()
-    
-    return total_time, mean_time
 
+    return total_time, mean_time

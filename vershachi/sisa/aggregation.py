@@ -2,7 +2,10 @@ import numpy as np
 import json
 import os
 
-def compute_aggregation_stats(strategy, container, shards, dataset, label, baseline=None):
+
+def compute_aggregation_stats(
+    strategy, container, shards, dataset, label, baseline=None
+):
     """
     Aggregate outputs from different shards based on the specified strategy.
 
@@ -20,13 +23,13 @@ def compute_aggregation_stats(strategy, container, shards, dataset, label, basel
     # Load dataset metadata
     with open(dataset) as f:
         datasetfile = json.load(f)
-    
+
     # Output files used for the vote
     if baseline is not None:
         filenames = [f"shard-{baseline}_{label}.npy"]
     else:
         filenames = [f"shard-{i}_{label}.npy" for i in range(shards)]
-    
+
     # Concatenate output files
     outputs = []
     for filename in filenames:
@@ -35,7 +38,7 @@ def compute_aggregation_stats(strategy, container, shards, dataset, label, basel
         )
 
     outputs = np.array(outputs)
-    
+
     # Compute weight vector based on given strategy
     if strategy == "uniform":
         weights = np.ones(outputs.shape[0]) / outputs.shape[0]
@@ -46,9 +49,10 @@ def compute_aggregation_stats(strategy, container, shards, dataset, label, basel
     elif strategy == "proportional":
         split = np.load(os.path.join(container, "splitfile.npy"), allow_pickle=True)
         weights = np.array([shard.shape[0] for shard in split])
-    
-    # Tensor contraction of outputs and weights (on the shard dimension)
-    votes = np.argmax(np.tensordot(weights.reshape(1, -1), outputs, axes=1), axis=2).reshape(outputs.shape[1])
-    
-    return votes
 
+    # Tensor contraction of outputs and weights (on the shard dimension)
+    votes = np.argmax(
+        np.tensordot(weights.reshape(1, -1), outputs, axes=1), axis=2
+    ).reshape(outputs.shape[1])
+
+    return votes

@@ -3,7 +3,7 @@ import torch
 from torch.nn import CrossEntropyLoss
 from torch.optim import Adam, SGD
 from torch.nn.functional import one_hot
-from .sharded import sizeOfShard, getShardHash, fetchShardBatch
+from .sharded import sizeOfShard, getShardHash, fetchShardBatch, fetchTestBatch
 import os
 from glob import glob
 from time import time
@@ -236,3 +236,37 @@ class SisaTrainer:
                         f"containers/{self.container}/times/{slice_hash}_{slice_epochs - 1}.time",
                         destination_time_file_path,
                     )
+
+    def _test(self):
+        if self.test:
+            # Load model weights from shard checkpoint (last slice).
+            checkpoint_path = (
+                f"containers/{self.container}/cache/shard-{self.shard}_{self.label}.pt"
+            )
+            self.model.load_state_dict(torch.load(checkpoint_path))
+
+            # Compute predictions batch per batch.
+            outputs = np.empty((0, self.nb_classes))
+            for images, _ in fetchTestBatch(self.dataset_file, self.batch_size):
+                # Convert data to torch format and send to selected device.
+                gpu_images = torch.from_numpy(images).to(self.device)
+
+                if self.output_type == "softmax":
+                    # Actual batch prediction.
+                    logits = self.model(gpu_images)
+                    predictions = torch.softmax(logits, dim=1).cpu().numpy()
+
+                else:
+                    # Actual batch prediction.
+                    logits = self.model(gpu_images)
+                    predictions = torch.argmax(logits, dim=1)  # Get class indices
+                    predictions = torch.nn.functional.one_hot(
+                        predictions, self.nb_classes
+                    )  # Convert to one-hot tensor
+
+                # Concatenate with previous batches.
+                outputs = np.concatenate((outputs, predictions))
+
+            # Save outputs in numpy format.
+            output_file_path = f"containers/{self.container}/outputs/shard-{self.shard}_{self.label}.npy"
+            np.save(output_file_path, outputs)
