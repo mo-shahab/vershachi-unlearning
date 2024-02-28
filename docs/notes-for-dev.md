@@ -2,7 +2,7 @@
 # the ml models and their unlearning algorithms
 
 PROJECT STRUCTURE:
-
+```
 repo-root/
 |---vershachi/
     |---__init__.py
@@ -24,7 +24,7 @@ repo-root/
 |   |---model1.py
 |   |---model2.py
 |---tools/
-
+```
 # to get started refer this:
 - clone the repo properly, try not to change anything, it is suggested that you follow the same directory, file and all those other thing's naming con. as in the repo, follow PEP8 guidelines
 - set up a venv
@@ -74,7 +74,9 @@ repo-root/
 
 
 ## working on sisa
-- dataset used for sisa part: https://github.com/privacytrustlab/datasets/blob/master/dataset_purchase.tgz
+- dataset used for sisa part: 
+[purchase-dataset](https://github.com/privacytrustlab/datasets/blob/master/dataset_purchase.tgz)
+[adult](https://archive.ics.uci.edu/dataset/2/adult)
 ### distribution.py
 - type of distribution is boolean -> uniform or non uniform
 - making seperate functions for the shards and the requests
