@@ -3,6 +3,7 @@ Core:
     core federated learning functionalities
     core traininng functions, testing functions
 """
+
 """
 credits:
     @author: jojo
@@ -19,17 +20,22 @@ import copy
 from sklearn.metrics import accuracy_score
 import numpy as np
 import time
-#our libs
+
+# our libs
 from .model_initialization import model_init
 from .data_preprocess import data_set
 
 
 def FL_Train(init_global_model, client_data_loaders, test_loader, FL_params):
-    if(FL_params.if_retrain == True):
-        raise ValueError('FL_params.if_retrain should be set to False, if you want to train, not retrain FL model')
-    if(FL_params.if_unlearning == True):
-        raise ValueError('FL_params.if_unlearning should be set to False, if you want to train, not unlearning FL model')
-    
+    if FL_params.if_retrain == True:
+        raise ValueError(
+            "FL_params.if_retrain should be set to False, if you want to train, not retrain FL model"
+        )
+    if FL_params.if_unlearning == True:
+        raise ValueError(
+            "FL_params.if_unlearning should be set to False, if you want to train, not unlearning FL model"
+        )
+
     all_global_models = list()
     all_client_models = list()
     global_model = init_global_model
@@ -37,10 +43,12 @@ def FL_Train(init_global_model, client_data_loaders, test_loader, FL_params):
     all_global_models.append(copy.deepcopy(global_model))
 
     for epoch in range(FL_params.global_epoch):
-        client_models = global_train_once(global_model, client_data_loaders, test_loader, FL_params)
-        
-        #IMPORTANT: It is IMPORTANT to note here that global_train_once is trained directly on the input client_models during training, so the output's client_models are the same set of models as the input's client_models, except that the input is untrained while the output is trained.
-        #Therefore, in order to implement Federated Unlearning, we need to save the models in Client -- Models before global Train.You can use DeepCopy, or hard disk IO.
+        client_models = global_train_once(
+            global_model, client_data_loaders, test_loader, FL_params
+        )
+
+        # IMPORTANT: It is IMPORTANT to note here that global_train_once is trained directly on the input client_models during training, so the output's client_models are the same set of models as the input's client_models, except that the input is untrained while the output is trained.
+        # Therefore, in order to implement Federated Unlearning, we need to save the models in Client -- Models before global Train.You can use DeepCopy, or hard disk IO.
         all_client_models += client_models
         global_model = fedavg(client_models)
         # print(30*'^')
@@ -53,24 +61,32 @@ def FL_Train(init_global_model, client_data_loaders, test_loader, FL_params):
     return all_global_models, all_client_models
 
 
-
-
 def FL_Retrain(init_global_model, client_data_loaders, test_loader, FL_params):
-    if(FL_params.if_retrain == False):
-        raise ValueError('FL_params.if_retrain should be set to True, if you want to retrain FL model')
-    if(FL_params.forget_client_idx not in range(FL_params.N_client)):
-        raise ValueError('FL_params.forget_client_idx should be in [{}], if you want to use standard FL train with forget the certain client dataset.'.format(range(FL_params.N_client)))
+    if FL_params.if_retrain == False:
+        raise ValueError(
+            "FL_params.if_retrain should be set to True, if you want to retrain FL model"
+        )
+    if FL_params.forget_client_idx not in range(FL_params.N_client):
+        raise ValueError(
+            "FL_params.forget_client_idx should be in [{}], if you want to use standard FL train with forget the certain client dataset.".format(
+                range(FL_params.N_client)
+            )
+        )
     # forget_idx= FL_params.forget_idx
-    print('\n')
-    print(5*"#"+"  Federated Retraining Start  "+5*"#")
+    print("\n")
+    print(5 * "#" + "  Federated Retraining Start  " + 5 * "#")
     # std_time = time.time()
-    print("Federated Retrain with Forget Client NO.{}".format(FL_params.forget_client_idx))
+    print(
+        "Federated Retrain with Forget Client NO.{}".format(FL_params.forget_client_idx)
+    )
     retrain_GMs = list()
     all_client_models = list()
     retrain_GMs.append(copy.deepcopy(init_global_model))
     global_model = init_global_model
     for epoch in range(FL_params.global_epoch):
-        client_models = global_train_once(global_model, client_data_loaders, test_loader, FL_params)
+        client_models = global_train_once(
+            global_model, client_data_loaders, test_loader, FL_params
+        )
         """
         #IMPORTANT: It is IMPORTANT to note here that global_train_once is trained directly on the input client_models during training,
         so the output's client_models are the same set of models as the input's client_models, except that the input is untrained while 
@@ -87,10 +103,8 @@ def FL_Retrain(init_global_model, client_data_loaders, test_loader, FL_params):
 
         all_client_models += client_models
     # end_time = time.time()
-    print(5*"#"+"  Federated Retraining End  "+5*"#")
+    print(5 * "#" + "  Federated Retraining End  " + 5 * "#")
     return retrain_GMs
-
-
 
 
 """
@@ -99,29 +113,33 @@ For the global round of training, the data and optimizer of each global_ModelT i
 NOTE:The global model inputed is the global model for the previous round
     The output client_Models is the model that each user trained separately.
 """
-#training sub function
+
+
+# training sub function
 def global_train_once(global_model, client_data_loaders, test_loader, FL_params):
     """
-    #Using the model and optimizer of each client, with client_models as the initial training model, 
+    #Using the model and optimizer of each client, with client_models as the initial training model,
     updating the client_models using the local data and optimizer of the client user.
     #Note: It is important to note that global_train_once is only a global update to the parameters of the model.
     """
-    
 
-    device = torch.device("cuda" if FL_params.use_gpu*FL_params.cuda_state else "cpu")
+    device = torch.device("cuda" if FL_params.use_gpu * FL_params.cuda_state else "cpu")
     device_cpu = torch.device("cpu")
-
 
     client_models = []
     client_sgds = []
     for ii in range(FL_params.N_client):
         client_models.append(copy.deepcopy(global_model))
-        client_sgds.append(optim.SGD(client_models[ii].parameters(), lr=FL_params.local_lr, momentum=0.9))
-
-
+        client_sgds.append(
+            optim.SGD(
+                client_models[ii].parameters(), lr=FL_params.local_lr, momentum=0.9
+            )
+        )
 
     for client_idx in range(FL_params.N_client):
-        if(((FL_params.if_retrain) and (FL_params.forget_client_idx == client_idx)) or ((FL_params.if_unlearning) and (FL_params.forget_client_idx == client_idx))):
+        if ((FL_params.if_retrain) and (FL_params.forget_client_idx == client_idx)) or (
+            (FL_params.if_unlearning) and (FL_params.forget_client_idx == client_idx)
+        ):
 
             continue
         # if((FL_params.if_unlearning) and (FL_params.forget_client_idx == client_idx)):
@@ -131,11 +149,10 @@ def global_train_once(global_model, client_data_loaders, test_loader, FL_params)
         model = client_models[client_idx]
         optimizer = client_sgds[client_idx]
 
-
         model.to(device)
         model.train()
 
-        #local training
+        # local training
         for local_epoch in range(FL_params.local_epoch):
             for batch_idx, (data, target) in enumerate(client_data_loaders[client_idx]):
                 data = data.to(device)
@@ -148,21 +165,26 @@ def global_train_once(global_model, client_data_loaders, test_loader, FL_params)
                 loss.backward()
                 optimizer.step()
 
-            if(FL_params.train_with_test):
-                print("Local Client No. {}, Local Epoch: {}".format(client_idx, local_epoch))
+            if FL_params.train_with_test:
+                print(
+                    "Local Client No. {}, Local Epoch: {}".format(
+                        client_idx, local_epoch
+                    )
+                )
                 test(model, test_loader)
-
 
         # if(FL_params.use_gpu*FL_params.cuda_state):
         model.to(device_cpu)
         client_models[client_idx] = model
 
-    if(((FL_params.if_retrain) and (FL_params.forget_client_idx == client_idx))):
-        #åªæœ‰retrian éœ€è¦ä¸¢å¼ƒclient æ¨¡åž‹ï¼›å¦‚æžœä¸æ˜¯åœ¨retrainçš„è¯ï¼Œå°±ä¸éœ€è¦ä¸¢å¼ƒæ¨¡åž‹
-        #Only retrian needs to discard the Client model;If it's not in Retrain, there's no need to discard the model
+    if (FL_params.if_retrain) and (FL_params.forget_client_idx == client_idx):
+        # åªæœ‰retrian éœ€è¦ä¸¢å¼ƒclient æ¨¡åž‹ï¼›å¦‚æžœä¸æ˜¯åœ¨retrainçš„è¯ï¼Œå°±ä¸éœ€è¦ä¸¢å¼ƒæ¨¡åž‹
+        # Only retrian needs to discard the Client model;If it's not in Retrain, there's no need to discard the model
         client_models.pop(FL_params.forget_client_idx)
         return client_models
-    elif((FL_params.if_unlearning) and (FL_params.forget_client_idx in range(FL_params.N_client))):
+    elif (FL_params.if_unlearning) and (
+        FL_params.forget_client_idx in range(FL_params.N_client)
+    ):
         client_models.pop(FL_params.forget_client_idx)
         return client_models
     else:
@@ -173,6 +195,8 @@ def global_train_once(global_model, client_data_loaders, test_loader, FL_params)
 Function
 Test the performance of the model on the test set
 """
+
+
 def test(model, test_loader):
     model.eval()
     test_loss = 0
@@ -181,15 +205,15 @@ def test(model, test_loader):
         for data, target in test_loader:
             output = model(data)
             criteria = nn.CrossEntropyLoss()
-            test_loss += criteria(output, target) # sum up batch loss
+            test_loss += criteria(output, target)  # sum up batch loss
 
-            pred = torch.argmax(output,axis=1)
-            test_acc += accuracy_score(pred,target)
+            pred = torch.argmax(output, axis=1)
+            test_acc += accuracy_score(pred, target)
 
     test_loss /= len(test_loader.dataset)
-    test_acc = test_acc/np.ceil(len(test_loader.dataset)/test_loader.batch_size)
-    print('Test set: Average loss: {:.8f}'.format(test_loss))
-    print('Test set: Average acc:  {:.4f}'.format(test_acc))
+    test_acc = test_acc / np.ceil(len(test_loader.dataset) / test_loader.batch_size)
+    print("Test set: Average loss: {:.8f}".format(test_loss))
+    print("Test set: Average acc:  {:.4f}".format(test_acc))
     return (test_loss, test_acc)
 
 
@@ -197,8 +221,10 @@ def test(model, test_loader):
 Function
 FedAvg
 """
+
+
 def fedavg(local_models):
-# def fedavg(local_models, local_model_weights=None):
+    # def fedavg(local_models, local_model_weights=None):
     """
     Parameters
     ----------
@@ -221,7 +247,6 @@ def fedavg(local_models):
     local_state_dicts = list()
     for model in local_models:
         local_state_dicts.append(model.state_dict())
-
 
     for layer in avg_state_dict.keys():
         avg_state_dict[layer] *= 0

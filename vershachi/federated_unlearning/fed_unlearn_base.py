@@ -8,49 +8,49 @@ import copy
 from sklearn.metrics import accuracy_score
 import numpy as np
 import time
-#our libs
+
+# our libs
 from .model_initialization import model_init
 from .data_preprocess import data_set
 
 from .fed_learn_base import fedavg, global_train_once, FL_Train, FL_Retrain
 
-def federated_learning_unlearning(init_global_model, client_loaders, test_loader, FL_params):
 
+def federated_learning_unlearning(
+    init_global_model, client_loaders, test_loader, FL_params
+):
 
     # all_global_models, all_client_models ä¸ºä¿å­˜èµ·æ¥æ‰€æœ‰çš„old FL models
-    print(5*"#"+"  Federated Learning Start"+5*"#")
+    print(5 * "#" + "  Federated Learning Start" + 5 * "#")
     std_time = time.time()
-    old_GMs, old_CMs = FL_Train(init_global_model, client_loaders, test_loader, FL_params)
+    old_GMs, old_CMs = FL_Train(
+        init_global_model, client_loaders, test_loader, FL_params
+    )
     end_time = time.time()
-    time_learn = (std_time - end_time)
-    print(5*"#"+"  Federated Learning End"+5*"#")
+    time_learn = std_time - end_time
+    print(5 * "#" + "  Federated Learning End" + 5 * "#")
 
-
-    print('\n')
+    print("\n")
     """4.2 unlearning  a clientï¼ŒFederated Unlearning"""
-    print(5*"#"+"  Federated Unlearning Start  "+5*"#")
+    print(5 * "#" + "  Federated Unlearning Start  " + 5 * "#")
     std_time = time.time()
-    #Set the parameter IF_unlearning =True so that global_train_once skips forgotten users and saves computing time
+    # Set the parameter IF_unlearning =True so that global_train_once skips forgotten users and saves computing time
     FL_params.if_unlearning = True
-    #Set the parameter forget_client_IDx to mark the user's IDX that needs to be forgotten
+    # Set the parameter forget_client_IDx to mark the user's IDX that needs to be forgotten
     FL_params.forget_client_idx = 2
     unlearn_GMs = unlearning(old_GMs, old_CMs, client_loaders, test_loader, FL_params)
     end_time = time.time()
-    time_unlearn = (std_time - end_time)
-    print(5*"#"+"  Federated Unlearning End  "+5*"#")
+    time_unlearn = std_time - end_time
+    print(5 * "#" + "  Federated Unlearning End  " + 5 * "#")
 
-
-
-    print('\n')
+    print("\n")
     """4.3 unlearning a clientï¼ŒFederated Unlearning without calibration"""
-    print(5*"#"+"  Federated Unlearning without Calibration Start  "+5*"#")
+    print(5 * "#" + "  Federated Unlearning without Calibration Start  " + 5 * "#")
     std_time = time.time()
     uncali_unlearn_GMs = unlearning_without_cali(old_GMs, old_CMs, FL_params)
     end_time = time.time()
-    time_unlearn_no_cali = (std_time - end_time)
-    print(5*"#"+"  Federated Unlearning without Calibration End  "+5*"#")
-
-
+    time_unlearn_no_cali = std_time - end_time
+    print(5 * "#" + "  Federated Unlearning without Calibration End  " + 5 * "#")
 
     # if(FL_params.if_retrain):
     #     print('\n')
@@ -70,10 +70,13 @@ def federated_learning_unlearning(init_global_model, client_loaders, test_loader
 
     print(" Learning time consuming = {} secods".format(-time_learn))
     print(" Unlearning time consuming = {} secods".format(-time_unlearn))
-    print(" Unlearning no Cali time consuming = {} secods".format(-time_unlearn_no_cali))
+    print(
+        " Unlearning no Cali time consuming = {} secods".format(-time_unlearn_no_cali)
+    )
     # print(" Retraining time consuming = {} secods".format(-time_retrain))
 
     return old_GMs, unlearn_GMs, uncali_unlearn_GMs, old_CMs
+
 
 def unlearning(old_GMs, old_CMs, client_data_loaders, test_loader, FL_params):
     """
@@ -97,35 +100,47 @@ def unlearning(old_GMs, old_CMs, client_data_loaders, test_loader, FL_params):
 
     """
 
+    if FL_params.if_unlearning == False:
+        raise ValueError(
+            "FL_params.if_unlearning should be set to True, if you want to unlearning with a certain user"
+        )
 
-    if(FL_params.if_unlearning == False):
-        raise ValueError('FL_params.if_unlearning should be set to True, if you want to unlearning with a certain user')
-
-    if(not(FL_params.forget_client_idx in range(FL_params.N_client))):
-        raise ValueError('FL_params.forget_client_idx is note assined correctly, forget_client_idx should in {}'.format(range(FL_params.N_client)))
-    if(FL_params.unlearn_interval == 0 or FL_params.unlearn_interval >FL_params.global_epoch):
-        raise ValueError('FL_params.unlearn_interval should not be 0, or larger than the number of FL_params.global_epoch')
+    if not (FL_params.forget_client_idx in range(FL_params.N_client)):
+        raise ValueError(
+            "FL_params.forget_client_idx is note assined correctly, forget_client_idx should in {}".format(
+                range(FL_params.N_client)
+            )
+        )
+    if (
+        FL_params.unlearn_interval == 0
+        or FL_params.unlearn_interval > FL_params.global_epoch
+    ):
+        raise ValueError(
+            "FL_params.unlearn_interval should not be 0, or larger than the number of FL_params.global_epoch"
+        )
 
     old_global_models = copy.deepcopy(old_GMs)
     old_client_models = copy.deepcopy(old_CMs)
 
-
     forget_client = FL_params.forget_client_idx
     for ii in range(FL_params.global_epoch):
-        temp = old_client_models[ii*FL_params.N_client : ii*FL_params.N_client+FL_params.N_client]
-        temp.pop(forget_client)#During Unlearn, the model saved by the forgotten user pops up
+        temp = old_client_models[
+            ii * FL_params.N_client : ii * FL_params.N_client + FL_params.N_client
+        ]
+        temp.pop(
+            forget_client
+        )  # During Unlearn, the model saved by the forgotten user pops up
         old_client_models.append(temp)
-    old_client_models = old_client_models[-FL_params.global_epoch:]
+    old_client_models = old_client_models[-FL_params.global_epoch :]
 
-
-
-    GM_intv = np.arange(0,FL_params.global_epoch+1, FL_params.unlearn_interval, dtype=np.int16())
-    CM_intv  = GM_intv -1
+    GM_intv = np.arange(
+        0, FL_params.global_epoch + 1, FL_params.unlearn_interval, dtype=np.int16()
+    )
+    CM_intv = GM_intv - 1
     CM_intv = CM_intv[1:]
 
     selected_GMs = [old_global_models[ii] for ii in GM_intv]
     selected_CMs = [old_client_models[jj] for jj in CM_intv]
-
 
     """1. First, complete the model overlay from the initial model to the first round of global train"""
     """
@@ -164,32 +179,45 @@ def unlearning(old_GMs, old_CMs, client_data_loaders, test_loader, FL_params):
 
     """
 
-
     CONST_local_epoch = copy.deepcopy(FL_params.local_epoch)
-    FL_params.local_epoch = np.ceil(FL_params.local_epoch*FL_params.forget_local_epoch_ratio)
+    FL_params.local_epoch = np.ceil(
+        FL_params.local_epoch * FL_params.forget_local_epoch_ratio
+    )
     FL_params.local_epoch = np.int16(FL_params.local_epoch)
 
     CONST_global_epoch = copy.deepcopy(FL_params.global_epoch)
     FL_params.global_epoch = CM_intv.shape[0]
 
-
-    print('Local Calibration Training epoch = {}'.format(FL_params.local_epoch))
+    print("Local Calibration Training epoch = {}".format(FL_params.local_epoch))
     for epoch in range(FL_params.global_epoch):
-        if(epoch == 0):
+        if epoch == 0:
             continue
         print("Federated Unlearning Global Epoch  = {}".format(epoch))
         global_model = unlearn_global_models[epoch]
 
-        new_client_models  = global_train_once(global_model, client_data_loaders, test_loader, FL_params)
+        new_client_models = global_train_once(
+            global_model, client_data_loaders, test_loader, FL_params
+        )
 
-        new_GM = unlearning_step_once(selected_CMs[epoch], new_client_models, selected_GMs[epoch+1], global_model)
+        new_GM = unlearning_step_once(
+            selected_CMs[epoch],
+            new_client_models,
+            selected_GMs[epoch + 1],
+            global_model,
+        )
 
         unlearn_global_models.append(new_GM)
     FL_params.local_epoch = CONST_local_epoch
     FL_params.global_epoch = CONST_global_epoch
     return unlearn_global_models
 
-def unlearning_step_once(old_client_models, new_client_models, global_model_before_forget, global_model_after_forget):
+
+def unlearning_step_once(
+    old_client_models,
+    new_client_models,
+    global_model_before_forget,
+    global_model_after_forget,
+):
     """
     Parameters
     ----------
@@ -210,35 +238,44 @@ def unlearning_step_once(old_client_models, new_client_models, global_model_befo
     return_global_model : After one iteration, the new global model under the forgetting setting
 
     """
-    old_param_update = dict()#Model Paramsï¼š oldCM - oldGM_t
-    new_param_update = dict()#Model Paramsï¼š newCM - newGM_t
+    old_param_update = dict()  # Model Paramsï¼š oldCM - oldGM_t
+    new_param_update = dict()  # Model Paramsï¼š newCM - newGM_t
 
-    new_global_model_state = global_model_after_forget.state_dict()#newGM_t
+    new_global_model_state = global_model_after_forget.state_dict()  # newGM_t
 
-    return_model_state = dict()#newGM_t + ||oldCM - oldGM_t||*(newCM - newGM_t)/||newCM - newGM_t||
+    return_model_state = (
+        dict()
+    )  # newGM_t + ||oldCM - oldGM_t||*(newCM - newGM_t)/||newCM - newGM_t||
 
     assert len(old_client_models) == len(new_client_models)
 
     for layer in global_model_before_forget.state_dict().keys():
-        old_param_update[layer] = 0*global_model_before_forget.state_dict()[layer]
-        new_param_update[layer] = 0*global_model_before_forget.state_dict()[layer]
+        old_param_update[layer] = 0 * global_model_before_forget.state_dict()[layer]
+        new_param_update[layer] = 0 * global_model_before_forget.state_dict()[layer]
 
-        return_model_state[layer] = 0*global_model_before_forget.state_dict()[layer]
+        return_model_state[layer] = 0 * global_model_before_forget.state_dict()[layer]
 
         for ii in range(len(new_client_models)):
             old_param_update[layer] += old_client_models[ii].state_dict()[layer]
             new_param_update[layer] += new_client_models[ii].state_dict()[layer]
-        old_param_update[layer] /= (ii+1)#Model Paramsï¼š oldCM
-        new_param_update[layer] /= (ii+1)#Model Paramsï¼š newCM
+        old_param_update[layer] /= ii + 1  # Model Paramsï¼š oldCM
+        new_param_update[layer] /= ii + 1  # Model Paramsï¼š newCM
 
-        old_param_update[layer] = old_param_update[layer] - global_model_before_forget.state_dict()[layer]#å‚æ•°ï¼š oldCM - oldGM_t
-        new_param_update[layer] = new_param_update[layer] - global_model_after_forget.state_dict()[layer]#å‚æ•°ï¼š newCM - newGM_t
+        old_param_update[layer] = (
+            old_param_update[layer] - global_model_before_forget.state_dict()[layer]
+        )  # å‚æ•°ï¼š oldCM - oldGM_t
+        new_param_update[layer] = (
+            new_param_update[layer] - global_model_after_forget.state_dict()[layer]
+        )  # å‚æ•°ï¼š newCM - newGM_t
 
-        step_length = torch.norm(old_param_update[layer])#||oldCM - oldGM_t||
-        step_direction = new_param_update[layer]/torch.norm(new_param_update[layer])#(newCM - newGM_t)/||newCM - newGM_t||
+        step_length = torch.norm(old_param_update[layer])  # ||oldCM - oldGM_t||
+        step_direction = new_param_update[layer] / torch.norm(
+            new_param_update[layer]
+        )  # (newCM - newGM_t)/||newCM - newGM_t||
 
-        return_model_state[layer] = new_global_model_state[layer] + step_length*step_direction
-
+        return_model_state[layer] = (
+            new_global_model_state[layer] + step_length * step_direction
+        )
 
     return_global_model = copy.deepcopy(global_model_after_forget)
 
@@ -269,19 +306,26 @@ def unlearning_without_cali(old_global_models, old_client_models, FL_params):
                  For unlearning FLï¼šnewGM_t-->The parameters of oldCM and oldGM were directly leveraged to update global model--> newGM_t+1
     The update process is as followsï¼šnewGM_t+1 = (oldCM - oldGM_t) + newGM_t
     """
-    if(FL_params.if_unlearning == False):
-        raise ValueError('FL_params.if_unlearning should be set to True, if you want to unlearning with a certain user')
+    if FL_params.if_unlearning == False:
+        raise ValueError(
+            "FL_params.if_unlearning should be set to True, if you want to unlearning with a certain user"
+        )
 
-    if(not(FL_params.forget_client_idx in range(FL_params.N_client))):
-        raise ValueError('FL_params.forget_client_idx is note assined correctly, forget_client_idx should in {}'.format(range(FL_params.N_client)))
+    if not (FL_params.forget_client_idx in range(FL_params.N_client)):
+        raise ValueError(
+            "FL_params.forget_client_idx is note assined correctly, forget_client_idx should in {}".format(
+                range(FL_params.N_client)
+            )
+        )
     forget_client = FL_params.forget_client_idx
 
-
     for ii in range(FL_params.global_epoch):
-        temp = old_client_models[ii*FL_params.N_client : ii*FL_params.N_client+FL_params.N_client]
+        temp = old_client_models[
+            ii * FL_params.N_client : ii * FL_params.N_client + FL_params.N_client
+        ]
         temp.pop(forget_client)
         old_client_models.append(temp)
-    old_client_models = old_client_models[-FL_params.global_epoch:]
+    old_client_models = old_client_models[-FL_params.global_epoch :]
 
     uncali_global_models = list()
     uncali_global_models.append(copy.deepcopy(old_global_models[0]))
@@ -297,32 +341,35 @@ def unlearning_without_cali(old_global_models, old_client_models, FL_params):
     For accumulatring:    newGM_t --> (oldCM_t - oldGM_t) --> oldGM_t+1
     For uncalibrated federated forgotten learning, the parameter update of the unforgotten user in standard federated learning is used to directly overlay the new global model to obtain the next round of new global model.
     """
-    old_param_update = dict()#(oldCM_t - oldGM_t)
-    return_model_state = dict()#newGM_t+1
+    old_param_update = dict()  # (oldCM_t - oldGM_t)
+    return_model_state = dict()  # newGM_t+1
 
     for epoch in range(FL_params.global_epoch):
-        if(epoch == 0):
+        if epoch == 0:
             continue
         print("Federated Unlearning Global Epoch  = {}".format(epoch))
 
-        current_global_model = uncali_global_models[epoch]#newGM_t
-        current_client_models = old_client_models[epoch]#oldCM_t
-        old_global_model = old_global_models[epoch]#oldGM_t
+        current_global_model = uncali_global_models[epoch]  # newGM_t
+        current_client_models = old_client_models[epoch]  # oldCM_t
+        old_global_model = old_global_models[epoch]  # oldGM_t
         # global_model_before_forget = old_global_models[epoch]#old_GM_t
 
-
         for layer in current_global_model.state_dict().keys():
-            #State variable initialization
-            old_param_update[layer] = 0*current_global_model.state_dict()[layer]
-            return_model_state[layer] = 0*current_global_model.state_dict()[layer]
+            # State variable initialization
+            old_param_update[layer] = 0 * current_global_model.state_dict()[layer]
+            return_model_state[layer] = 0 * current_global_model.state_dict()[layer]
 
             for ii in range(len(current_client_models)):
                 old_param_update[layer] += current_client_models[ii].state_dict()[layer]
-            old_param_update[layer] /= (ii+1)# oldCM_t
+            old_param_update[layer] /= ii + 1  # oldCM_t
 
-            old_param_update[layer] = old_param_update[layer] - old_global_model.state_dict()[layer]#å‚æ•°ï¼š oldCM_t - oldGM_t
+            old_param_update[layer] = (
+                old_param_update[layer] - old_global_model.state_dict()[layer]
+            )  # å‚æ•°ï¼š oldCM_t - oldGM_t
 
-            return_model_state[layer] = current_global_model.state_dict()[layer] + old_param_update[layer]#newGM_t + (oldCM_t - oldGM_t)
+            return_model_state[layer] = (
+                current_global_model.state_dict()[layer] + old_param_update[layer]
+            )  # newGM_t + (oldCM_t - oldGM_t)
 
         return_global_model = copy.deepcopy(old_global_models[0])
         return_global_model.load_state_dict(return_model_state)
