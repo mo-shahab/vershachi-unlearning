@@ -71,7 +71,9 @@ repo-root/
 -KNOT
 
 
-
+## 6. bayesian_unlearning;
+- https://github.com/i-hxrsh/Bayesian-Unlearning-Streamlit
+- https://github.com/qphong/variational-bayesian-unlearning
 
 ## working on sisa
 - dataset used for sisa part: 
