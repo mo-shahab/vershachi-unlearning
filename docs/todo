@@ -2,3 +2,6 @@ unlearning algos:
 	sisa:
         - fix the tests
         - work on the memory exhaustion
+
+general:
+        - to rename the example files in examples/ 
