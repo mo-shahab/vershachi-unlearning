@@ -1,0 +1,24 @@
+# Exclude version control system files
+.git
+.gitignore
+
+# Exclude development and documentation files
+docs/
+tests/
+*.md
+LICENSE
+
+# Exclude temporary files and directories
+*.pyc
+__pycache__/
+
+# Exclude venv files 
+venv/
+
+# Exclude specific directories within examples and datasets
+examples/container/
+datasets/adult/
+datasets/mnist/
+
+# Exclude the entire models directory
+# models/
