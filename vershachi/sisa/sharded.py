@@ -1,3 +1,9 @@
+"""
+Script Description:
+This script provides functions for managing shards, fetching batches of data from shards, and fetching test batches.
+
+"""
+
 import numpy as np
 from hashlib import sha256
 import importlib
@@ -9,6 +15,13 @@ import importlib.util
 def sizeOfShard(container, shard):
     """
     Returns the size (in number of points) of the shard before any unlearning request.
+
+    Parameters:
+        - container (str): Path to the container directory.
+        - shard (int): Shard index.
+
+    Returns:
+        - int: Size of the shard.
     """
     shards = np.load("containers/{}/splitfile.npy".format(container), allow_pickle=True)
 
@@ -18,6 +31,14 @@ def sizeOfShard(container, shard):
 def realSizeOfShard(container, label, shard):
     """
     Returns the actual size of the shard (including unlearning requests).
+
+    Parameters:
+        - container (str): Path to the container directory.
+        - label (str): Label for the outputs.
+        - shard (int): Shard index.
+
+    Returns:
+        - int: Actual size of the shard.
     """
     shards = np.load("containers/{}/splitfile.npy".format(container), allow_pickle=True)
     requests = np.load(
@@ -31,6 +52,15 @@ def getShardHash(container, label, shard, until=None):
     """
     Returns a hash of the indices of the points in the shard lower than until
     that are not in the requests (separated by :).
+
+    Parameters:
+        - container (str): Path to the container directory.
+        - label (str): Label for the outputs.
+        - shard (int): Shard index.
+        - until (int): Upper limit for the indices (default is None).
+
+    Returns:
+        - str: Hash of the indices.
     """
     shards = np.load("containers/{}/splitfile.npy".format(container), allow_pickle=True)
     requests = np.load(
@@ -73,7 +103,19 @@ def fetchShardBatch(container, label, shard, batch_size, dataset, offset=0, unti
     """
     Generator returning batches of points in the shard that are not in the requests
     with specified batch_size from the specified dataset
-    optionnally located between offset and until (slicing).
+    optionally located between offset and until (slicing).
+
+    Parameters:
+        - container (str): Path to the container directory.
+        - label (str): Label for the outputs.
+        - shard (int): Shard index.
+        - batch_size (int): Size of each batch.
+        - dataset (str): Location of the dataset file.
+        - offset (int): Starting index for slicing (default is 0).
+        - until (int): Ending index for slicing (default is None).
+
+    Yields:
+        - np.ndarray: Batch of data.
     """
     shards = np.load("containers/{}/splitfile.npy".format(container), allow_pickle=True)
     requests = np.load(
@@ -131,6 +173,13 @@ def fetchTestBatch(dataset, batch_size):
     """
     Generator returning batches of points from the specified test dataset
     with specified batch_size.
+
+    Parameters:
+        - dataset (str): Location of the dataset file.
+        - batch_size (int): Size of each batch.
+
+    Yields:
+        - np.ndarray: Batch of test data.
     """
     with open(dataset) as f:
         datasetfile = json.loads(f.read())

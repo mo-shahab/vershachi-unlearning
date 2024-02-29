@@ -1,3 +1,10 @@
+"""
+Script Description:
+This script defines a function to aggregate outputs from different shards based on a specified strategy.
+The aggregation process combines the outputs from multiple shards into a single aggregated result,
+which can be used in various machine learning tasks such as federated learning.
+"""
+
 import numpy as np
 import json
 import os

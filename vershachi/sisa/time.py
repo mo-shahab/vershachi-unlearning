@@ -1,3 +1,9 @@
+"""
+Script Description:
+This script defines a function to compute statistics based on the execution time of the shards.
+
+"""
+
 import pandas as pd
 
 

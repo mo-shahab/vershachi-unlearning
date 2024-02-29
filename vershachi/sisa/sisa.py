@@ -1,3 +1,10 @@
+"""
+Script Description:
+This script defines the `SisaTrainer` class, which is responsible for training 
+and testing models using the SISA (Secure Incremental Self-Adaptive) framework.
+
+"""
+
 import numpy as np
 import torch
 from torch.nn import CrossEntropyLoss
@@ -32,6 +39,27 @@ class SisaTrainer:
         chkpt_interval=1,
         label="latest",
     ):
+        """
+        A class to train and test models using the SISA framework.
+
+        Parameters:
+            - model_dir (str): Directory containing the model definition.
+            - dataset_file (str): Path to the dataset file.
+            - model_name (str): Name of the model class.
+            - train (bool): Flag indicating whether to train the model.
+            - test (bool): Flag indicating whether to test the model.
+            - epochs (int): Number of epochs for training.
+            - batch_size (int): Batch size for training and testing.
+            - dropout_rate (float): Dropout rate for the model.
+            - learning_rate (float): Learning rate for the optimizer.
+            - optimizer (str): Name of the optimizer ('adam' or 'sgd').
+            - output_type (str): Type of output ('argmax' or 'softmax').
+            - container (str): Name of the container.
+            - shard (int): Shard index.
+            - slices (int): Number of slices.
+            - chkpt_interval (int): Interval for saving checkpoints.
+            - label (str): Label for the outputs.
+        """
         self.model_dir = model_dir
         self.dataset_file = dataset_file
         self.model_name = model_name
@@ -57,11 +85,25 @@ class SisaTrainer:
         self.optimizer = self._init_optimizer()
 
     def _import_model_module(self):
+        """
+        Import the model module.
+
+        Returns:
+            module: The imported model module.
+
+        """
         sys.path.append(self.model_dir)
         model_lib = import_module(f"{self.model_name}")
         return model_lib
 
     def _get_dataset_metadata(self):
+        """
+        Get the metadata of the dataset.
+
+        Returns:
+            tuple: A tuple containing the input shape and number of classes.
+
+        """
         # Construct the absolute path to the dataset file
         # dataset_file_path = os.path.join(self.dataset_dir, self.dataset_file)
         with open(self.dataset_file) as f:
@@ -71,6 +113,13 @@ class SisaTrainer:
         return input_shape, nb_classes
 
     def _init_model(self):
+        """
+        Initialize the model.
+
+        Returns:
+            torch.nn.Module: The initialized model.
+
+        """
         # Pass input_shape and nb_classes to _init_model()
         model = self.model_lib.Model(
             self.input_shape, self.nb_classes, dropout_rate=self.dropout_rate
@@ -79,6 +128,13 @@ class SisaTrainer:
         return model
 
     def _init_optimizer(self):
+        """
+        Initialize the optimizer.
+
+        Returns:
+            torch.optim.Optimizer: The initialized optimizer.
+
+        """
         if self.optimizer == "adam":
             optimizer = Adam(self.model.parameters(), lr=self.learning_rate)
         elif self.optimizer == "sgd":
@@ -88,6 +144,10 @@ class SisaTrainer:
         return optimizer
 
     def _train(self):
+        """
+        Train the model.
+
+        """
         if self.train:
             shard_size = sizeOfShard(self.container, self.shard)
             slice_size = shard_size // self.slices
@@ -238,6 +298,10 @@ class SisaTrainer:
                     )
 
     def _test(self):
+        """
+        Test the model.
+
+        """
         if self.test:
             # Load model weights from shard checkpoint (last slice).
             checkpoint_path = (

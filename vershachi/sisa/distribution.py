@@ -1,9 +1,25 @@
+"""
+Script Description:
+This script provides functions for splitting datasets into shards and generating/distributing requests for federated learning.
+
+"""
+
 import numpy as np
 import json
 import os
 
 
 def split_dataset(shards, distribution, container, dataset, label="latest"):
+    """
+    Splits a dataset into shards according to the specified distribution strategy.
+
+    Parameters:
+        - shards (int): Number of shards to split the dataset into.
+        - distribution (str): Strategy for distributing data across shards ('uniform' or custom distribution).
+        - container (str): Path to the container directory where data will be saved.
+        - dataset (str): Path to the dataset metadata file.
+        - label (str, optional): Label for the outputs (default is 'latest').
+    """
     # Load dataset metadata.
     with open(dataset) as f:
         datasetfile = json.load(f)
@@ -36,6 +52,17 @@ def split_dataset(shards, distribution, container, dataset, label="latest"):
 
 
 def generate_requests(num_requests, distribution, datasetfile):
+    """
+    Generates requests for unlearning based on the specified distribution strategy.
+
+    Parameters:
+        - num_requests (int): Number of requests to generate.
+        - distribution (str): Distribution strategy for generating requests.
+        - datasetfile (dict): Metadata of the dataset.
+
+    Returns:
+        - np.ndarray: Array containing the generated requests.
+    """
     if distribution.split(":")[0] == "exponential":
         lbd = (
             float(distribution.split(":")[1])
@@ -57,6 +84,17 @@ def generate_requests(num_requests, distribution, datasetfile):
 def generate_and_distribute_requests(
     requests, distribution, container, label, partition, dataset
 ):
+    """
+    Generates and distributes unlearning requests among shards.
+
+    Parameters:
+        - requests (int): Number of requests to generate and distribute.
+        - distribution (str): Strategy for distributing requests among shards.
+        - container (str): Path to the container directory.
+        - label (str): Label for the requests.
+        - partition (np.ndarray): Split dataset partition.
+        - dataset (str or dict): Path to the dataset metadata file or loaded dataset metadata dictionary.
+    """
     if isinstance(dataset, str):
         # If dataset is a string, assume it's the path to a JSON metadata file
         with open(dataset) as f:
@@ -85,6 +123,16 @@ def generate_and_distribute_requests(
 
 
 def distribute_requests(partition, all_requests):
+    """
+    Distributes requests among shard partitions.
+
+    Parameters:
+        - partition (np.ndarray): Partition of the dataset across shards.
+        - all_requests (np.ndarray): All generated unlearning requests.
+
+    Returns:
+        - List[np.ndarray]: List containing distributed requests for each shard partition.
+    """
     requests = [np.intersect1d(part, all_requests) for part in partition]
 
     # Pad requests to ensure consistent length
