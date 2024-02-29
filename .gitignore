@@ -163,4 +163,7 @@ cython_debug/
 PPT/
 *.npy
 examples/containers
-adult 
+adult
+mnist
+purchase
+svhn
