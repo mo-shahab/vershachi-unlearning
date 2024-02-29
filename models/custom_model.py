@@ -8,6 +8,7 @@ be needed and what all should be done to create your
 own Neural Network model.
 """
 
+
 # Define CustomModel class
 class CustomModel(nn.Module):
     def __init__(self):
@@ -18,19 +19,19 @@ class CustomModel(nn.Module):
         # Define the forward pass of your model here
         return x
 
+
 # Update model_init function to initialize CustomModel
 def model_init(data_name):
-    if data_name == 'mnist':
+    if data_name == "mnist":
         model = Net_mnist()
-    elif data_name == 'cifar10':
+    elif data_name == "cifar10":
         model = Net_cifar10()
-    elif data_name == 'purchase':
+    elif data_name == "purchase":
         model = Net_purchase()
-    elif data_name == 'adult':
+    elif data_name == "adult":
         model = Net_adult()
-    elif data_name == 'custom_dataset':
+    elif data_name == "custom_dataset":
         model = CustomModel()  # Initialize CustomModel for custom dataset
     else:
         raise ValueError("Unknown dataset name: {}".format(data_name))
     return model
-
