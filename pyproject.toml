@@ -2,16 +2,22 @@
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+
+
 [tool.poetry]
 name = "vershachi"
 version = "0.1.0"
 description = "Vershachi is a Python-based toolkit designed to streamline the development of machine learning and unlearning applications."
 authors = ["mo_shahab <mohdshahabuddinsoharwardi@gmail.com>"]
-# Add your long description here
 long_description = """
-    Your long description goes here.
-    You can provide a detailed description of your package, its features, and its intended use.
-    Make sure to use proper markdown or reStructuredText syntax.
+    Vershachi is a Python-based toolkit designed to streamline the development of machine learning and unlearning applications.
+
+    Features:
+    - Streamlined development process
+    - Support for various machine learning frameworks
+    - Easy integration with existing projects
+
+    For more information, visit: https://github.com/your_username/vershachi
 """
 
 [tool.poetry.dependencies]
