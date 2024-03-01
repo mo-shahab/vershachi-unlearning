@@ -1,16 +1,13 @@
 import importlib.util
 import os
 
-
 def hello():
     print("Hello! This is the Vershachi Unlearning Framework.")
-
 
 def read_requirements(file_path):
     with open(file_path, "r") as f:
         requirements = [line.strip() for line in f.readlines() if line.strip()]
     return requirements
-
 
 def check_module(module_name):
     try:
@@ -21,6 +18,14 @@ def check_module(module_name):
         print(f"Module '{module_name}' is not installed.")
         return False
 
+def check_vershachi_import():
+    try:
+        import vershachi
+        print("Vershachi module has been imported successfully.")
+        return True
+    except ImportError:
+        print("Vershachi module could not be imported.")
+        return False
 
 def sanity_checks():
     print("Performing sanity checks...")
@@ -31,17 +36,15 @@ def sanity_checks():
     if all_modules_installed:
         print("All required modules are installed.")
     else:
-        print(
-            "Some required modules are missing. Please install them before running the framework."
-        )
-
+        print("Some required modules are missing. Please install them before running the framework.")
 
 def version():
     # Display version information
     print("Vershachi Unlearning Framework version 0.1")
 
-
 if __name__ == "__main__":
     hello()
     sanity_checks()
+    check_vershachi_import()
     version()
+

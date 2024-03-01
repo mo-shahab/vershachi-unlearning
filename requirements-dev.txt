@@ -6,3 +6,4 @@ tqdm
 pandas
 torchvision
 xgboost
+poetry
