@@ -18,9 +18,13 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 
+# Add the following line for long_description content type
+long_description_content_type = "text/markdown"  # or "text/x-rst" for reStructuredText
+
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.21.5"
 pandas = "^2.2.1"
 scikit-learn = "^1.4.1"
 torch = "^2.2.1"
+
