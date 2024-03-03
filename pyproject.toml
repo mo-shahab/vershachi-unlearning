@@ -2,15 +2,13 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[project]
+[tool.poetry]
 name = "vershachi"
 version = "0.1.0"
 description = "Vershachi is a Python-based toolkit designed to streamline the development of machine learning and unlearning applications."
-authors = [
-    {name = "mo_shahab", email = "mohdshahabuddinsoharwardi@gmail.com"}
-]
+authors = ["mo_shahab <mohdshahabuddinsoharwardi@gmail.com>"]
+license = "MIT"
 readme = "README.md"
-license = {file = "LICENSE.txt"}
 keywords = ["machine learning", "unlearning", "toolkit"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -19,12 +17,10 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
 ]
-url = "https://github.com/mo-shahab/vershachi-unlearning"
-project-urls = {Documentation = "https://github.com/mo-shahab/vershachi-unlearning/"}
 
-[project.dependencies]
+[tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.21.5"
-pandas = "^1.3.5"
+pandas = "^2.2.1"
 scikit-learn = "^1.4.1"
-torch = "^1.10.1"
+torch = "^2.2.1"

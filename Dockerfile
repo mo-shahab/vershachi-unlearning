@@ -10,14 +10,14 @@ WORKDIR /app
 # Copy only the necessary files for the framework
 COPY ./vershachi /app/vershachi
 
-# Copy the requirements file
-COPY ./requirements-3-10.txt .
+# Copy the pyproject.toml file
+COPY ./pyproject.toml /app/
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements-3-10.txt
+# Install Poetry
+RUN pip install --no-cache-dir poetry
 
-# Install the framework in editable mode
-RUN pip install --no-cache-dir -e /app/
+# Install dependencies using Poetry
+RUN poetry install
 
 # Specify the default command to run when the container starts
 CMD [ "python", "run.py" ]
