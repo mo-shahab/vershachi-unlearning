@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Vershachi is a Python-based toolkit designed to streamline the development of machine learning and unlearning applications."
 authors = ["mo_shahab <mohdshahabuddinsoharwardi@gmail.com>", "veerasagar <veerasagar24502@gmail.com>"]
 license = "MIT"
-#readme = "README.md"
+long_description = "README.md"
 keywords = ["machine learning", "unlearning", "toolkit"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -17,8 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
 ]
-[project]
-readme = "README.md"
+
 # Add the following line for long_description content type
 #long_description_content_type = "text/markdown"  # or "text/x-rst" for reStructuredText
 
