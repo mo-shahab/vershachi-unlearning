@@ -1,8 +1,11 @@
-# Use Alpine Linux as the base image
-FROM python:3.10.4-alpine3.14
+FROM ubuntu:20.04 AS builder
+RUN apt-get update && apt-get install -y build-essential python3-dev python3-pip
+
+FROM python:3.10-slim
+COPY --from=builder /usr/bin/python3 /usr/bin/python3
 
 # Install build tools and dependencies
-RUN apk add --no-cache build-base python3-dev py3-pip
+RUN apt-get update && apt-get install -y build-essential python3-dev python3-pip
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,7 +23,7 @@ RUN pip install --no-cache-dir poetry && poetry self update
 RUN poetry install
 
 # Run the installed dependencies
-RUN poetry build
+# RUN poetry build
 
 # Specify the default command to run when the container starts
 CMD [ "python", "run.py" ]
