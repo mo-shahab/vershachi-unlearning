@@ -7,3 +7,4 @@ pandas
 torchvision
 xgboost
 poetry
+twine
