@@ -13,11 +13,14 @@ COPY ./vershachi /app/vershachi
 # Copy the pyproject.toml file
 COPY ./pyproject.toml /app/
 
-# Install Poetry
-RUN pip install --no-cache-dir poetry
+# Install Poetry and upgrade it
+RUN pip install --no-cache-dir poetry && poetry self update
 
 # Install dependencies using Poetry
 RUN poetry install
+
+# Run the installed dependencies
+RUN poetry build
 
 # Specify the default command to run when the container starts
 CMD [ "python", "run.py" ]

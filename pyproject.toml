@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "vershachi"
-version = "0.1.0"
+version = "0.1.01"
 description = "Vershachi is a Python-based toolkit designed to streamline the development of machine learning and unlearning applications."
 authors = ["mo_shahab <mohdshahabuddinsoharwardi@gmail.com>", "veerasagar <veerasagar24502@gmail.com>"]
 license = "MIT"
