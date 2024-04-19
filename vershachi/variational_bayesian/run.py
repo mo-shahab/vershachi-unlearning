@@ -100,7 +100,7 @@ def run_variational_bayesian_unlearning(
     nsample=1000,
     ntrain=30000,
     batchsize=1000,
-    folder="out",
+    folder="./out",
     gpu="0",
 ):
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -110,6 +110,16 @@ def run_variational_bayesian_unlearning(
         approximate, nbijector, nhidden
     )
     experiment_data = get_experiment(experiment)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    path = "{}/{}".format(folder, experiment)
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    path = "{}/{}".format(path, approximate)
+    if not os.path.exists(path):
+        os.makedirs(path)
 
     dim = experiment_data["dim"]
     nparam = experiment_data["nparam"]
@@ -142,14 +152,14 @@ def run_variational_bayesian_unlearning(
     remain_data = experiment_data["remain_data"]
     removed_data = experiment_data["removed_data"]
 
-    filename = "{}/full_data_post.p".format(folder)
+    filename = "{}/full_data_post.p".format(path)
     learned_param_full = utils.load_file_if_exist_else_create(
         filename,
         lambda: unlearn.learn(data, ntrain=ntrain, batchsize=batchsize),
         force_create_new=False,
     )
 
-    filename = "{}/remain_data_retrain_post.p".format(folder)
+    filename = "{}/remain_data_retrain_post.p".format(path)
     learned_param_remain = utils.load_file_if_exist_else_create(
         filename,
         lambda: unlearn.learn(
