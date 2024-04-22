@@ -29,4 +29,4 @@ scikit-learn = "^1.4.1"
 # torch = "^2.2.1"
 
 # Exclude problematic package
-nvidia-cudnn-cu12 = { version = "*", allow-prereleases = false }
+#nvidia-cudnn-cu12 = { version = "*", allow-prereleases = false }

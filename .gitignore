@@ -167,3 +167,9 @@ adult
 mnist
 purchase
 svhn
+
+variational-bayesian-unlearning/*
+
+datasets/
+examples/out/
+examples/plot_data/
