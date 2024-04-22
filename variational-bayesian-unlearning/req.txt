@@ -1,0 +1,7 @@
+tensorflow
+tensorflow-probability
+matplotlib
+numpy
+scipy
+pickle
+argparse

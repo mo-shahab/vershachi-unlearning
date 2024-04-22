@@ -168,8 +168,12 @@ mnist
 purchase
 svhn
 
-variational-bayesian-unlearning/*
+variational-bayesian-unlearning/dataset/
+variational-bayesian-unlearning/plot_data/
+variational-bayesian-unlearning/result/
 
 datasets/
 examples/out/
 examples/plot_data/
+
+
