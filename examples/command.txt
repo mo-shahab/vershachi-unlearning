@@ -1,0 +1,4 @@
+To run the federated unlearning script:
+
+run this command in the terminal
+python example_fed_unlearn.py
