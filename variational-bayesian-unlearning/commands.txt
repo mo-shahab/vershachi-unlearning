@@ -1,6 +1,6 @@
 1. To run the training with VI on full data, retraining with VI on remaining data, and unlearning using EUBO, rKL
 
-python run.py --exper moon --appr gauss_fullcov --nsample 1000 --ntrain 30000 --folder result
+python run.py --exper moon --appr gauss_fullcov --nsample 10 --ntrain 30 --folder result
 
 -> The result is written to folder result.
 
