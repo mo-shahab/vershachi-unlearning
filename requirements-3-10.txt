@@ -1,3 +1,8 @@
 scikit-learn
 numpy
 pandas
+#torch
+tensorflow
+tensorflow-probability
+matplotlib
+#xgboost
