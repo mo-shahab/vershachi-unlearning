@@ -2,6 +2,11 @@ import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 
+"""
+EUBO: Evidence Upper Bound Objective
+ELBO: Evidence Lower Bound Objective
+"""
+
 
 def plot_likelihood_diffs(
     folder="plot_data",

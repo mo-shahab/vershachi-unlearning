@@ -36,7 +36,7 @@ def FL_Train(init_global_model, client_data_loaders, test_loader, FL_params):
             "FL_params.if_unlearning should be set to False, if you want to train, not unlearning FL model"
         )
 
-    all_global_models = list()
+    all_global_models = list()  # checkpoints, storing the trained global models
     all_client_models = list()
     global_model = init_global_model
 

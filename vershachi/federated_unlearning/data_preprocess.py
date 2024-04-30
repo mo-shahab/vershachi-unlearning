@@ -202,6 +202,7 @@ def data_set(data_name, data_dir):
         testset = TensorDataset(X_test_tensor, y_test_tensor)
     elif data_name == "adult":
         # Load adult dataset
+        # this is where the error was encountered
         file_path = os.path.join(root_dir, "adult")
         data1 = pd.read_csv(os.path.join(file_path, "adult.data"), header=None)
         data2 = pd.read_csv(os.path.join(file_path, "adult.test"), header=None)

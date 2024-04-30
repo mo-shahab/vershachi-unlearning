@@ -32,11 +32,12 @@ DATASETS_DIR = r"C:\dev\vershachi-unlearning\datasets"
 """Step 0. Initialize Federated Unlearning parameters"""
 
 
+# how much part of the dataset is for training, and for testing -------- ?
 class Arguments:
     def __init__(self):
         # Federated Learning Settings
         self.N_total_client = 100
-        self.N_client = 10
+        self.N_client = 10  # how they get selected ?
         self.data_name = "mnist"  # purchase, cifar10, mnist, adult
         self.global_epoch = 3
 
@@ -93,6 +94,7 @@ def Federated_Unlearning():
     # data_dir = "../datasets/"
     client_all_loaders, test_loader = data_init(FL_params, data_dir=DATASETS_DIR)
 
+    # client is randomly chose, ?
     selected_clients = np.random.choice(
         range(FL_params.N_total_client), size=FL_params.N_client, replace=False
     )
@@ -111,7 +113,9 @@ def Federated_Unlearning():
     print(60 * "=")
     print("Step3. Fedearated Learning and Unlearning Training...")
     #
-    old_GMs, unlearn_GMs, uncali_unlearn_GMs, old_CMs = federated_learning_unlearning(init_global_model, client_loaders, test_loader, FL_params)
+    old_GMs, unlearn_GMs, uncali_unlearn_GMs, old_CMs = federated_learning_unlearning(
+        init_global_model, client_loaders, test_loader, FL_params
+    )
 
     if FL_params.if_retrain == True:
 

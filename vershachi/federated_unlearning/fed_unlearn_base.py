@@ -95,7 +95,7 @@ def unlearning(old_GMs, old_CMs, client_data_loaders, test_loader, FL_params):
 
     Returns
     -------
-    forget_global_model : One DNN model that has the same structure but different parameters with global_moedel
+    forget_global_model : One DNN model that has the same structure but different parameters with global_model
         DESCRIPTION.
 
     """
