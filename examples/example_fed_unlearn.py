@@ -138,7 +138,7 @@ def Federated_Unlearning():
     attack_model = train_attack_model(old_GM, client_loaders, test_loader, FL_params)
 
     print("\nEpoch  = {}".format(T_epoch))
-    print("Attacking against FL Standard  ")
+    print("Attacking against FL Standard  (Before unlearning)")
     target_model = old_GMs[T_epoch]
     (ACC_old, PRE_old) = attack(
         target_model, attack_model, client_loaders, test_loader, FL_params
@@ -151,7 +151,7 @@ def Federated_Unlearning():
             target_model, attack_model, client_loaders, test_loader, FL_params
         )
 
-    print("Attacking against FL Unlearn  ")
+    print("Attacking against FL Unlearn (After unlearning) ")
     target_model = unlearn_GMs[T_epoch]
     (ACC_unlearn, PRE_unlearn) = attack(
         target_model, attack_model, client_loaders, test_loader, FL_params
