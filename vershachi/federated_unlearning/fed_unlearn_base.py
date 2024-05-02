@@ -121,18 +121,20 @@ def unlearning(old_GMs, old_CMs, client_data_loaders, test_loader, FL_params):
 
     old_global_models = copy.deepcopy(old_GMs)
     old_client_models = copy.deepcopy(old_CMs)
+    # print(old_client_models)
 
     forget_client = FL_params.forget_client_idx
+    store_client = 0
     for ii in range(FL_params.global_epoch):
         temp = old_client_models[
             ii * FL_params.N_client : ii * FL_params.N_client + FL_params.N_client
         ]
-        temp.pop(
-            forget_client
-        )  # During Unlearn, the model saved by the forgotten user pops up
+
+        temp.pop(forget_client)
+        # During Unlearn, the model saved by the forgotten user pops up
         old_client_models.append(temp)
     old_client_models = old_client_models[-FL_params.global_epoch :]
-
+    print(f"The forgotten client:  {np.random.randint(100)}")
     GM_intv = np.arange(
         0, FL_params.global_epoch + 1, FL_params.unlearn_interval, dtype=np.int16()
     )
